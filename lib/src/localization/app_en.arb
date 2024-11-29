@@ -1,0 +1,6 @@
+{
+  "appTitle": "raspidrum_ui",
+  "@appTitle": {
+    "description": "Raspi drum module"
+  }
+}
