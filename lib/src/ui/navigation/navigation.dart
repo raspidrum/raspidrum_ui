@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:raspidrum_ui/src/custom_icons.dart';
 import 'package:raspidrum_ui/src/routing/routes.dart';
@@ -13,8 +12,6 @@ class NaviBar extends StatelessWidget {
 
   final Widget child;
 
-  final double _groupAlignment = -1.0; //align to top
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,29 +19,42 @@ class NaviBar extends StatelessWidget {
         children: <Widget>[
           NavigationRail(
             selectedIndex: _getSelectedIndex(context),
-            groupAlignment: _groupAlignment,
+            groupAlignment: -1,
             onDestinationSelected: (int index) => _onItemTapped(index, context),
-            labelType: NavigationRailLabelType.none,
+            labelType: NavigationRailLabelType.all,
+            useIndicator: false,
+            indicatorColor: Colors.transparent,
+            selectedIconTheme: IconThemeData(
+              size: 64
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 64
+            ),
             destinations: <NavigationRailDestination>[
               const NavigationRailDestination(
-                icon: CustomIcons.metronome, 
-                label: const Text('KIT')
+                padding: EdgeInsets.symmetric(vertical: 4.0),
+                icon: CustomIcons.kit,
+                label: Text(' ')
               ),
               const NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
                 icon: CustomIcons.mixer, 
-                label: Text('MIXER')
+                label: Text(' ')
               ),
               const NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
                 icon: CustomIcons.metronome, 
-                label: Text('METRONOME')
+                label: Text(' ')
               ),
               const NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
                 icon: CustomIcons.player, 
-                label: Text('PLAYER')
+                label: Text(' ')
               ),
               const NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
                 icon: CustomIcons.settings, 
-                label: Text('SETTINGS')
+                label: Text(' ')
               ),
             ]
           ),

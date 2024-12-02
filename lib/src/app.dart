@@ -42,7 +42,7 @@ class App extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('en', ''), // English, no country code
-            Locale('ru', 'RU')
+            //Locale('ru', 'RU')
           ],
 
           // Use AppLocalizations to configure the correct application title
