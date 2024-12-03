@@ -10,6 +10,7 @@ environment:
   sdk: ^3.5.4
 
 dependencies:
+  device_preview: ^1.2.0
   flutter:
     sdk: flutter
   flutter_localizations:

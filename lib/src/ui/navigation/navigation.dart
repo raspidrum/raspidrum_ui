@@ -10,6 +10,9 @@ class NaviBar extends StatelessWidget {
     super.key
   });
 
+  static const double navEdgeInset = 4.0;
+  static const double iconSize = 40;
+
   final Widget child;
 
   @override
@@ -25,35 +28,55 @@ class NaviBar extends StatelessWidget {
             useIndicator: false,
             indicatorColor: Colors.transparent,
             selectedIconTheme: IconThemeData(
-              size: 64
+              size: iconSize
             ),
             unselectedIconTheme: IconThemeData(
-              size: 64
+              size: iconSize
             ),
             destinations: <NavigationRailDestination>[
-              const NavigationRailDestination(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                icon: CustomIcons.kit,
+              NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: navEdgeInset),
+                icon: SizedBox(
+                    width: iconSize,
+                    height: iconSize,
+                    child: CustomIcons.kit,
+                ),
                 label: Text(' ')
               ),
-              const NavigationRailDestination(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                icon: CustomIcons.mixer, 
+              NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: navEdgeInset),
+                icon: SizedBox(
+                  width: iconSize,
+                  height: iconSize,
+                  child: CustomIcons.mixer
+                ), 
                 label: Text(' ')
               ),
-              const NavigationRailDestination(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                icon: CustomIcons.metronome, 
+              NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: navEdgeInset),
+                icon: SizedBox(
+                  width: iconSize,
+                  height: iconSize,
+                  child: CustomIcons.metronome
+                ), 
                 label: Text(' ')
               ),
-              const NavigationRailDestination(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                icon: CustomIcons.player, 
+              NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: navEdgeInset),
+                icon: SizedBox(
+                  width: iconSize,
+                  height: iconSize,
+                  child: CustomIcons.player
+                ), 
                 label: Text(' ')
               ),
-              const NavigationRailDestination(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                icon: CustomIcons.settings, 
+              NavigationRailDestination(
+                padding: EdgeInsets.symmetric(vertical: navEdgeInset),
+                icon: SizedBox(
+                  width: iconSize,
+                  height: iconSize,
+                  child: CustomIcons.settings
+                ), 
                 label: Text(' ')
               ),
             ]

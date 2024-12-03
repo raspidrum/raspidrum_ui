@@ -14,6 +14,7 @@ import 'package:raspidrum_ui/src/ui/settings/settings.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings_viewmodel.dart';
 
 final GoRouter router = GoRouter(
+      routerNeglect: true, // disable browser history tracking
       initialLocation: Routes.kit,
       routes: <RouteBase>[
         ShellRoute(
