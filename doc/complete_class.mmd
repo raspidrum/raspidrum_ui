@@ -1,0 +1,171 @@
+---
+title: Domain Model
+---
+classDiagram
+direction TB
+
+class Kit {
+  *string id
+  *string name
+  *string author
+  *Engine engine
+  *List<Instrument> instruments
+}
+
+Kit o-- Instrument : "1..*" instruments
+Kit o-- Engine : "1..1" engine
+
+class Engine {
+  *string key
+  *string name
+  *EngineType type
+}
+
+Engine -- EngineType : type
+
+class EngineType {
+  <<Enumeration>>
+  sfz
+  sf2
+  gig
+}
+
+class Instrument {
+  *string key
+  *string name
+  List<FX> tunes
+  List<Layer> layers
+}
+
+Instrument o-- Layer : "1..*" layers
+Instrument o-- FX : "0..*" tunes
+
+class Layer {
+  *string key
+  *string name
+  *boolean isFXable
+  List<FX> defaultEffects
+}
+
+Layer o-- FX : "0..*" defaultEffects
+
+class FX {
+  *string key
+  *string name
+  List<FXParam> params
+}
+
+FX o-- FXParam : "1..*" params
+
+class FXParam {
+  *string key
+  *string name
+  *int order
+  *FXParamType type
+  double min
+  double max
+  *int divisions
+  List<FXParamDiscreteVal> discrete_vals
+}
+
+FXparam -- FXParamType : type
+FXparam o-- FXParamDiscreteVal : "0..*" discrete_vals
+
+class FXParamType {
+<<Enumeration>>
+  range
+  fixed
+  boolean
+}
+
+class FXParamDiscreteVal {
+  string name
+  *double val
+}
+
+
+class ChannelMeta {
+  *ChannelType type
+  *boolean isMutable
+  *boolean isSoloable
+  *boolean isTunable
+  *boolean isFXable
+  *boolean isLayerFXable
+}
+
+ChannelMeta -- ChannelType : type
+
+class ChannelType {
+<<Enumeration>>
+  global
+  sampler
+  instrument
+  mixer
+  player
+}
+
+
+class Preset {
+  *string key #readOnly
+  *string name
+  string description
+  *List<ChannelPset> channels
+}
+Preset o-- ChannelPset : "1..*" channels
+
+class ChannelPset {
+  *string key #readOnly
+  *string name
+  *ChannelType type
+  *double: level
+  *double: pan 
+  List<FXPset> fxs
+  List<InstrumentPset> instruments
+}
+ChannelPset .. ChannelMeta
+ChannelPset o-- InstrumentPset : "1..*" instruments
+ChannelPset o-- FXPset : "0..*" fxs
+
+class InstrumentPset {
+  *string key #readOnly
+  *string name #readOnly
+  List<FXPset> tunes
+  List<LayerPset> layers
+}
+InstrumentPset .. Instrument
+InstrumentPset o-- LayerPset : "1..*" layers 
+InstrumentPset o-- FXPset : "0..*" tunes
+
+%% if level is null, then layer inherite channel level
+class LayerPset {
+  *string key #readOnly
+  *string name #readOnly
+  double level
+  List<FXPset> fxs
+}
+LayerPset .. Layer
+LayerPset o-- FXPset : "0..*" fxs
+
+class FXPset {
+  *string key #readOnly
+  *string name #readOnly
+  *int order
+  *List<FXParamPset> params
+}
+FXPset o-- FXParamPset : "1..*" params
+FXPset .. FX
+
+class FXParamPset {
+  *string key #readOnly
+  *string name #readOnly
+  *int order #readOnly
+  *FXParamType type #readOnly
+  double min #readOnly
+  double max #readOnly
+  int divisions #readOnly
+  List<FXParamDiscreteVal> discrete_vals #readOnly
+  double value
+  boolean value
+}
+
+FXParamPset .. FXParam
