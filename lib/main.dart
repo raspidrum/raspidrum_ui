@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:raspidrum_ui/src/providers.dart';
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
@@ -29,7 +31,12 @@ void main() async {
           pixelRatio: 1.0,
         ),
       ],
-      builder: (context) => App(settingsController: settingsController)
+      builder: (context) {
+        return MultiProvider (
+          providers: providers,
+          child: App(settingsController: settingsController),
+        );
+      }
     )
   );
 }

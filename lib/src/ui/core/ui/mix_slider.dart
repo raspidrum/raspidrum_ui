@@ -65,7 +65,7 @@ class MixSlider extends StatelessWidget {
       handler: FlutterSliderHandler(
         decoration: BoxDecoration(),
         child: Container(
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
               color: Colors.black,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(5),

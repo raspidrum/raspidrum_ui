@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:raspidrum_ui/src/routing/routes.dart';
 import 'package:raspidrum_ui/src/ui/kit/kit.dart';
 import 'package:raspidrum_ui/src/ui/kit/kit_viewmodel.dart';
@@ -24,9 +25,11 @@ final GoRouter router = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: Routes.kit,
-              builder: (contect, state) {
+              builder: (context, state) {
                 return KitScreen (
-                  viewModel: KitViewModel()
+                  viewModel: KitViewModel(
+                    kitPresetRepository: context.read()
+                  )
                 );
               }
             ),

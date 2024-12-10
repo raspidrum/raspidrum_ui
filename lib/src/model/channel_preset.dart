@@ -8,7 +8,7 @@ part 'channel_preset.g.dart';
 
 @unfreezed
 class Preset with _$Preset {
-  const factory Preset({
+  factory Preset({
     required final String key,
     required String name,
     String? description,
@@ -30,7 +30,7 @@ enum ChannelType {
 // TODO: rewrite to multiple constructor by type
 @unfreezed
 class Channel with _$Channel {
-  const factory Channel({
+  factory Channel({
     required final String key,
     required String name,
     required final ChannelType type,
@@ -46,7 +46,7 @@ class Channel with _$Channel {
 
 @unfreezed
 class Instrument with _$Instrument {
-  const factory Instrument({
+  factory Instrument({
     required final String key,
     required String name,
     List<FX>? tunes,
@@ -59,7 +59,7 @@ class Instrument with _$Instrument {
 
 @unfreezed
 class Layer with _$Layer {
-  const factory Layer({
+  factory Layer({
     required final String key,
     required String name,
     double? level,
@@ -72,7 +72,7 @@ class Layer with _$Layer {
 
 @unfreezed
 class FX with _$FX {
-  const factory FX({
+  factory FX({
     required final String key,
     required final String name,
     required int order,
@@ -92,7 +92,7 @@ enum FXParamType {
 // TODO: rewrite to multiple constructor by type
 @unfreezed
 class FXParam with _$FXParam {
-  const factory FXParam({
+  factory FXParam({
     required final String key,
     required final String name,
     required int order,

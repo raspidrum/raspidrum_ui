@@ -140,7 +140,7 @@ class __$$PresetImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PresetImpl with DiagnosticableTreeMixin implements _Preset {
-  const _$PresetImpl(
+  _$PresetImpl(
       {required this.key, required this.name, this.description, this.channels});
 
   factory _$PresetImpl.fromJson(Map<String, dynamic> json) =>
@@ -188,7 +188,7 @@ class _$PresetImpl with DiagnosticableTreeMixin implements _Preset {
 }
 
 abstract class _Preset implements Preset {
-  const factory _Preset(
+  factory _Preset(
       {required final String key,
       required String name,
       String? description,
@@ -390,7 +390,7 @@ class __$$ChannelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
-  const _$ChannelImpl(
+  _$ChannelImpl(
       {required this.key,
       required this.name,
       required this.type,
@@ -453,7 +453,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
 }
 
 abstract class _Channel implements Channel {
-  const factory _Channel(
+  factory _Channel(
       {required final String key,
       required String name,
       required final ChannelType type,
@@ -619,7 +619,7 @@ class __$$InstrumentImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
-  const _$InstrumentImpl(
+  _$InstrumentImpl(
       {required this.key, required this.name, this.tunes, this.layers});
 
   factory _$InstrumentImpl.fromJson(Map<String, dynamic> json) =>
@@ -667,7 +667,7 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
 }
 
 abstract class _Instrument implements Instrument {
-  const factory _Instrument(
+  factory _Instrument(
       {required final String key,
       required String name,
       List<FX>? tunes,
@@ -820,8 +820,7 @@ class __$$LayerImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
-  const _$LayerImpl(
-      {required this.key, required this.name, this.level, this.fxs});
+  _$LayerImpl({required this.key, required this.name, this.level, this.fxs});
 
   factory _$LayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$LayerImplFromJson(json);
@@ -868,7 +867,7 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
 }
 
 abstract class _Layer implements Layer {
-  const factory _Layer(
+  factory _Layer(
       {required final String key,
       required String name,
       double? level,
@@ -1014,7 +1013,7 @@ class __$$FXImplCopyWithImpl<$Res> extends _$FXCopyWithImpl<$Res, _$FXImpl>
 /// @nodoc
 @JsonSerializable()
 class _$FXImpl with DiagnosticableTreeMixin implements _FX {
-  const _$FXImpl(
+  _$FXImpl(
       {required this.key,
       required this.name,
       required this.order,
@@ -1065,7 +1064,7 @@ class _$FXImpl with DiagnosticableTreeMixin implements _FX {
 }
 
 abstract class _FX implements FX {
-  const factory _FX(
+  factory _FX(
       {required final String key,
       required final String name,
       required int order,
@@ -1290,7 +1289,7 @@ class __$$FXParamImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$FXParamImpl with DiagnosticableTreeMixin implements _FXParam {
-  const _$FXParamImpl(
+  _$FXParamImpl(
       {required this.key,
       required this.name,
       required this.order,
@@ -1361,7 +1360,7 @@ class _$FXParamImpl with DiagnosticableTreeMixin implements _FXParam {
 }
 
 abstract class _FXParam implements FXParam {
-  const factory _FXParam(
+  factory _FXParam(
       {required final String key,
       required final String name,
       required int order,
