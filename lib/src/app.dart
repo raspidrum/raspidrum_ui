@@ -1,9 +1,9 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:raspidrum_ui/src/routing/router.dart';
 import 'settings/settings_controller.dart';
+import 'ui/core/localization/applocalization.dart';
 
 /// The Widget that configures your application.
 class App extends StatelessWidget {
@@ -37,8 +37,8 @@ class App extends StatelessWidget {
           // Provide the generated AppLocalizations to the MaterialApp. This
           // allows descendant Widgets to display the correct translations
           // depending on the user's locale.
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
+          localizationsDelegates: [
+            AppLocalizationDelegate(),
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
@@ -54,7 +54,7 @@ class App extends StatelessWidget {
           // The appTitle is defined in .arb files found in the localization
           // directory.
           onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!.appTitle,
+              AppLocalization.of(context)!.appTitle,
 
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the

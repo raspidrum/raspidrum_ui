@@ -11,6 +11,7 @@ class AppLocalization {
   static const _strings = <String, String> {
     'errorWhileLoadingKitPreset': 'Error while loading kit preset',
     'tryAgain': 'Try again',
+    'appTitle': 'Raspi Drum',
   };
 
   // If string for "label" does not exist, will show "[LABEL]"
@@ -19,6 +20,7 @@ class AppLocalization {
 
   String get errorWhileLoadingKitPreset => _get('errorWhileLoadingKitPreset');
   String get tryAgain => _get('tryAgain');
+  String get appTitle => _get('appTitle');
 
 }
 

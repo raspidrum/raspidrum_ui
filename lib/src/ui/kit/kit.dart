@@ -23,11 +23,13 @@ class KitScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (viewModel.load.error) {
-              return ErrorIndicator(
-                title: AppLocalization.of(context).errorWhileLoadingKitPreset, 
-                label: AppLocalization.of(context).tryAgain, 
-                onPressed: viewModel.load.execute
-                );
+              return Center(
+                child: ErrorIndicator(
+                  title: AppLocalization.of(context).errorWhileLoadingKitPreset, 
+                  label: AppLocalization.of(context).tryAgain, 
+                  onPressed: viewModel.load.execute
+                  ),
+              );
             }
             return child!;
           },
