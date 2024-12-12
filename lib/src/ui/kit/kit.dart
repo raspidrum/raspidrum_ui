@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:raspidrum_ui/src/ui/core/localization/applocalization.dart';
-import 'package:raspidrum_ui/src/ui/core/ui/error_indicator.dart';
-import 'package:raspidrum_ui/src/ui/core/ui/mix_slider.dart';
-import 'package:raspidrum_ui/src/ui/kit/kit_viewmodel.dart';
+import '../core/localization/applocalization.dart';
+import '../core/ui/error_indicator.dart';
+import '../core/ui/mix_slider.dart';
+import 'kit_viewmodel.dart';
+
+import '../../model/channel_preset.dart';
 
 class KitScreen extends StatelessWidget {
   const KitScreen({
@@ -15,7 +17,7 @@ class KitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        //appBar: AppBar(),
         body: ListenableBuilder(
           listenable: viewModel.load,
           builder: (context, child) {
@@ -41,14 +43,17 @@ class KitScreen extends StatelessWidget {
                 Expanded(flex: 20, child: const Text('KIT')),
                 Expanded(
                     flex: 80,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: _buildSlider(),
-                        ),
-                      ],
-                    )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Builder(builder: (context) {
+                                if (viewModel.preset != null) {
+                                  return _buildKitMixer(context, viewModel.preset!);
+                                }
+                                return Container();
+                              }
+                            ),
+                    )
+                    ),
               ],
             ),
           ),
@@ -59,6 +64,47 @@ class KitScreen extends StatelessWidget {
     return MixSlider();
   }
 
+  Widget _buildKitMixer(BuildContext context, Preset preset) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all()
+        ),
+      padding: EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        children: _buildChannels(preset.channels)!,
+      ),  
+    );
+  }
 
+  List<Widget>? _buildChannels(List<Channel>? channels) {
+    if (channels == null) return List<Widget>.empty();
+    final chnlControls = List<Widget>.generate(channels.length, 
+      (int index) => _buildChannel(channels[index]), 
+      growable: false);
+    return chnlControls;
+  }
+
+  Widget _buildChannel(Channel channel) {
+    return 
+    Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          flex: 85,
+          child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MixSlider(
+                min: 0.0,
+                max: 110,
+                values: [channel.level*100],
+              ),
+            ),
+        ),
+        Text(channel.name),
+      ],
+    );
+  }
 
 }

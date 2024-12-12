@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
-import 'package:raspidrum_ui/src/data/repositories/kit_preset.dart';
-import 'package:raspidrum_ui/src/model/channel_preset.dart';
-import 'package:raspidrum_ui/src/utils/result.dart';
+import '../../data/repositories/kit_preset.dart';
+import '../../model/channel_preset.dart';
+import '../../utils/result.dart';
 
 import '../../utils/command.dart';
 
@@ -21,6 +21,7 @@ class KitViewModel extends ChangeNotifier {
   late Command0 load;
 
   Preset? _preset;
+  Preset? get preset => _preset;
 
   Future<Result> _load() async {
     try {

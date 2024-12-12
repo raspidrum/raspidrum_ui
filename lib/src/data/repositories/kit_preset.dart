@@ -212,7 +212,7 @@ final _presetJson = '''
     },
     {
       "key": "4",
-      "name": "toms",
+      "name": "Toms",
       "type": "instrument",
       "level": 0.85,
       "pan": 0.1,
