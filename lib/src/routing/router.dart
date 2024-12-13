@@ -14,6 +14,9 @@ import 'package:raspidrum_ui/src/ui/player/player_viewmodel.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings_viewmodel.dart';
 
+import '../ui/channel/channel_config.dart';
+import '../ui/channel/channel_config_viewmodel.dart';
+
 final GoRouter router = GoRouter(
       routerNeglect: true, // disable browser history tracking
       initialLocation: Routes.kit,
@@ -24,6 +27,7 @@ final GoRouter router = GoRouter(
           },
           routes: <RouteBase>[
             GoRoute(
+              name: Routes.kit,
               path: Routes.kit,
               builder: (context, state) {
                 return KitScreen (
@@ -34,6 +38,7 @@ final GoRouter router = GoRouter(
               }
             ),
             GoRoute(
+              name: Routes.mixer,
               path: Routes.mixer,
               builder: (contect, state) {
                 return MixerScreen (
@@ -42,6 +47,7 @@ final GoRouter router = GoRouter(
               }
             ),
             GoRoute(
+              name: Routes.metronome,
               path: Routes.metronome,
               builder: (contect, state) {
                 return MetronomeScreen (
@@ -50,6 +56,7 @@ final GoRouter router = GoRouter(
               }
             ),
             GoRoute(
+              name: Routes.player,
               path: Routes.player,
               builder: (contect, state) {
                 return PlayerScreen (
@@ -58,6 +65,7 @@ final GoRouter router = GoRouter(
               }
             ),
             GoRoute(
+              name: Routes.settings,
               path: Routes.settings,
               builder: (contect, state) {
                 return SettingsScreen (
@@ -65,6 +73,18 @@ final GoRouter router = GoRouter(
                 );
               }
             ),
+            GoRoute(
+              name: ChannelRoutes.channelConfig,
+              path: ChannelRoutes.channelConfigPath,
+              builder: (context, state) {
+                return ChannelConfigScreen(
+                  viewModel: ChannelConfigViewModel(
+                    kitPresetRepository: context.read(),
+                    channelKey: state.pathParameters[ChannelRoutes.channelKey]!
+                  ),
+                );
+              }
+              ),
           ]
         )
       ]

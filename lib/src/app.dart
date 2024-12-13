@@ -54,7 +54,7 @@ class App extends StatelessWidget {
           // The appTitle is defined in .arb files found in the localization
           // directory.
           onGenerateTitle: (BuildContext context) =>
-              AppLocalization.of(context)!.appTitle,
+              AppLocalization.of(context).appTitle,
 
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the

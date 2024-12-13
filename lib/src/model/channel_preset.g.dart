@@ -81,6 +81,7 @@ _$LayerImpl _$$LayerImplFromJson(Map<String, dynamic> json) => _$LayerImpl(
       key: json['key'] as String,
       name: json['name'] as String,
       level: (json['level'] as num?)?.toDouble(),
+      pan: (json['pan'] as num?)?.toDouble(),
       fxs: (json['fxs'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -91,6 +92,7 @@ Map<String, dynamic> _$$LayerImplToJson(_$LayerImpl instance) =>
       'key': instance.key,
       'name': instance.name,
       'level': instance.level,
+      'pan': instance.pan,
       'fxs': instance.fxs,
     };
 
@@ -119,7 +121,7 @@ _$FXParamImpl _$$FXParamImplFromJson(Map<String, dynamic> json) =>
       min: (json['min'] as num?)?.toDouble(),
       max: (json['max'] as num?)?.toDouble(),
       divisions: (json['divisions'] as num?)?.toInt(),
-      discrete_vals: (json['discrete_vals'] as List<dynamic>?)
+      discreteVals: (json['discreteVals'] as List<dynamic>?)
           ?.map((e) => FXParamDiscreteVal.fromJson(e as Map<String, dynamic>))
           .toList(),
       value: (json['value'] as num).toDouble(),
@@ -134,7 +136,7 @@ Map<String, dynamic> _$$FXParamImplToJson(_$FXParamImpl instance) =>
       'min': instance.min,
       'max': instance.max,
       'divisions': instance.divisions,
-      'discrete_vals': instance.discrete_vals,
+      'discreteVals': instance.discreteVals,
       'value': instance.value,
     };
 

@@ -707,6 +707,8 @@ mixin _$Layer {
   set name(String value) => throw _privateConstructorUsedError;
   double? get level => throw _privateConstructorUsedError;
   set level(double? value) => throw _privateConstructorUsedError;
+  double? get pan => throw _privateConstructorUsedError;
+  set pan(double? value) => throw _privateConstructorUsedError;
   List<FX>? get fxs => throw _privateConstructorUsedError;
   set fxs(List<FX>? value) => throw _privateConstructorUsedError;
 
@@ -724,7 +726,8 @@ abstract class $LayerCopyWith<$Res> {
   factory $LayerCopyWith(Layer value, $Res Function(Layer) then) =
       _$LayerCopyWithImpl<$Res, Layer>;
   @useResult
-  $Res call({String key, String name, double? level, List<FX>? fxs});
+  $Res call(
+      {String key, String name, double? level, double? pan, List<FX>? fxs});
 }
 
 /// @nodoc
@@ -745,6 +748,7 @@ class _$LayerCopyWithImpl<$Res, $Val extends Layer>
     Object? key = null,
     Object? name = null,
     Object? level = freezed,
+    Object? pan = freezed,
     Object? fxs = freezed,
   }) {
     return _then(_value.copyWith(
@@ -759,6 +763,10 @@ class _$LayerCopyWithImpl<$Res, $Val extends Layer>
       level: freezed == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pan: freezed == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
               as double?,
       fxs: freezed == fxs
           ? _value.fxs
@@ -775,7 +783,8 @@ abstract class _$$LayerImplCopyWith<$Res> implements $LayerCopyWith<$Res> {
       __$$LayerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String key, String name, double? level, List<FX>? fxs});
+  $Res call(
+      {String key, String name, double? level, double? pan, List<FX>? fxs});
 }
 
 /// @nodoc
@@ -794,6 +803,7 @@ class __$$LayerImplCopyWithImpl<$Res>
     Object? key = null,
     Object? name = null,
     Object? level = freezed,
+    Object? pan = freezed,
     Object? fxs = freezed,
   }) {
     return _then(_$LayerImpl(
@@ -809,6 +819,10 @@ class __$$LayerImplCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as double?,
+      pan: freezed == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
+              as double?,
       fxs: freezed == fxs
           ? _value.fxs
           : fxs // ignore: cast_nullable_to_non_nullable
@@ -820,7 +834,8 @@ class __$$LayerImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
-  _$LayerImpl({required this.key, required this.name, this.level, this.fxs});
+  _$LayerImpl(
+      {required this.key, required this.name, this.level, this.pan, this.fxs});
 
   factory _$LayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$LayerImplFromJson(json);
@@ -832,11 +847,13 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
   @override
   double? level;
   @override
+  double? pan;
+  @override
   List<FX>? fxs;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Layer(key: $key, name: $name, level: $level, fxs: $fxs)';
+    return 'Layer(key: $key, name: $name, level: $level, pan: $pan, fxs: $fxs)';
   }
 
   @override
@@ -847,6 +864,7 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('pan', pan))
       ..add(DiagnosticsProperty('fxs', fxs));
   }
 
@@ -871,6 +889,7 @@ abstract class _Layer implements Layer {
       {required final String key,
       required String name,
       double? level,
+      double? pan,
       List<FX>? fxs}) = _$LayerImpl;
 
   factory _Layer.fromJson(Map<String, dynamic> json) = _$LayerImpl.fromJson;
@@ -883,6 +902,9 @@ abstract class _Layer implements Layer {
   @override
   double? get level;
   set level(double? value);
+  @override
+  double? get pan;
+  set pan(double? value);
   @override
   List<FX>? get fxs;
   set fxs(List<FX>? value);
@@ -1104,9 +1126,9 @@ mixin _$FXParam {
   double? get min => throw _privateConstructorUsedError;
   double? get max => throw _privateConstructorUsedError;
   int? get divisions => throw _privateConstructorUsedError;
-  List<FXParamDiscreteVal>? get discrete_vals =>
+  List<FXParamDiscreteVal>? get discreteVals =>
       throw _privateConstructorUsedError;
-  set discrete_vals(List<FXParamDiscreteVal>? value) =>
+  set discreteVals(List<FXParamDiscreteVal>? value) =>
       throw _privateConstructorUsedError;
   double get value => throw _privateConstructorUsedError;
   set value(double value) => throw _privateConstructorUsedError;
@@ -1133,7 +1155,7 @@ abstract class $FXParamCopyWith<$Res> {
       double? min,
       double? max,
       int? divisions,
-      List<FXParamDiscreteVal>? discrete_vals,
+      List<FXParamDiscreteVal>? discreteVals,
       double value});
 }
 
@@ -1159,7 +1181,7 @@ class _$FXParamCopyWithImpl<$Res, $Val extends FXParam>
     Object? min = freezed,
     Object? max = freezed,
     Object? divisions = freezed,
-    Object? discrete_vals = freezed,
+    Object? discreteVals = freezed,
     Object? value = null,
   }) {
     return _then(_value.copyWith(
@@ -1191,9 +1213,9 @@ class _$FXParamCopyWithImpl<$Res, $Val extends FXParam>
           ? _value.divisions
           : divisions // ignore: cast_nullable_to_non_nullable
               as int?,
-      discrete_vals: freezed == discrete_vals
-          ? _value.discrete_vals
-          : discrete_vals // ignore: cast_nullable_to_non_nullable
+      discreteVals: freezed == discreteVals
+          ? _value.discreteVals
+          : discreteVals // ignore: cast_nullable_to_non_nullable
               as List<FXParamDiscreteVal>?,
       value: null == value
           ? _value.value
@@ -1218,7 +1240,7 @@ abstract class _$$FXParamImplCopyWith<$Res> implements $FXParamCopyWith<$Res> {
       double? min,
       double? max,
       int? divisions,
-      List<FXParamDiscreteVal>? discrete_vals,
+      List<FXParamDiscreteVal>? discreteVals,
       double value});
 }
 
@@ -1242,7 +1264,7 @@ class __$$FXParamImplCopyWithImpl<$Res>
     Object? min = freezed,
     Object? max = freezed,
     Object? divisions = freezed,
-    Object? discrete_vals = freezed,
+    Object? discreteVals = freezed,
     Object? value = null,
   }) {
     return _then(_$FXParamImpl(
@@ -1274,9 +1296,9 @@ class __$$FXParamImplCopyWithImpl<$Res>
           ? _value.divisions
           : divisions // ignore: cast_nullable_to_non_nullable
               as int?,
-      discrete_vals: freezed == discrete_vals
-          ? _value.discrete_vals
-          : discrete_vals // ignore: cast_nullable_to_non_nullable
+      discreteVals: freezed == discreteVals
+          ? _value.discreteVals
+          : discreteVals // ignore: cast_nullable_to_non_nullable
               as List<FXParamDiscreteVal>?,
       value: null == value
           ? _value.value
@@ -1297,7 +1319,7 @@ class _$FXParamImpl with DiagnosticableTreeMixin implements _FXParam {
       this.min,
       this.max,
       this.divisions,
-      this.discrete_vals,
+      this.discreteVals,
       required this.value});
 
   factory _$FXParamImpl.fromJson(Map<String, dynamic> json) =>
@@ -1318,13 +1340,13 @@ class _$FXParamImpl with DiagnosticableTreeMixin implements _FXParam {
   @override
   final int? divisions;
   @override
-  List<FXParamDiscreteVal>? discrete_vals;
+  List<FXParamDiscreteVal>? discreteVals;
   @override
   double value;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FXParam(key: $key, name: $name, order: $order, type: $type, min: $min, max: $max, divisions: $divisions, discrete_vals: $discrete_vals, value: $value)';
+    return 'FXParam(key: $key, name: $name, order: $order, type: $type, min: $min, max: $max, divisions: $divisions, discreteVals: $discreteVals, value: $value)';
   }
 
   @override
@@ -1339,7 +1361,7 @@ class _$FXParamImpl with DiagnosticableTreeMixin implements _FXParam {
       ..add(DiagnosticsProperty('min', min))
       ..add(DiagnosticsProperty('max', max))
       ..add(DiagnosticsProperty('divisions', divisions))
-      ..add(DiagnosticsProperty('discrete_vals', discrete_vals))
+      ..add(DiagnosticsProperty('discreteVals', discreteVals))
       ..add(DiagnosticsProperty('value', value));
   }
 
@@ -1368,7 +1390,7 @@ abstract class _FXParam implements FXParam {
       final double? min,
       final double? max,
       final int? divisions,
-      List<FXParamDiscreteVal>? discrete_vals,
+      List<FXParamDiscreteVal>? discreteVals,
       required double value}) = _$FXParamImpl;
 
   factory _FXParam.fromJson(Map<String, dynamic> json) = _$FXParamImpl.fromJson;
@@ -1389,8 +1411,8 @@ abstract class _FXParam implements FXParam {
   @override
   int? get divisions;
   @override
-  List<FXParamDiscreteVal>? get discrete_vals;
-  set discrete_vals(List<FXParamDiscreteVal>? value);
+  List<FXParamDiscreteVal>? get discreteVals;
+  set discreteVals(List<FXParamDiscreteVal>? value);
   @override
   double get value;
   set value(double value);

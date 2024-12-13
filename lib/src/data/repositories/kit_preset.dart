@@ -1,6 +1,5 @@
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:raspidrum_ui/src/model/channel_preset.dart';
 import 'package:raspidrum_ui/src/utils/result.dart';
@@ -300,7 +299,7 @@ class KitPresetRepository {
   Future<Result<Preset>> getPreset() async {
     //await Future.delayed(Duration(seconds: 2));
     return Result.ok(
-      Preset.fromJson(jsonDecode(_presetJson))
+      preset
     );
     //return Result.error(
     //  HttpException('''Can't get preset''')

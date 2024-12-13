@@ -93,37 +93,31 @@ class NaviBar extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        GoRouter.of(context).go(Routes.kit);
+        context.goNamed(Routes.kit);
       case 1:
-        GoRouter.of(context).go(Routes.mixer);
+        context.goNamed(Routes.mixer);
       case 2:
-        GoRouter.of(context).go(Routes.metronome);
+        context.goNamed(Routes.metronome);
       case 3:
-        GoRouter.of(context).go(Routes.player);
+        context.goNamed(Routes.player);
       case 4:
-        GoRouter.of(context).go(Routes.settings);
+        context.goNamed(Routes.settings);
     }
   }
 
   static int _getSelectedIndex(BuildContext context) {
-    final String location = GoRouterState.of(context).uri.path;
-    if (location.startsWith(Routes.kit)) {
+    final String? name = GoRouterState.of(context).name;
+    if (name == null) { 
       return 0;
     }
-    if (location.startsWith(Routes.mixer)) {
-      return 1;
+    switch (name) {
+      case Routes.kit: return 0;
+      case Routes.mixer: return 1;
+      case Routes.metronome: return 2;
+      case Routes.player: return 3;
+      case Routes.settings: return 4;
+      default: return 0;
     }
-    if (location.startsWith(Routes.metronome)) {
-      return 2;
-    }
-    if (location.startsWith(Routes.player)) {
-      return 3;
-    }
-    if (location.startsWith(Routes.settings)) {
-      return 4;
-    }
-
-    return 0;
   }
 
 }

@@ -2,32 +2,36 @@ import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 import '../../data/repositories/kit_preset.dart';
 import '../../model/channel_preset.dart';
-import '../../utils/result.dart';
 import '../../utils/command.dart';
+import '../../utils/result.dart';
 
-class KitViewModel extends ChangeNotifier {
+class ChannelConfigViewModel extends ChangeNotifier {
 
-  KitViewModel({
+  ChannelConfigViewModel({
     required KitPresetRepository kitPresetRepository,
+    required String channelKey
   }):
     _kitPresetRepository = kitPresetRepository {
-      load = Command0(_load)..execute();
+      load = Command1(_load)..execute(channelKey);
     }
 
   final KitPresetRepository _kitPresetRepository;
-  final _log = Logger('KitViewModel');
+  final _log = Logger('ChannelConfigViewModel');
+  
+  late Command1<void, String> load;
 
-  late Command0 load;
+  Channel? _channel;
+  Channel? get channel => _channel;
 
-  Preset? _preset;
-  Preset? get preset => _preset;
-
-  Future<Result> _load() async {
+  Future<Result> _load(String channelKey) async {
     try {
       final kitPresetResult = await _kitPresetRepository.getPreset();
       switch (kitPresetResult) {
         case Ok<Preset>():
-          _preset = kitPresetResult.value;
+          if (kitPresetResult.value.channels != null) {
+            // TODO: сделать поиск по ключу
+            _channel = kitPresetResult.value.channels!.first;
+          };
           _log.fine('Preset loaded');
         case Error<Preset>():
           _log.warning('Failed to load preset', kitPresetResult.error);
@@ -37,4 +41,5 @@ class KitViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 }

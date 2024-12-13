@@ -5,3 +5,9 @@ class Routes {
   static const player = '/player';
   static const settings = '/settings';
 }
+
+class ChannelRoutes {
+  static const channelConfig = 'channelConfig';
+  static const channelConfigPath = '/kit/channels/:channelKey'; 
+  static const channelKey = 'channelKey';
+}

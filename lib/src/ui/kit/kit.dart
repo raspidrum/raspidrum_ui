@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../routing/routes.dart';
 import '../core/localization/applocalization.dart';
 import '../core/ui/error_indicator.dart';
 import '../core/ui/mix_slider.dart';
@@ -47,7 +49,7 @@ class KitScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Builder(builder: (context) {
                                 if (viewModel.preset != null) {
-                                  return _buildKitMixer(context, viewModel.preset!);
+                                  return _buildKitMixer(context);
                                 }
                                 return Container();
                               }
@@ -60,11 +62,8 @@ class KitScreen extends StatelessWidget {
         ));
   }
 
-  Widget _buildSlider() {
-    return MixSlider();
-  }
 
-  Widget _buildKitMixer(BuildContext context, Preset preset) {
+  Widget _buildKitMixer(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -73,26 +72,47 @@ class KitScreen extends StatelessWidget {
       padding: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
       child: Row(
-        children: _buildChannels(preset.channels)!,
+        children: _buildChannels(context)!,
       ),  
     );
   }
 
-  List<Widget>? _buildChannels(List<Channel>? channels) {
+  List<Widget>? _buildChannels(BuildContext context) {
+    var channels = viewModel.preset!.channels;
     if (channels == null) return List<Widget>.empty();
     final chnlControls = List<Widget>.generate(channels.length, 
-      (int index) => _buildChannel(channels[index]), 
+      (int index) => _buildChannel(context, channels[index]), 
       growable: false);
     return chnlControls;
   }
 
-  Widget _buildChannel(Channel channel) {
+  Widget _buildChannel(BuildContext context, Channel channel) {
     return 
     Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
-          flex: 85,
+          flex: 12,
+          child: IconButton.outlined(
+            iconSize: 24,
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                // TODO: вынести в стиль
+                borderRadius: BorderRadius.circular(5), // <-- Radius
+                ),
+            ),
+            icon: const Icon(
+              Icons.graphic_eq
+            ), 
+            onPressed: () { 
+              context.goNamed(
+                ChannelRoutes.channelConfig, 
+                pathParameters: {ChannelRoutes.channelKey: channel.key});
+             },
+          ),
+        ),
+        Expanded(
+          flex: 83,
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: MixSlider(
@@ -102,7 +122,10 @@ class KitScreen extends StatelessWidget {
               ),
             ),
         ),
-        Text(channel.name),
+        Expanded(
+          flex: 5,
+          child: Text(channel.name)
+        ),
       ],
     );
   }

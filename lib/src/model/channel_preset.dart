@@ -63,6 +63,7 @@ class Layer with _$Layer {
     required final String key,
     required String name,
     double? level,
+    double? pan,
     List<FX>? fxs
   }) = _Layer;
 
@@ -100,7 +101,7 @@ class FXParam with _$FXParam {
     final double? min,
     final double? max,
     final int? divisions,
-    List<FXParamDiscreteVal>? discrete_vals,
+    List<FXParamDiscreteVal>? discreteVals,
     required double value,
   }) = _FXParam;
 
