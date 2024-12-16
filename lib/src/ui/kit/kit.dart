@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:raspidrum_ui/src/ui/core/themes/constants.dart';
 import '../../routing/routes.dart';
 import '../core/localization/applocalization.dart';
+import '../core/themes/decorations.dart';
 import '../core/ui/error_indicator.dart';
 import '../core/ui/mix_slider.dart';
 import 'kit_viewmodel.dart';
@@ -35,55 +37,51 @@ class KitScreen extends StatelessWidget {
                   ),
               );
             }
-            return child!;
+            if (viewModel.preset == null) {
+              return Container();
+            }
+            return _buildSkeleton(context);
           },
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Expanded(flex: 20, child: const Text('KIT')),
-                Expanded(
-                    flex: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Builder(builder: (context) {
-                                if (viewModel.preset != null) {
-                                  return _buildKitMixer(context);
-                                }
-                                return Container();
-                              }
-                            ),
-                    )
-                    ),
-              ],
-            ),
-          ),
         ));
   }
 
+  Widget _buildSkeleton(BuildContext context) {
+    return Align(
+          alignment: Alignment.centerLeft,
+          child: Column (
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                flex: 20,
+                child: Text('KIT')
+                ),
+              Expanded(
+                flex: 80,
+                child: _buildKitMixer(context)
+              )
+            ],
+          )
+        );
+  }
 
   Widget _buildKitMixer(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all()
-        ),
-      padding: EdgeInsets.all(10),
+      decoration: themeRoundedBox,
+      padding: EdgeInsets.all(Dimentions.containerPadding),
       width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: _buildChannels(context)!,
-      ),  
-    );
+      child: _buildChannels(context),
+      );  
   }
 
-  List<Widget>? _buildChannels(BuildContext context) {
+  Widget _buildChannels(BuildContext context) {
     var channels = viewModel.preset!.channels;
-    if (channels == null) return List<Widget>.empty();
+    if (channels == null) return Container();
     final chnlControls = List<Widget>.generate(channels.length, 
       (int index) => _buildChannel(context, channels[index]), 
       growable: false);
-    return chnlControls;
+    return Row(
+      children: chnlControls
+    );
   }
 
   Widget _buildChannel(BuildContext context, Channel channel) {
@@ -98,7 +96,7 @@ class KitScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 // TODO: вынести в стиль
-                borderRadius: BorderRadius.circular(5), // <-- Radius
+                borderRadius: BorderRadius.circular(Dimentions.buttonBorderRadius), // <-- Radius
                 ),
             ),
             icon: const Icon(
@@ -114,7 +112,7 @@ class KitScreen extends StatelessWidget {
         Expanded(
           flex: 83,
           child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(Dimentions.sliderPadding),
               child: MixSlider(
                 min: 0.0,
                 max: 110,

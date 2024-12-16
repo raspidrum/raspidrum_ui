@@ -29,13 +29,22 @@ final GoRouter router = GoRouter(
             GoRoute(
               name: Routes.kit,
               path: Routes.kit,
-              builder: (context, state) {
-                return KitScreen (
+              //builder: (context, state) {
+              //  return KitScreen (
+              //    viewModel: KitViewModel(
+              //      kitPresetRepository: context.read()
+              //    )
+              //  );
+              //},
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: KitScreen (
                   viewModel: KitViewModel(
                     kitPresetRepository: context.read()
                   )
-                );
-              }
+                ),
+              ),
             ),
             GoRoute(
               name: Routes.mixer,
@@ -83,9 +92,42 @@ final GoRouter router = GoRouter(
                     channelKey: state.pathParameters[ChannelRoutes.channelKey]!
                   ),
                 );
-              }
+              },
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: ChannelConfigScreen(
+                  viewModel: ChannelConfigViewModel(
+                    kitPresetRepository: context.read(),
+                    channelKey: state.pathParameters[ChannelRoutes.channelKey]!
+                  ),
+                ),
               ),
+            ),
           ]
         )
       ]
   );
+
+
+// Utility function for disable transition animation
+CustomTransitionPage<T> buildPageWithoutAnimation<T>({
+    required BuildContext context, 
+    required GoRouterState state, 
+    required Widget child,
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      child: child,
+      transitionsBuilder: (
+        context, 
+        animation, 
+        secondaryAnimation, 
+        child
+        ) => child,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+    );
+  }
+
+

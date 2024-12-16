@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:raspidrum_ui/src/ui/core/themes/constants.dart';
 
 import '../core/localization/applocalization.dart';
+import '../core/themes/decorations.dart';
 import '../core/ui/error_indicator.dart';
+import '../core/ui/mix_slider.dart';
 import 'channel_config_viewmodel.dart';
 
 class ChannelConfigScreen extends StatelessWidget {
@@ -15,7 +18,6 @@ class ChannelConfigScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: вынести генерацию обертки в отдельную функцию, подобно как сделано для слайдера
       body: ListenableBuilder(
         listenable: viewModel.load,
         builder: (context, child) {
@@ -34,40 +36,85 @@ class ChannelConfigScreen extends StatelessWidget {
           if (viewModel.channel == null) {
             return Container();
           }
-          return child!;
-        },
-        child: Align(
+          return _buildSkeleton(context);
+        }
+      )
+    );
+  }
+
+  Widget _buildSkeleton(BuildContext context) {
+    return Align(
           alignment: Alignment.centerLeft,
           child: Column (
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Expanded(
                 flex: 20,
-                child: Text('${viewModel.channel?.name}')
+                child: Text(viewModel.channel!.name)
                 ),
               Expanded(
                 flex: 80,
-                child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Builder(builder: (context) {
-                                if (viewModel.channel != null) {
-                                  return _buildChannelConfig(context);
-                                }
-                                return Container();
-                              }
-                            ),
-                    )
-              ),
+                child: _buildChannelConfig(context)
+              )
             ],
           )
-        )
-      )
-    );
+        );
   }
 
   Widget _buildChannelConfig(BuildContext context) {
-    // TODO: make UI
-    return Container();
+    return Container(
+      decoration: themeRoundedBox,
+      padding: EdgeInsets.all(Dimentions.containerPadding),
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        children: [
+          _buildChannelLevel(context),
+          //_buildInstruments(context),
+        ],
+        ),
+      );  
   }
+
+Widget _buildChannelLevel(BuildContext context) {
+  var channel = viewModel.channel!;
+  return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          flex: 12,
+          child: IconButton.outlined(
+            iconSize: 24,
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                // TODO: вынести в стиль
+                borderRadius: BorderRadius.circular(Dimentions.buttonBorderRadius), // <-- Radius
+                ),
+            ),
+            icon: const Icon(
+              Icons.graphic_eq
+            ), 
+            onPressed: () { 
+            
+             },
+          ),
+        ),
+        Expanded(
+          flex: 83,
+          child: Padding(
+              padding: const EdgeInsets.all(Dimentions.sliderPadding),
+              child: MixSlider(
+                min: 0.0,
+                max: 110,
+                values: [channel.level*100],
+              ),
+            ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Text(channel.name)
+        ),
+      ],
+    );
+}
 
 }
