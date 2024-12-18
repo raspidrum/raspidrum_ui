@@ -120,6 +120,7 @@ final _presetJson = '''
               "key": "top",
               "name": "Top",
               "level": 0.64,
+              "pan": -0.2,
               "fxs": [
                 {
                   "key": "reverb",
@@ -160,12 +161,14 @@ final _presetJson = '''
             {
               "key": "bottom",
               "name": "Bottom",
-              "level": 0.75
+              "level": 0.75,
+              "pan": -0.2
             },
             {
               "key": "oh",
               "name": "OH",
-              "level": 0.68
+              "level": 0.68,
+              "pan": -0.2
             }
           ]
         }

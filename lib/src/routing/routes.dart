@@ -8,6 +8,6 @@ class Routes {
 
 class ChannelRoutes {
   static const channelConfig = 'channelConfig';
-  static const channelConfigPath = '/kit/channels/:channelKey'; 
-  static const channelKey = 'channelKey';
+  static const channelConfigPath = '/kit/channels/:channelIdx'; 
+  static const channelIdx = 'channelIdx';
 }

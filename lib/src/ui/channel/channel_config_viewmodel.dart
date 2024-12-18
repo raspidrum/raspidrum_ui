@@ -9,10 +9,10 @@ class ChannelConfigViewModel extends ChangeNotifier {
 
   ChannelConfigViewModel({
     required KitPresetRepository kitPresetRepository,
-    required String channelKey
+    required String channelIdx
   }):
     _kitPresetRepository = kitPresetRepository {
-      load = Command1(_load)..execute(channelKey);
+      load = Command1(_load)..execute(channelIdx);
     }
 
   final KitPresetRepository _kitPresetRepository;
@@ -23,14 +23,14 @@ class ChannelConfigViewModel extends ChangeNotifier {
   Channel? _channel;
   Channel? get channel => _channel;
 
-  Future<Result> _load(String channelKey) async {
+  Future<Result> _load(String channelIdx) async {
     try {
       final kitPresetResult = await _kitPresetRepository.getPreset();
       switch (kitPresetResult) {
         case Ok<Preset>():
           if (kitPresetResult.value.channels != null) {
-            // TODO: сделать поиск по ключу
-            _channel = kitPresetResult.value.channels!.first;
+            var chnls = kitPresetResult.value.channels!;
+            _channel = chnls[int.parse(channelIdx)];
           };
           _log.fine('Preset loaded');
         case Error<Preset>():

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
-import '../themes/constants.dart';
+import 'package:raspidrum_ui/src/ui/core/themes/constants.dart';
 
-class MixSlider extends StatelessWidget {
+class PanSlider extends StatelessWidget {
 
   final Function(int handlerIndex, dynamic lowerValue, dynamic upperValue)?
       onDragStarted;
@@ -15,7 +15,7 @@ class MixSlider extends StatelessWidget {
   final List<double>? values;
   final List<FlutterSliderFixedValue>? fixedValues;
 
-  const MixSlider(
+  const PanSlider(
     {super.key,
     this.min,
     this.max,
@@ -30,10 +30,10 @@ class MixSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterSlider(
-      axis: Axis.vertical,
+      axis: Axis.horizontal,
       rtl: true,
       values: values ?? [0],
-      min: min ?? 0,
+      min: min ?? -100,
       max: max ?? 100,
       fixedValues: fixedValues,
       onDragStarted: onDragStarted,
@@ -53,24 +53,27 @@ class MixSlider extends StatelessWidget {
               height: 5,
               width: 1,
               decoration: BoxDecoration(color: Colors.black45)),
-          labels: [
-            FlutterSliderHatchMarkLabel(percent: 0, label: Text('\u{221E}')),
-            FlutterSliderHatchMarkLabel(percent: 8, label: Text('-48')),
-            FlutterSliderHatchMarkLabel(percent: 20, label: Text('-36')),
-            FlutterSliderHatchMarkLabel(percent: 35, label: Text('-24')),
-            FlutterSliderHatchMarkLabel(percent: 55, label: Text('-12')),
-            FlutterSliderHatchMarkLabel(percent: 70, label: Text('-6')),
-            FlutterSliderHatchMarkLabel(percent: 85, label: Text('0')),
-            FlutterSliderHatchMarkLabel(percent: 100, label: Text('6')),
-          ]),
+          //labels: [
+          //  FlutterSliderHatchMarkLabel(percent: 0, label: Text('\u{221E}')),
+          //  FlutterSliderHatchMarkLabel(percent: 8, label: Text('-48')),
+          //  FlutterSliderHatchMarkLabel(percent: 20, label: Text('-36')),
+          //  FlutterSliderHatchMarkLabel(percent: 35, label: Text('-24')),
+          //  FlutterSliderHatchMarkLabel(percent: 55, label: Text('-12')),
+          //  FlutterSliderHatchMarkLabel(percent: 70, label: Text('-6')),
+          //  FlutterSliderHatchMarkLabel(percent: 85, label: Text('0')),
+          //  FlutterSliderHatchMarkLabel(percent: 100, label: Text('6')),
+          //]
+          ),
       handler: FlutterSliderHandler(
-        decoration: BoxDecoration(),
+          decoration: BoxDecoration(),
+          child: RotatedBox(
+        quarterTurns: 1,
         child: Icon(
-              size: 32,
-              Icons.drag_handle,
-              color: Colors.black,
-            ),
-      ),
+          size: 32,
+          Icons.drag_handle,
+          color: Colors.black,
+        ),
+      )),
       trackBar: FlutterSliderTrackBar(
         activeTrackBarHeight: 8,
         inactiveTrackBarHeight: 10,

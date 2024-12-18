@@ -29,13 +29,6 @@ final GoRouter router = GoRouter(
             GoRoute(
               name: Routes.kit,
               path: Routes.kit,
-              //builder: (context, state) {
-              //  return KitScreen (
-              //    viewModel: KitViewModel(
-              //      kitPresetRepository: context.read()
-              //    )
-              //  );
-              //},
               pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
                 context: context, 
                 state: state, 
@@ -49,57 +42,57 @@ final GoRouter router = GoRouter(
             GoRoute(
               name: Routes.mixer,
               path: Routes.mixer,
-              builder: (contect, state) {
-                return MixerScreen (
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: MixerScreen (
                   viewModel: MixerViewModel()
-                );
-              }
+                ),
+              ),
             ),
             GoRoute(
               name: Routes.metronome,
               path: Routes.metronome,
-              builder: (contect, state) {
-                return MetronomeScreen (
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: MetronomeScreen (
                   viewModel: MetronomeViewModel()
-                );
-              }
+                ),
+              ),
             ),
             GoRoute(
               name: Routes.player,
               path: Routes.player,
-              builder: (contect, state) {
-                return PlayerScreen (
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: PlayerScreen (
                   viewModel: PlayerViewModel()
-                );
-              }
+                ),
+              ),
             ),
             GoRoute(
               name: Routes.settings,
               path: Routes.settings,
-              builder: (contect, state) {
-                return SettingsScreen (
+              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
+                context: context, 
+                state: state, 
+                child: SettingsScreen (
                   viewModel: SettingsViewModel()
-                );
-              }
+                ),
+              ),
             ),
             GoRoute(
               name: ChannelRoutes.channelConfig,
               path: ChannelRoutes.channelConfigPath,
-              builder: (context, state) {
-                return ChannelConfigScreen(
-                  viewModel: ChannelConfigViewModel(
-                    kitPresetRepository: context.read(),
-                    channelKey: state.pathParameters[ChannelRoutes.channelKey]!
-                  ),
-                );
-              },
               pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
                 context: context, 
                 state: state, 
                 child: ChannelConfigScreen(
                   viewModel: ChannelConfigViewModel(
                     kitPresetRepository: context.read(),
-                    channelKey: state.pathParameters[ChannelRoutes.channelKey]!
+                    channelIdx: state.pathParameters[ChannelRoutes.channelIdx]!
                   ),
                 ),
               ),
@@ -125,8 +118,8 @@ CustomTransitionPage<T> buildPageWithoutAnimation<T>({
         secondaryAnimation, 
         child
         ) => child,
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
+        transitionDuration: Duration(milliseconds: 200),
+        reverseTransitionDuration: Duration(milliseconds: 200),
     );
   }
 

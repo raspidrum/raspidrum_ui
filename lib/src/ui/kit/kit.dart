@@ -65,26 +65,28 @@ class KitScreen extends StatelessWidget {
   }
 
   Widget _buildKitMixer(BuildContext context) {
-    return Container(
-      decoration: themeRoundedBox,
-      padding: EdgeInsets.all(Dimentions.containerPadding),
-      width: MediaQuery.of(context).size.width,
-      child: _buildChannels(context),
-      );  
+    return Padding(
+      padding: const EdgeInsets.all(Dimentions.smallPadding),
+      child: Container(
+        decoration: themeRoundedBox,
+        padding: EdgeInsets.all(Dimentions.bigPadding),
+        width: MediaQuery.of(context).size.width,
+        child: _buildChannels(context),
+        ),
+    );  
   }
 
   Widget _buildChannels(BuildContext context) {
     var channels = viewModel.preset!.channels;
     if (channels == null) return Container();
-    final chnlControls = List<Widget>.generate(channels.length, 
-      (int index) => _buildChannel(context, channels[index]), 
-      growable: false);
-    return Row(
-      children: chnlControls
-    );
+    final chnlControls = List<Widget>.generate(
+        channels.length, 
+        (int index) => _buildChannel(context, channels[index], index),
+        growable: false);
+    return Row(children: chnlControls);
   }
 
-  Widget _buildChannel(BuildContext context, Channel channel) {
+  Widget _buildChannel(BuildContext context, Channel channel, int idx) {
     return 
     Column(
       mainAxisSize: MainAxisSize.min,
@@ -93,19 +95,13 @@ class KitScreen extends StatelessWidget {
           flex: 12,
           child: IconButton.outlined(
             iconSize: 24,
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                // TODO: вынести в стиль
-                borderRadius: BorderRadius.circular(Dimentions.buttonBorderRadius), // <-- Radius
-                ),
-            ),
             icon: const Icon(
               Icons.graphic_eq
             ), 
             onPressed: () { 
               context.goNamed(
                 ChannelRoutes.channelConfig, 
-                pathParameters: {ChannelRoutes.channelKey: channel.key});
+                pathParameters: {ChannelRoutes.channelIdx: idx.toString()});
              },
           ),
         ),
