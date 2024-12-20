@@ -49,6 +49,8 @@ class Instrument with _$Instrument {
   factory Instrument({
     required final String key,
     required String name,
+    double? level,
+    double? pan,
     List<FX>? tunes,
     List<Layer>? layers,
   }) = _Instrument;

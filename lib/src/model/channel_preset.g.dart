@@ -61,6 +61,8 @@ _$InstrumentImpl _$$InstrumentImplFromJson(Map<String, dynamic> json) =>
     _$InstrumentImpl(
       key: json['key'] as String,
       name: json['name'] as String,
+      level: (json['level'] as num?)?.toDouble(),
+      pan: (json['pan'] as num?)?.toDouble(),
       tunes: (json['tunes'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -73,6 +75,8 @@ Map<String, dynamic> _$$InstrumentImplToJson(_$InstrumentImpl instance) =>
     <String, dynamic>{
       'key': instance.key,
       'name': instance.name,
+      'level': instance.level,
+      'pan': instance.pan,
       'tunes': instance.tunes,
       'layers': instance.layers,
     };

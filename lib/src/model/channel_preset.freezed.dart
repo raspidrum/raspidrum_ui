@@ -501,6 +501,10 @@ mixin _$Instrument {
   String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
+  double? get level => throw _privateConstructorUsedError;
+  set level(double? value) => throw _privateConstructorUsedError;
+  double? get pan => throw _privateConstructorUsedError;
+  set pan(double? value) => throw _privateConstructorUsedError;
   List<FX>? get tunes => throw _privateConstructorUsedError;
   set tunes(List<FX>? value) => throw _privateConstructorUsedError;
   List<Layer>? get layers => throw _privateConstructorUsedError;
@@ -522,7 +526,13 @@ abstract class $InstrumentCopyWith<$Res> {
           Instrument value, $Res Function(Instrument) then) =
       _$InstrumentCopyWithImpl<$Res, Instrument>;
   @useResult
-  $Res call({String key, String name, List<FX>? tunes, List<Layer>? layers});
+  $Res call(
+      {String key,
+      String name,
+      double? level,
+      double? pan,
+      List<FX>? tunes,
+      List<Layer>? layers});
 }
 
 /// @nodoc
@@ -542,6 +552,8 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
   $Res call({
     Object? key = null,
     Object? name = null,
+    Object? level = freezed,
+    Object? pan = freezed,
     Object? tunes = freezed,
     Object? layers = freezed,
   }) {
@@ -554,6 +566,14 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pan: freezed == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
+              as double?,
       tunes: freezed == tunes
           ? _value.tunes
           : tunes // ignore: cast_nullable_to_non_nullable
@@ -574,7 +594,13 @@ abstract class _$$InstrumentImplCopyWith<$Res>
       __$$InstrumentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String key, String name, List<FX>? tunes, List<Layer>? layers});
+  $Res call(
+      {String key,
+      String name,
+      double? level,
+      double? pan,
+      List<FX>? tunes,
+      List<Layer>? layers});
 }
 
 /// @nodoc
@@ -592,6 +618,8 @@ class __$$InstrumentImplCopyWithImpl<$Res>
   $Res call({
     Object? key = null,
     Object? name = null,
+    Object? level = freezed,
+    Object? pan = freezed,
     Object? tunes = freezed,
     Object? layers = freezed,
   }) {
@@ -604,6 +632,14 @@ class __$$InstrumentImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pan: freezed == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
+              as double?,
       tunes: freezed == tunes
           ? _value.tunes
           : tunes // ignore: cast_nullable_to_non_nullable
@@ -620,7 +656,12 @@ class __$$InstrumentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
   _$InstrumentImpl(
-      {required this.key, required this.name, this.tunes, this.layers});
+      {required this.key,
+      required this.name,
+      this.level,
+      this.pan,
+      this.tunes,
+      this.layers});
 
   factory _$InstrumentImpl.fromJson(Map<String, dynamic> json) =>
       _$$InstrumentImplFromJson(json);
@@ -630,13 +671,17 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
   @override
   String name;
   @override
+  double? level;
+  @override
+  double? pan;
+  @override
   List<FX>? tunes;
   @override
   List<Layer>? layers;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Instrument(key: $key, name: $name, tunes: $tunes, layers: $layers)';
+    return 'Instrument(key: $key, name: $name, level: $level, pan: $pan, tunes: $tunes, layers: $layers)';
   }
 
   @override
@@ -646,6 +691,8 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
       ..add(DiagnosticsProperty('type', 'Instrument'))
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('pan', pan))
       ..add(DiagnosticsProperty('tunes', tunes))
       ..add(DiagnosticsProperty('layers', layers));
   }
@@ -670,6 +717,8 @@ abstract class _Instrument implements Instrument {
   factory _Instrument(
       {required final String key,
       required String name,
+      double? level,
+      double? pan,
       List<FX>? tunes,
       List<Layer>? layers}) = _$InstrumentImpl;
 
@@ -681,6 +730,12 @@ abstract class _Instrument implements Instrument {
   @override
   String get name;
   set name(String value);
+  @override
+  double? get level;
+  set level(double? value);
+  @override
+  double? get pan;
+  set pan(double? value);
   @override
   List<FX>? get tunes;
   set tunes(List<FX>? value);
