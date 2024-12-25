@@ -87,30 +87,17 @@ class ChannelConfigScreen extends StatelessWidget {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              flex: 12,
-              child: IconButton.outlined(
-                iconSize: 24,
-                icon: const Icon(
-                  Icons.graphic_eq
-                ), 
-                onPressed: () { 
-                
-                 },
-              ),
+            IconButton.outlined(
+              icon: const Icon(Icons.graphic_eq), 
+                onPressed: () { },
             ),
             Expanded(
-              flex: 20,
+              //flex: 20,
               child: _buildPanSlider(channel.pan),
             ),
-            Expanded(
-              flex: 70,
-              child: _buildLevelSlider(channel.level),
-            ),
-            Expanded(
-              flex: 5,
-              child: Text(channel.name)
-            ),
+            _buildLevelSlider(channel.level),
+            Text(channel.name,
+                style: Theme.of(context).textTheme.labelLarge)
           ],
         ),
     );
@@ -129,39 +116,39 @@ class ChannelConfigScreen extends StatelessWidget {
   }
 
   Widget _buildInstrumentControls(BuildContext context, Instrument instr) {
-    return SizedBox(
-      width: Dimentions.channelControlWidth,
-      child: Row(
+    return Row(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-            Expanded(
-              flex: 12,
-              child: IconButton.outlined(
-                iconSize: 24,
-                icon: const Icon(
-                  Icons.tune
+          SizedBox(
+            width: Dimentions.channelControlWidth,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              Expanded(
+                flex: 12,
+                child: IconButton.outlined(
+                  iconSize: 24,
+                  icon: const Icon(
+                    Icons.tune
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
               ),
-            ),
-            Expanded(
-              flex: 98,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Text(
-                  instr.name,
-                  textAlign: TextAlign.center,
-                  )
+              Expanded(
+                flex: 98,
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: Text(
+                    instr.name,
+                    textAlign: TextAlign.center,
+                    )
+                ),
               ),
+              ],
             ),
-            ],
           ),
           _buildLayers(context, instr.layers)
-        ],
-      )
+        ]
     );
   }
 
@@ -211,26 +198,32 @@ class ChannelConfigScreen extends StatelessWidget {
 
   Widget _buildLevelSlider(double? level) {
     if (level == null) return Container();
-    return Padding(
-      padding: const EdgeInsets.all(Dimentions.sliderPadding),
-      child: MixSlider(
-        min: 0.0,
-        max: 110,
-        values: [level * 100],
+    return SizedBox(
+      height: Dimentions.channelControlHeight,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimentions.sliderPadding),
+        child: MixSlider(
+          min: 0.0,
+          max: 110,
+          values: [level * 100],
+        ),
       ),
     );
   }
 
   Widget _buildPanSlider(double? pan) {
     if (pan == null) return Container();
-    return Padding(
-      padding: const EdgeInsets.all(Dimentions.borderRadius),
-      child: PanSlider(
-        min: -100.0,
-        max: 100,
-        values: [pan * 100]
-      ),
-      );
+    return SizedBox(
+      height: 240,
+      child: Padding(
+        padding: const EdgeInsets.all(Dimentions.borderRadius),
+        child: PanSlider(
+          min: -100.0,
+          max: 100,
+          values: [pan * 100]
+        ),
+        ),
+    );
   }
 
 

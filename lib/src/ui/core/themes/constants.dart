@@ -12,6 +12,7 @@ abstract final class Dimentions {
   static const double boxBorderRadius = borderRadius;
 
   static const double channelControlWidth = 86.0;
+  static const double channelControlHeight = 220;
 }
 
 abstract final class SliderStyle {

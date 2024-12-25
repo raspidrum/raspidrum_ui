@@ -61,7 +61,8 @@ class App extends StatelessWidget {
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
           theme: ThemeData(
-            iconButtonTheme: iconButtonStyle
+            iconButtonTheme: iconButtonStyle,
+            useMaterial3: true,
           ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
