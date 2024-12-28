@@ -87,9 +87,16 @@ class ChannelConfigScreen extends StatelessWidget {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconButton.outlined(
-              icon: const Icon(Icons.graphic_eq), 
-                onPressed: () { },
+            SizedBox(
+              width: Dimentions.buttonSize.width,
+              height: Dimentions.buttonSize.height,
+              child: Visibility(
+                visible: channel.fxs != null,
+                child: IconButton.outlined(
+                  icon: const Icon(Icons.graphic_eq), 
+                    onPressed: () { },
+                ),
+              ),
             ),
             Expanded(
               //flex: 20,

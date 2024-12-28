@@ -10,6 +10,7 @@ abstract final class Dimentions {
   static const double borderRadius = 5.0;
   static const double buttonBorderRadius = borderRadius;
   static const double boxBorderRadius = borderRadius;
+  static const Size buttonSize = Size(40,40);
 
   static const double channelControlWidth = 86.0;
   static const double channelControlHeight = 220;

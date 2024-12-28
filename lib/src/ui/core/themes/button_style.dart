@@ -8,7 +8,7 @@ final IconButtonThemeData iconButtonStyle = IconButtonThemeData(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(Dimentions.buttonBorderRadius), // <-- Radius
                     ),
-                  fixedSize: Size(40, 40),
+                  fixedSize: Dimentions.buttonSize,
                   padding: EdgeInsets.all(8.0)
                 )
   );
