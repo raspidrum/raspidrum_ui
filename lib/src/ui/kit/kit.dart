@@ -91,13 +91,11 @@ class KitScreen extends StatelessWidget {
     Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
-          flex: 12,
+        SizedBox(
+          width: Dimentions.buttonSize.width,
+          height: Dimentions.buttonSize.height,
           child: IconButton.outlined(
-            iconSize: 24,
-            icon: const Icon(
-              Icons.graphic_eq
-            ), 
+            icon: const Icon(Icons.graphic_eq), 
             onPressed: () { 
               context.goNamed(
                 ChannelRoutes.channelConfig, 
@@ -106,7 +104,6 @@ class KitScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 83,
           child: Padding(
               padding: const EdgeInsets.all(Dimentions.sliderPadding),
               child: MixSlider(
@@ -116,10 +113,8 @@ class KitScreen extends StatelessWidget {
               ),
             ),
         ),
-        Expanded(
-          flex: 5,
-          child: Text(channel.name)
-        ),
+        Text(channel.name,
+                style: Theme.of(context).textTheme.labelLarge)
       ],
     );
   }

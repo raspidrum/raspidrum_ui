@@ -98,11 +98,8 @@ class ChannelConfigScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              //flex: 20,
-              child: _buildPanSlider(channel.pan),
-            ),
-            _buildLevelSlider(channel.level),
+            _buildPanSlider(channel.pan),
+            Expanded(child: _buildLevelSlider(channel.level)),
             Text(channel.name,
                 style: Theme.of(context).textTheme.labelLarge)
           ],
@@ -123,40 +120,38 @@ class ChannelConfigScreen extends StatelessWidget {
   }
 
   Widget _buildInstrumentControls(BuildContext context, Instrument instr) {
-    return Row(
-        children: [
-          SizedBox(
-            width: Dimentions.channelControlWidth,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-              Expanded(
-                flex: 12,
+    return Row(children: [
+      SizedBox(
+        width: Dimentions.channelControlWidth,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: Dimentions.buttonSize.width,
+              height: Dimentions.buttonSize.height,
+              child: Visibility(
+                visible: instr.tunes != null,
                 child: IconButton.outlined(
                   iconSize: 24,
-                  icon: const Icon(
-                    Icons.tune
-                  ),
+                  icon: const Icon(Icons.tune),
                   onPressed: () {},
                 ),
               ),
-              Expanded(
-                flex: 98,
-                child: RotatedBox(
+            ),
+            Expanded(
+              child: RotatedBox(
                   quarterTurns: 3,
                   child: Text(
                     instr.name,
                     textAlign: TextAlign.center,
-                    )
-                ),
-              ),
-              ],
+                  )),
             ),
-          ),
-          _buildLayers(context, instr.layers)
-        ]
-    );
+          ],
+        ),
+      ),
+      _buildLayers(context, instr.layers)
+    ]);
   }
 
   Widget _buildLayers(BuildContext context, List<Layer>? layers) {
@@ -173,55 +168,43 @@ class ChannelConfigScreen extends StatelessWidget {
     return SizedBox(
       width: Dimentions.channelControlWidth,
       child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              flex: 12,
-              child: IconButton.outlined(
-                iconSize: 24,
-                icon: const Icon(
-                  Icons.graphic_eq
-                ), 
-                onPressed: () { 
-                 },
-              ),
-            ),
-            Expanded(
-              flex: 20,
-              child: _buildPanSlider(layer.pan),
-            ),
-            Expanded(
-              flex: 70,
-              child: _buildLevelSlider(layer.level),
-            ),
-            Expanded(
-              flex: 5,
-              child: Text(layer.name)
-            ),
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+              width: Dimentions.buttonSize.width,
+              height: Dimentions.buttonSize.height,
+              child: Visibility(
+                visible: layer.fxs != null,
+                child: IconButton.outlined(
+                  iconSize: 24,
+                  icon: const Icon(Icons.graphic_eq),
+                  onPressed: () {},
+                ),
+              )),
+          _buildPanSlider(layer.pan),
+          Expanded(child: _buildLevelSlider(layer.level)),
+          Text(layer.name, style: Theme.of(context).textTheme.labelLarge),
+        ],
+      ),
     );
   }
 
   Widget _buildLevelSlider(double? level) {
     if (level == null) return Container();
-    return SizedBox(
-      height: Dimentions.channelControlHeight,
-      child: Padding(
+    return Padding(
         padding: const EdgeInsets.all(Dimentions.sliderPadding),
         child: MixSlider(
           min: 0.0,
           max: 110,
           values: [level * 100],
         ),
-      ),
     );
   }
 
   Widget _buildPanSlider(double? pan) {
-    if (pan == null) return Container();
+    if (pan == null) return SizedBox(height: Dimentions.controlPanHeight);
     return SizedBox(
-      height: 240,
+      height: Dimentions.controlPanHeight,
       child: Padding(
         padding: const EdgeInsets.all(Dimentions.borderRadius),
         child: PanSlider(
