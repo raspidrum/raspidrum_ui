@@ -14,8 +14,11 @@ import 'package:raspidrum_ui/src/ui/player/player_viewmodel.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings_viewmodel.dart';
 
+import '../model/channel_preset.dart';
 import '../ui/channel/channel_config.dart';
 import '../ui/channel/channel_config_viewmodel.dart';
+import '../ui/fx_tune/fx_tune.dart';
+import '../ui/fx_tune/fx_tune_viewmodel.dart';
 
 final GoRouter router = GoRouter(
       routerNeglect: true, // disable browser history tracking
@@ -27,18 +30,32 @@ final GoRouter router = GoRouter(
           },
           routes: <RouteBase>[
             GoRoute(
-              name: Routes.kit,
-              path: Routes.kit,
-              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
-                context: context, 
-                state: state, 
-                child: KitScreen (
-                  viewModel: KitViewModel(
-                    kitPresetRepository: context.read()
-                  )
-                ),
-              ),
-            ),
+                name: Routes.kit,
+                path: Routes.kit,
+                pageBuilder: (BuildContext context, GoRouterState state) =>
+                    buildPageWithoutAnimation<void>(
+                      context: context,
+                      state: state,
+                      child: KitScreen(
+                          viewModel: KitViewModel(
+                              kitPresetRepository: context.read())),
+                    ),
+                routes: [
+                  GoRoute(
+                    name: ChannelRoutes.channelConfig,
+                    path: ChannelRoutes.channelConfigPath,
+                    pageBuilder: (BuildContext context, GoRouterState state) =>
+                        buildPageWithoutAnimation<void>(
+                      context: context,
+                      state: state,
+                      child: ChannelConfigScreen(
+                        viewModel: ChannelConfigViewModel(
+                            kitPresetRepository: context.read(),
+                            channelIdx: state.pathParameters[ChannelRoutes.channelIdx]!),
+                      ),
+                    ),
+                  ),
+                ]),
             GoRoute(
               name: Routes.mixer,
               path: Routes.mixer,
@@ -84,17 +101,16 @@ final GoRouter router = GoRouter(
               ),
             ),
             GoRoute(
-              name: ChannelRoutes.channelConfig,
-              path: ChannelRoutes.channelConfigPath,
+              name: ChannelRoutes.channelFx,
+              path: ChannelRoutes.channelFxPath,
               pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
                 context: context, 
                 state: state, 
-                child: ChannelConfigScreen(
-                  viewModel: ChannelConfigViewModel(
-                    kitPresetRepository: context.read(),
-                    channelIdx: state.pathParameters[ChannelRoutes.channelIdx]!
-                  ),
-                ),
+                child: FxTuneScreen(
+                  viewModel: FxTuneViewModel(
+                    fxs: GoRouterState.of(context).extra! as List<FX>
+                  )
+                )
               ),
             ),
           ]
