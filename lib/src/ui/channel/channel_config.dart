@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../model/channel_preset.dart';
+import '../../routing/routes.dart';
 import '../core/themes/constants.dart';
 
 import '../core/localization/applocalization.dart';
@@ -94,7 +96,12 @@ class ChannelConfigScreen extends StatelessWidget {
                 visible: channel.fxs != null,
                 child: IconButton.outlined(
                   icon: const Icon(Icons.graphic_eq), 
-                    onPressed: () { },
+                    onPressed: () {
+                      context.goNamed(
+                        ChannelRoutes.channelFx,
+                        pathParameters: {ChannelRoutes.channelIdx: channel.key}, 
+                        extra: channel.fxs);
+                    },
                 ),
               ),
             ),

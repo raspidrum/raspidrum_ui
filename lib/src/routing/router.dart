@@ -51,9 +51,25 @@ final GoRouter router = GoRouter(
                       child: ChannelConfigScreen(
                         viewModel: ChannelConfigViewModel(
                             kitPresetRepository: context.read(),
-                            channelIdx: state.pathParameters[ChannelRoutes.channelIdx]!),
+                            channelIdx: state
+                                .pathParameters[ChannelRoutes.channelIdx]!),
                       ),
                     ),
+                    routes: [
+                      GoRoute(
+                        name: ChannelRoutes.channelFx,
+                        path: ChannelRoutes.channelFxPath,
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            buildPageWithoutAnimation<void>(
+                                context: context,
+                                state: state,
+                                child: FxTuneScreen(
+                                    viewModel: FxTuneViewModel(
+                                        fxs: GoRouterState.of(context).extra!
+                                            as List<FX>))),
+                      ),
+                    ],
                   ),
                 ]),
             GoRoute(
@@ -98,19 +114,6 @@ final GoRouter router = GoRouter(
                 child: SettingsScreen (
                   viewModel: SettingsViewModel()
                 ),
-              ),
-            ),
-            GoRoute(
-              name: ChannelRoutes.channelFx,
-              path: ChannelRoutes.channelFxPath,
-              pageBuilder: (BuildContext context, GoRouterState state) => buildPageWithoutAnimation<void>(
-                context: context, 
-                state: state, 
-                child: FxTuneScreen(
-                  viewModel: FxTuneViewModel(
-                    fxs: GoRouterState.of(context).extra! as List<FX>
-                  )
-                )
               ),
             ),
           ]

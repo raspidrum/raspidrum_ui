@@ -99,7 +99,9 @@ class KitScreen extends StatelessWidget {
             onPressed: () { 
               context.goNamed(
                 ChannelRoutes.channelConfig, 
-                pathParameters: {ChannelRoutes.channelIdx: idx.toString()});
+                //pathParameters: {ChannelRoutes.channelIdx: idx.toString()}
+                pathParameters: {ChannelRoutes.channelIdx: channel.key}
+                );
              },
           ),
         ),

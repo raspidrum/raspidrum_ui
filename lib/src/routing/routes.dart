@@ -9,10 +9,10 @@ class Routes {
 class ChannelRoutes {
   static const channelConfig = 'channelConfig';
   static const channelIdx = 'channelIdx';
-  static const channelConfigPath = '/kit/channels/:$channelIdx'; 
+  static const channelConfigPath = '/channels/:$channelIdx'; 
 
   static const channelFx = 'channelFx';
-  static const channelFxPath = '$channelConfigPath/fxs';
+  static const channelFxPath = '/fxs';
 }
 
 class InstrumentRoutes {
