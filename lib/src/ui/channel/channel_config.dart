@@ -142,7 +142,12 @@ class ChannelConfigScreen extends StatelessWidget {
                 child: IconButton.outlined(
                   iconSize: 24,
                   icon: const Icon(Icons.tune),
-                  onPressed: () {},
+                  onPressed: () {
+                      context.goNamed(
+                        InstrumentRoutes.instrTune,
+                        pathParameters: {ChannelRoutes.channelIdx: viewModel.channel!.key, InstrumentRoutes.instrId: instr.key}, 
+                        extra: instr.tunes);
+                    },
                 ),
               ),
             ),
@@ -171,7 +176,7 @@ class ChannelConfigScreen extends StatelessWidget {
     return Row(children: layersCtrls);
   }
 
-  Widget _buildLayerControls(BuildContext context, layer) {
+  Widget _buildLayerControls(BuildContext context, Layer layer) {
     return SizedBox(
       width: Dimentions.channelControlWidth,
       child: Column(
@@ -185,7 +190,13 @@ class ChannelConfigScreen extends StatelessWidget {
                 child: IconButton.outlined(
                   iconSize: 24,
                   icon: const Icon(Icons.graphic_eq),
-                  onPressed: () {},
+                  onPressed: () {
+                      context.goNamed(
+                        InstrumentRoutes.layerFx,
+                        pathParameters: {ChannelRoutes.channelIdx: viewModel.channel!.key, 
+                                         InstrumentRoutes.layerId: layer.key}, 
+                        extra: layer.fxs);
+                    },
                 ),
               )),
           _buildPanSlider(layer.pan),

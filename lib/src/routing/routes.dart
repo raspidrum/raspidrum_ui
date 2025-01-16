@@ -17,12 +17,12 @@ class ChannelRoutes {
 
 class InstrumentRoutes {
   static const instrId = 'instrId';
-  static const instrPath = '/kit/instruments/:$instrId';
+  static const instrPath = '/instruments/:$instrId';
 
   static const instrTune = 'instrTune';
   static const instrTunePath = '$instrPath/tunes';
 
-  static const layerId = 'layerId';
   static const layerFx = 'layerFx';
-  static const layerFxPath = '$instrPath/layers/:$layerId/fxs';
+  static const layerId = 'layerId';
+  static const layerFxPath = '/layers/:$layerId/fxs';
 }

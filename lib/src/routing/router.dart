@@ -41,7 +41,7 @@ final GoRouter router = GoRouter(
                               kitPresetRepository: context.read())),
                     ),
                 routes: [
-                  GoRoute(
+                  GoRoute( //ChannelConfig
                     name: ChannelRoutes.channelConfig,
                     path: ChannelRoutes.channelConfigPath,
                     pageBuilder: (BuildContext context, GoRouterState state) =>
@@ -56,9 +56,35 @@ final GoRouter router = GoRouter(
                       ),
                     ),
                     routes: [
-                      GoRoute(
+                      GoRoute( //ChannelFxs
                         name: ChannelRoutes.channelFx,
                         path: ChannelRoutes.channelFxPath,
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            buildPageWithoutAnimation<void>(
+                                context: context,
+                                state: state,
+                                child: FxTuneScreen(
+                                    viewModel: FxTuneViewModel(
+                                        fxs: GoRouterState.of(context).extra!
+                                            as List<FX>))),
+                      ),
+                      GoRoute( //InstrumentsTunes
+                        name: InstrumentRoutes.instrTune,
+                        path: InstrumentRoutes.instrTunePath,
+                        pageBuilder: (BuildContext context,
+                                GoRouterState state) =>
+                            buildPageWithoutAnimation<void>(
+                                context: context,
+                                state: state,
+                                child: FxTuneScreen(
+                                    viewModel: FxTuneViewModel(
+                                        fxs: GoRouterState.of(context).extra!
+                                            as List<FX>))),
+                      ),
+                      GoRoute( //LayerFxs
+                        name: InstrumentRoutes.layerFx,
+                        path: InstrumentRoutes.layerFxPath,
                         pageBuilder: (BuildContext context,
                                 GoRouterState state) =>
                             buildPageWithoutAnimation<void>(
