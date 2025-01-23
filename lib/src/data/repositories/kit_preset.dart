@@ -4,6 +4,12 @@ import 'dart:convert';
 import 'package:raspidrum_ui/src/model/channel_preset.dart';
 import 'package:raspidrum_ui/src/utils/result.dart';
 
+// Repository is used for working with presets:
+//   - get preset list 
+//   - load preset. With loading preset in sampler (configure channels and FX plugins) and settings mixer controls
+//   - store changed controls values in preset. With loading same as load preset
+//   - configure new preset: channels, instruments, layers, fx, ...
+
 final _presetJson = '''
 {
   "key": "123ABC",
