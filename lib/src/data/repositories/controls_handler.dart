@@ -7,14 +7,19 @@
 import 'dart:async';
 import 'dart:collection';
 
+import '../../services/channel_control/channel_control_service.dart';
+import '../../services/channel_control/model/channel_control.dart';
+
 // Class is used for interacting with viewmodel or other upper level
 class ControlsHandler {
+
+  final ChannelControlService _service;
 
   Map<String, _Control> _controls = {};
 
   void setValue(String key, double value) {
     if  (! _controls.containsKey(key)) {
-      _controls[key] = _Control(key);
+      _controls[key] = _Control(key, _service);
     }
     _controls[key]!.addEvent(value);
   }
@@ -23,11 +28,11 @@ class ControlsHandler {
 }
 
 // Type for holding event of setting control value
-class _valEvent {
+class _valRequest {
   final int seq;
   final double value;
 
-  _valEvent({
+  _valRequest({
     required this.seq,
     required this.value,
   });
@@ -36,25 +41,28 @@ class _valEvent {
 // Class handle queue for one control
 class _Control {
   
-  _Control(this._key);
+  _Control(
+    this._key,
+    this._service
+  );
 
   static final int delayStartProcessing = 10;
   static final int periodProcessing = 50;
   Timer? _timer;
 
   final String _key;
+  final ChannelControlService _service;
   int _seq = 0;
   
-  final Queue<_valEvent> _valsQueue = Queue();
-  _valEvent? _processindEvent;
-  _valEvent? _completedEvent;
+  final Queue<double> _valsQueue = Queue();
+  _valRequest? _processindEvent;
+  _valRequest? _completedEvent;
 
 
 
   // adding event to queue to delayed process
   void addEvent(double value) {
-    var val = _valEvent(seq: _seq++, value: value);
-    _valsQueue.add(val);
+    _valsQueue.add(value);
     if (_timer == null || !_timer!.isActive) {
       _timer = Timer(Duration(milliseconds: delayStartProcessing), () => _processQueue());
     } 
@@ -65,25 +73,26 @@ class _Control {
     if (_valsQueue.isEmpty) {
       return;
     }
-    _valEvent? val;
+    double? val;
     // read all events in queue
     while (_valsQueue.isNotEmpty) {
       val = _valsQueue.removeFirst();
     }
-    // TODO: start request
-    _processindEvent = val;
+    // TODO: handle request result
+    _service.setValue(_key, _seq++, val!);
+    _processindEvent = _valRequest(seq: _seq, value: val!);
     _timer = Timer(Duration(milliseconds: periodProcessing), () => _processQueue());
   }
 
-  void _processResponse(String key, int seq, double value) {
+  void _processResponse(ChannelControl settedValue) {
     // TODO: if (key != this._key) { throw exception("invalid key: $key"); }
     // update last completed event
     if (_completedEvent != null) {
-      if (seq > _completedEvent!.seq) {
-        _completedEvent = _valEvent(seq: seq, value: value);  
+      if (settedValue.seq > _completedEvent!.seq) {
+        _completedEvent = _valRequest(seq: settedValue.seq, value: settedValue.value);  
       }
     } else {
-      _completedEvent = _valEvent(seq: seq, value: value);
+      _completedEvent = _valRequest(seq: settedValue.seq, value: settedValue.value);
     }
   }
 
