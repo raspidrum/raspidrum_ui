@@ -7,19 +7,23 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:logging/logging.dart';
+
 import '../../services/channel_control/channel_control_service.dart';
 import '../../services/channel_control/model/channel_control.dart';
+import '../../utils/result.dart';
 
 // Class is used for interacting with viewmodel or other upper level
 class ControlsHandler {
 
   final ChannelControlService _service;
+  final _log = Logger('ControlsHandler');
 
   Map<String, _Control> _controls = {};
 
   void setValue(String key, double value) {
     if  (! _controls.containsKey(key)) {
-      _controls[key] = _Control(key, _service);
+      _controls[key] = _Control(key, _service, _log);
     }
     _controls[key]!.addEvent(value);
   }
@@ -43,15 +47,17 @@ class _Control {
   
   _Control(
     this._key,
-    this._service
+    this._service,
+    this._log,
   );
 
   static final int delayStartProcessing = 10;
   static final int periodProcessing = 50;
-  Timer? _timer;
 
   final String _key;
   final ChannelControlService _service;
+  final Logger _log;
+  Timer? _timer;
   int _seq = 0;
   
   final Queue<double> _valsQueue = Queue();
@@ -69,7 +75,7 @@ class _Control {
   }
 
   // process queue after timer
-  void _processQueue() {
+  void _processQueue() async {
     if (_valsQueue.isEmpty) {
       return;
     }
@@ -78,10 +84,16 @@ class _Control {
     while (_valsQueue.isNotEmpty) {
       val = _valsQueue.removeFirst();
     }
-    // TODO: handle request result
-    _service.setValue(_key, _seq++, val!);
+    _seq++;
     _processindEvent = _valRequest(seq: _seq, value: val!);
     _timer = Timer(Duration(milliseconds: periodProcessing), () => _processQueue());
+    final setValueResult = await _service.setValue(_key, _seq, val);
+    switch (setValueResult) {
+      case Ok<ChannelControl>():
+        _processResponse(setValueResult.value);
+      case Error<ChannelControl>():
+        _log.warning('Failed to set value', setValueResult.error);
+    }
   }
 
   void _processResponse(ChannelControl settedValue) {
