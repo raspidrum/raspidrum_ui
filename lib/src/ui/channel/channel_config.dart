@@ -207,7 +207,7 @@ class ChannelConfigScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLevelSlider(double? level) {
+  Widget _buildLevelSlider(string key, double? level) {
     if (level == null) return Container();
     return Padding(
         padding: const EdgeInsets.all(Dimentions.sliderPadding),
@@ -215,6 +215,9 @@ class ChannelConfigScreen extends StatelessWidget {
           min: 0.0,
           max: 110,
           values: [level * 100],
+          onDragging: (handlerIndex, lowerValue, upperValue) {
+            viewModel.sendValue(key, lowerValue);
+          },
         ),
     );
   }

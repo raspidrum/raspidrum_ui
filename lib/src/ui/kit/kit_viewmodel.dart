@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
-import '../../data/repositories/kit_preset.dart';
+import '../../data/repositories/kit_preset_repository.dart';
 import '../../model/channel_preset.dart';
 import '../../utils/result.dart';
 import '../../utils/command.dart';

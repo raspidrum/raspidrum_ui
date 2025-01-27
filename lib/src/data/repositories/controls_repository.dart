@@ -14,12 +14,16 @@ import '../../services/channel_control/model/channel_control.dart';
 import '../../utils/result.dart';
 
 // Class is used for interacting with viewmodel or other upper level
-class ControlsHandler {
+class ControlsRepository {
 
   final ChannelControlService _service;
   final _log = Logger('ControlsHandler');
 
   Map<String, _Control> _controls = {};
+
+  ControlsRepository(
+    this._service
+  );
 
   void setValue(String key, double value) {
     if  (! _controls.containsKey(key)) {
