@@ -106,7 +106,7 @@ class ChannelConfigScreen extends StatelessWidget {
               ),
             ),
             _buildPanSlider(channel.pan),
-            Expanded(child: _buildLevelSlider(channel.level)),
+            Expanded(child: _buildLevelSlider(channel.key, channel.level)),
             Text(channel.name,
                 style: Theme.of(context).textTheme.labelLarge)
           ],
@@ -200,14 +200,14 @@ class ChannelConfigScreen extends StatelessWidget {
                 ),
               )),
           _buildPanSlider(layer.pan),
-          Expanded(child: _buildLevelSlider(layer.level)),
+          Expanded(child: _buildLevelSlider(layer.key ,layer.level)),
           Text(layer.name, style: Theme.of(context).textTheme.labelLarge),
         ],
       ),
     );
   }
 
-  Widget _buildLevelSlider(string key, double? level) {
+  Widget _buildLevelSlider(String key, double? level) {
     if (level == null) return Container();
     return Padding(
         padding: const EdgeInsets.all(Dimentions.sliderPadding),

@@ -17,7 +17,7 @@ import '../../utils/result.dart';
 class ControlsRepository {
 
   final ChannelControlService _service;
-  final _log = Logger('ControlsHandler');
+  final _log = Logger('ControlsRepository');
 
   Map<String, _Control> _controls = {};
 

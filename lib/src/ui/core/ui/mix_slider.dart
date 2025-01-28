@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
-import '../themes/constants.dart';
 
 class MixSlider extends StatelessWidget {
 

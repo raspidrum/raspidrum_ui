@@ -51,6 +51,7 @@ final GoRouter router = GoRouter(
                       child: ChannelConfigScreen(
                         viewModel: ChannelConfigViewModel(
                             kitPresetRepository: context.read(),
+                            controlRepository: context.read(),
                             channelIdx: state
                                 .pathParameters[ChannelRoutes.channelIdx]!),
                       ),
