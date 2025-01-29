@@ -19,7 +19,7 @@ class ControlsRepository {
   final ChannelControlService _service;
   final _log = Logger('ControlsRepository');
 
-  Map<String, _Control> _controls = {};
+  final Map<String, _Control> _controls = {};
 
   ControlsRepository(
     this._service
@@ -36,11 +36,11 @@ class ControlsRepository {
 }
 
 // Type for holding event of setting control value
-class _valRequest {
+class _ValRequest {
   final int seq;
   final double value;
 
-  _valRequest({
+  _ValRequest({
     required this.seq,
     required this.value,
   });
@@ -65,8 +65,8 @@ class _Control {
   int _seq = 0;
   
   final Queue<double> _valsQueue = Queue();
-  _valRequest? _processindEvent;
-  _valRequest? _completedEvent;
+  _ValRequest? _processindEvent;
+  _ValRequest? _completedEvent;
 
 
 
@@ -85,12 +85,14 @@ class _Control {
     }
     double? val;
     // read all events in queue
+    _log.fine("queue: $_valsQueue");
     while (_valsQueue.isNotEmpty) {
       val = _valsQueue.removeFirst();
     }
     _seq++;
-    _processindEvent = _valRequest(seq: _seq, value: val!);
+    _processindEvent = _ValRequest(seq: _seq, value: val!);
     _timer = Timer(Duration(milliseconds: periodProcessing), () => _processQueue());
+    _log.fine("request: \t $_seq \t val: $val");
     final setValueResult = await _service.setValue(_key, _seq, val);
     switch (setValueResult) {
       case Ok<ChannelControl>():
@@ -103,12 +105,9 @@ class _Control {
   void _processResponse(ChannelControl settedValue) {
     // TODO: if (key != this._key) { throw exception("invalid key: $key"); }
     // update last completed event
-    if (_completedEvent != null) {
-      if (settedValue.seq > _completedEvent!.seq) {
-        _completedEvent = _valRequest(seq: settedValue.seq, value: settedValue.value);  
-      }
-    } else {
-      _completedEvent = _valRequest(seq: settedValue.seq, value: settedValue.value);
+    if (_completedEvent == null || settedValue.seq >= _completedEvent!.seq) {
+      _completedEvent = _ValRequest(seq: settedValue.seq, value: settedValue.value);
+      _log.fine("completed: \t ${settedValue.seq} \t val: ${settedValue.value}");
     }
   }
 

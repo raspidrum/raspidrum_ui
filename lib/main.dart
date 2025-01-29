@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart' as $log;
 import 'package:provider/provider.dart';
 import 'package:raspidrum_ui/src/providers.dart';
 import 'src/app.dart';
@@ -15,6 +16,13 @@ void main() async {
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
+
+  $log.hierarchicalLoggingEnabled = true;
+  $log.Logger.root.level = $log.Level.INFO;
+  $log.Logger.root.onRecord.listen((record) {
+    // ignore: avoid_print
+    print('${record.message}');
+  });
 
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
@@ -33,7 +41,7 @@ void main() async {
       ],
       builder: (context) {
         return MultiProvider (
-          providers: providersRemote,
+          providers: providersLocal,
           child: App(settingsController: settingsController),
         );
       }
