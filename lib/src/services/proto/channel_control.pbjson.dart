@@ -28,3 +28,20 @@ final $typed_data.Uint8List controlValueDescriptor = $convert.base64Decode(
     'CgxDb250cm9sVmFsdWUSEAoDa2V5GAEgASgJUgNrZXkSEAoDc2VxGAIgASgDUgNzZXESFAoFdm'
     'FsdWUYAyABKAFSBXZhbHVl');
 
+const $core.Map<$core.String, $core.dynamic> ChannelControlServiceBase$json = {
+  '1': 'ChannelControl',
+  '2': [
+    {'1': 'SetValue', '2': '.channelControl.v1.ControlValue', '3': '.channelControl.v1.ControlValue', '5': true, '6': true},
+  ],
+};
+
+@$core.Deprecated('Use channelControlServiceDescriptor instead')
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ChannelControlServiceBase$messageJson = {
+  '.channelControl.v1.ControlValue': ControlValue$json,
+};
+
+/// Descriptor for `ChannelControl`. Decode as a `google.protobuf.ServiceDescriptorProto`.
+final $typed_data.Uint8List channelControlServiceDescriptor = $convert.base64Decode(
+    'Cg5DaGFubmVsQ29udHJvbBJQCghTZXRWYWx1ZRIfLmNoYW5uZWxDb250cm9sLnYxLkNvbnRyb2'
+    'xWYWx1ZRofLmNoYW5uZWxDb250cm9sLnYxLkNvbnRyb2xWYWx1ZSgBMAE=');
+
