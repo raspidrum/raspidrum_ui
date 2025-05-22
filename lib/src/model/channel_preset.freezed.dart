@@ -226,8 +226,8 @@ mixin _$Channel {
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
   ChannelType get type => throw _privateConstructorUsedError;
-  double get level => throw _privateConstructorUsedError;
-  set level(double value) => throw _privateConstructorUsedError;
+  double get volume => throw _privateConstructorUsedError;
+  set volume(double value) => throw _privateConstructorUsedError;
   double get pan => throw _privateConstructorUsedError;
   set pan(double value) => throw _privateConstructorUsedError;
   List<FX>? get fxs => throw _privateConstructorUsedError;
@@ -254,7 +254,7 @@ abstract class $ChannelCopyWith<$Res> {
       {String key,
       String name,
       ChannelType type,
-      double level,
+      double volume,
       double pan,
       List<FX>? fxs,
       List<Instrument>? instruments});
@@ -278,7 +278,7 @@ class _$ChannelCopyWithImpl<$Res, $Val extends Channel>
     Object? key = null,
     Object? name = null,
     Object? type = null,
-    Object? level = null,
+    Object? volume = null,
     Object? pan = null,
     Object? fxs = freezed,
     Object? instruments = freezed,
@@ -296,9 +296,9 @@ class _$ChannelCopyWithImpl<$Res, $Val extends Channel>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ChannelType,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double,
       pan: null == pan
           ? _value.pan
@@ -327,7 +327,7 @@ abstract class _$$ChannelImplCopyWith<$Res> implements $ChannelCopyWith<$Res> {
       {String key,
       String name,
       ChannelType type,
-      double level,
+      double volume,
       double pan,
       List<FX>? fxs,
       List<Instrument>? instruments});
@@ -349,7 +349,7 @@ class __$$ChannelImplCopyWithImpl<$Res>
     Object? key = null,
     Object? name = null,
     Object? type = null,
-    Object? level = null,
+    Object? volume = null,
     Object? pan = null,
     Object? fxs = freezed,
     Object? instruments = freezed,
@@ -367,9 +367,9 @@ class __$$ChannelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ChannelType,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double,
       pan: null == pan
           ? _value.pan
@@ -394,7 +394,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
       {required this.key,
       required this.name,
       required this.type,
-      required this.level,
+      required this.volume,
       required this.pan,
       this.fxs,
       this.instruments});
@@ -409,7 +409,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
   @override
   final ChannelType type;
   @override
-  double level;
+  double volume;
   @override
   double pan;
   @override
@@ -419,7 +419,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Channel(key: $key, name: $name, type: $type, level: $level, pan: $pan, fxs: $fxs, instruments: $instruments)';
+    return 'Channel(key: $key, name: $name, type: $type, volume: $volume, pan: $pan, fxs: $fxs, instruments: $instruments)';
   }
 
   @override
@@ -430,7 +430,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('volume', volume))
       ..add(DiagnosticsProperty('pan', pan))
       ..add(DiagnosticsProperty('fxs', fxs))
       ..add(DiagnosticsProperty('instruments', instruments));
@@ -457,7 +457,7 @@ abstract class _Channel implements Channel {
       {required final String key,
       required String name,
       required final ChannelType type,
-      required double level,
+      required double volume,
       required double pan,
       List<FX>? fxs,
       List<Instrument>? instruments}) = _$ChannelImpl;
@@ -472,8 +472,8 @@ abstract class _Channel implements Channel {
   @override
   ChannelType get type;
   @override
-  double get level;
-  set level(double value);
+  double get volume;
+  set volume(double value);
   @override
   double get pan;
   set pan(double value);
@@ -501,8 +501,8 @@ mixin _$Instrument {
   String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  double? get level => throw _privateConstructorUsedError;
-  set level(double? value) => throw _privateConstructorUsedError;
+  double? get volume => throw _privateConstructorUsedError;
+  set volume(double? value) => throw _privateConstructorUsedError;
   double? get pan => throw _privateConstructorUsedError;
   set pan(double? value) => throw _privateConstructorUsedError;
   List<FX>? get tunes => throw _privateConstructorUsedError;
@@ -529,7 +529,7 @@ abstract class $InstrumentCopyWith<$Res> {
   $Res call(
       {String key,
       String name,
-      double? level,
+      double? volume,
       double? pan,
       List<FX>? tunes,
       List<Layer>? layers});
@@ -552,7 +552,7 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
   $Res call({
     Object? key = null,
     Object? name = null,
-    Object? level = freezed,
+    Object? volume = freezed,
     Object? pan = freezed,
     Object? tunes = freezed,
     Object? layers = freezed,
@@ -566,9 +566,9 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      level: freezed == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double?,
       pan: freezed == pan
           ? _value.pan
@@ -597,7 +597,7 @@ abstract class _$$InstrumentImplCopyWith<$Res>
   $Res call(
       {String key,
       String name,
-      double? level,
+      double? volume,
       double? pan,
       List<FX>? tunes,
       List<Layer>? layers});
@@ -618,7 +618,7 @@ class __$$InstrumentImplCopyWithImpl<$Res>
   $Res call({
     Object? key = null,
     Object? name = null,
-    Object? level = freezed,
+    Object? volume = freezed,
     Object? pan = freezed,
     Object? tunes = freezed,
     Object? layers = freezed,
@@ -632,9 +632,9 @@ class __$$InstrumentImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      level: freezed == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double?,
       pan: freezed == pan
           ? _value.pan
@@ -658,7 +658,7 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
   _$InstrumentImpl(
       {required this.key,
       required this.name,
-      this.level,
+      this.volume,
       this.pan,
       this.tunes,
       this.layers});
@@ -671,7 +671,7 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
   @override
   String name;
   @override
-  double? level;
+  double? volume;
   @override
   double? pan;
   @override
@@ -681,7 +681,7 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Instrument(key: $key, name: $name, level: $level, pan: $pan, tunes: $tunes, layers: $layers)';
+    return 'Instrument(key: $key, name: $name, volume: $volume, pan: $pan, tunes: $tunes, layers: $layers)';
   }
 
   @override
@@ -691,7 +691,7 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
       ..add(DiagnosticsProperty('type', 'Instrument'))
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('volume', volume))
       ..add(DiagnosticsProperty('pan', pan))
       ..add(DiagnosticsProperty('tunes', tunes))
       ..add(DiagnosticsProperty('layers', layers));
@@ -717,7 +717,7 @@ abstract class _Instrument implements Instrument {
   factory _Instrument(
       {required final String key,
       required String name,
-      double? level,
+      double? volume,
       double? pan,
       List<FX>? tunes,
       List<Layer>? layers}) = _$InstrumentImpl;
@@ -731,8 +731,8 @@ abstract class _Instrument implements Instrument {
   String get name;
   set name(String value);
   @override
-  double? get level;
-  set level(double? value);
+  double? get volume;
+  set volume(double? value);
   @override
   double? get pan;
   set pan(double? value);
@@ -760,8 +760,8 @@ mixin _$Layer {
   String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  double? get level => throw _privateConstructorUsedError;
-  set level(double? value) => throw _privateConstructorUsedError;
+  double? get volume => throw _privateConstructorUsedError;
+  set volume(double? value) => throw _privateConstructorUsedError;
   double? get pan => throw _privateConstructorUsedError;
   set pan(double? value) => throw _privateConstructorUsedError;
   List<FX>? get fxs => throw _privateConstructorUsedError;
@@ -782,7 +782,7 @@ abstract class $LayerCopyWith<$Res> {
       _$LayerCopyWithImpl<$Res, Layer>;
   @useResult
   $Res call(
-      {String key, String name, double? level, double? pan, List<FX>? fxs});
+      {String key, String name, double? volume, double? pan, List<FX>? fxs});
 }
 
 /// @nodoc
@@ -802,7 +802,7 @@ class _$LayerCopyWithImpl<$Res, $Val extends Layer>
   $Res call({
     Object? key = null,
     Object? name = null,
-    Object? level = freezed,
+    Object? volume = freezed,
     Object? pan = freezed,
     Object? fxs = freezed,
   }) {
@@ -815,9 +815,9 @@ class _$LayerCopyWithImpl<$Res, $Val extends Layer>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      level: freezed == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double?,
       pan: freezed == pan
           ? _value.pan
@@ -839,7 +839,7 @@ abstract class _$$LayerImplCopyWith<$Res> implements $LayerCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String key, String name, double? level, double? pan, List<FX>? fxs});
+      {String key, String name, double? volume, double? pan, List<FX>? fxs});
 }
 
 /// @nodoc
@@ -857,7 +857,7 @@ class __$$LayerImplCopyWithImpl<$Res>
   $Res call({
     Object? key = null,
     Object? name = null,
-    Object? level = freezed,
+    Object? volume = freezed,
     Object? pan = freezed,
     Object? fxs = freezed,
   }) {
@@ -870,9 +870,9 @@ class __$$LayerImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      level: freezed == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
               as double?,
       pan: freezed == pan
           ? _value.pan
@@ -890,7 +890,7 @@ class __$$LayerImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
   _$LayerImpl(
-      {required this.key, required this.name, this.level, this.pan, this.fxs});
+      {required this.key, required this.name, this.volume, this.pan, this.fxs});
 
   factory _$LayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$LayerImplFromJson(json);
@@ -900,7 +900,7 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
   @override
   String name;
   @override
-  double? level;
+  double? volume;
   @override
   double? pan;
   @override
@@ -908,7 +908,7 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Layer(key: $key, name: $name, level: $level, pan: $pan, fxs: $fxs)';
+    return 'Layer(key: $key, name: $name, volume: $volume, pan: $pan, fxs: $fxs)';
   }
 
   @override
@@ -918,7 +918,7 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
       ..add(DiagnosticsProperty('type', 'Layer'))
       ..add(DiagnosticsProperty('key', key))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('level', level))
+      ..add(DiagnosticsProperty('volume', volume))
       ..add(DiagnosticsProperty('pan', pan))
       ..add(DiagnosticsProperty('fxs', fxs));
   }
@@ -943,7 +943,7 @@ abstract class _Layer implements Layer {
   factory _Layer(
       {required final String key,
       required String name,
-      double? level,
+      double? volume,
       double? pan,
       List<FX>? fxs}) = _$LayerImpl;
 
@@ -955,8 +955,8 @@ abstract class _Layer implements Layer {
   String get name;
   set name(String value);
   @override
-  double? get level;
-  set level(double? value);
+  double? get volume;
+  set volume(double? value);
   @override
   double? get pan;
   set pan(double? value);

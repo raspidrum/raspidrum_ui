@@ -2,8 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
 part 'channel_preset.freezed.dart';
-// optional: Since our Person class is serializable, we must add this line.
-// But if Person was not serializable, we could skip it.
 part 'channel_preset.g.dart';
 
 @unfreezed
@@ -34,7 +32,7 @@ class Channel with _$Channel {
     required final String key,
     required String name,
     required final ChannelType type,
-    required double level,
+    required double volume,
     required double pan,
     List<FX>? fxs,
     List<Instrument>? instruments
@@ -49,7 +47,7 @@ class Instrument with _$Instrument {
   factory Instrument({
     required final String key,
     required String name,
-    double? level,
+    double? volume,
     double? pan,
     List<FX>? tunes,
     List<Layer>? layers,
@@ -64,7 +62,7 @@ class Layer with _$Layer {
   factory Layer({
     required final String key,
     required String name,
-    double? level,
+    double? volume,
     double? pan,
     List<FX>? fxs
   }) = _Layer;
@@ -86,6 +84,10 @@ class FX with _$FX {
     => _$FXFromJson(json);
 }
 
+// Параметры могут быть:
+// - диапазонные. Ограничения задаются в range_min и range_max
+// - дискретные - набор допустимых значений. Список допустимых значений задается в FxParamDiscreteVal
+// - логические - не указываются range_min, range_max, divisions и discrete_vals. false: default==0; true: default==1.0
 enum FXParamType {
   range,
   fixed,

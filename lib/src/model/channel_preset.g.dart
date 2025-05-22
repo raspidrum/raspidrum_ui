@@ -28,7 +28,7 @@ _$ChannelImpl _$$ChannelImplFromJson(Map<String, dynamic> json) =>
       key: json['key'] as String,
       name: json['name'] as String,
       type: $enumDecode(_$ChannelTypeEnumMap, json['type']),
-      level: (json['level'] as num).toDouble(),
+      volume: (json['volume'] as num).toDouble(),
       pan: (json['pan'] as num).toDouble(),
       fxs: (json['fxs'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
@@ -43,7 +43,7 @@ Map<String, dynamic> _$$ChannelImplToJson(_$ChannelImpl instance) =>
       'key': instance.key,
       'name': instance.name,
       'type': _$ChannelTypeEnumMap[instance.type]!,
-      'level': instance.level,
+      'volume': instance.volume,
       'pan': instance.pan,
       'fxs': instance.fxs,
       'instruments': instance.instruments,
@@ -61,7 +61,7 @@ _$InstrumentImpl _$$InstrumentImplFromJson(Map<String, dynamic> json) =>
     _$InstrumentImpl(
       key: json['key'] as String,
       name: json['name'] as String,
-      level: (json['level'] as num?)?.toDouble(),
+      volume: (json['volume'] as num?)?.toDouble(),
       pan: (json['pan'] as num?)?.toDouble(),
       tunes: (json['tunes'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
@@ -75,7 +75,7 @@ Map<String, dynamic> _$$InstrumentImplToJson(_$InstrumentImpl instance) =>
     <String, dynamic>{
       'key': instance.key,
       'name': instance.name,
-      'level': instance.level,
+      'volume': instance.volume,
       'pan': instance.pan,
       'tunes': instance.tunes,
       'layers': instance.layers,
@@ -84,7 +84,7 @@ Map<String, dynamic> _$$InstrumentImplToJson(_$InstrumentImpl instance) =>
 _$LayerImpl _$$LayerImplFromJson(Map<String, dynamic> json) => _$LayerImpl(
       key: json['key'] as String,
       name: json['name'] as String,
-      level: (json['level'] as num?)?.toDouble(),
+      volume: (json['volume'] as num?)?.toDouble(),
       pan: (json['pan'] as num?)?.toDouble(),
       fxs: (json['fxs'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
@@ -95,7 +95,7 @@ Map<String, dynamic> _$$LayerImplToJson(_$LayerImpl instance) =>
     <String, dynamic>{
       'key': instance.key,
       'name': instance.name,
-      'level': instance.level,
+      'volume': instance.volume,
       'pan': instance.pan,
       'fxs': instance.fxs,
     };

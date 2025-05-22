@@ -21,7 +21,7 @@ void main() async {
   $log.Logger.root.level = $log.Level.INFO;
   $log.Logger.root.onRecord.listen((record) {
     // ignore: avoid_print
-    print('${record.message}');
+    print(record.message);
   });
 
   // Run the app and pass in the SettingsController. The app listens to the

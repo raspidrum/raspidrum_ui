@@ -38,7 +38,7 @@ class ChannelConfigViewModel extends ChangeNotifier {
             var chnls = kitPresetResult.value.channels!;
             //_channel = chnls[int.parse(channelIdx)];
             _channel = chnls.firstWhere( (channel) => channel.key == channelIdx );
-          };
+          } {}
           _log.fine('Preset loaded');
         case Error<Preset>():
           _log.warning('Failed to load preset', kitPresetResult.error);
