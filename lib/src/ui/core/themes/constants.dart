@@ -1,7 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 abstract final class Dimentions {
   static const double sliderPadding = 6.0;
