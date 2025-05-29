@@ -93,7 +93,7 @@ class ChannelConfigScreen extends StatelessWidget {
               width: Dimentions.buttonSize.width,
               height: Dimentions.buttonSize.height,
               child: Visibility(
-                visible: channel.fxs != null,
+                visible: channel.fxs!.isNotEmpty,
                 child: IconButton.outlined(
                   icon: const Icon(Icons.graphic_eq), 
                     onPressed: () {
@@ -105,7 +105,7 @@ class ChannelConfigScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _buildPanSlider(channel.pan),
+            _buildPanSlider(channel.key, channel.pan),
             Expanded(child: _buildLevelSlider(channel.key, channel.volume)),
             Text(channel.name,
                 style: Theme.of(context).textTheme.labelLarge)
@@ -116,8 +116,8 @@ class ChannelConfigScreen extends StatelessWidget {
 
 
   Widget _buildInstruments(BuildContext context) {
-    var instrs = viewModel.channel!.instruments;
-    if (instrs == null) return Container();
+    var instrs = viewModel.channel!.instruments!;
+    if (instrs.isEmpty) return Container();
     final instrControls = List<Widget>.generate(
       instrs.length,
       (int idx) => _buildInstrumentControls(context, instrs[idx]),
@@ -138,7 +138,7 @@ class ChannelConfigScreen extends StatelessWidget {
               width: Dimentions.buttonSize.width,
               height: Dimentions.buttonSize.height,
               child: Visibility(
-                visible: instr.tunes != null,
+                visible: instr.tunes!.isNotEmpty,
                 child: IconButton.outlined(
                   iconSize: 24,
                   icon: const Icon(Icons.tune),
@@ -186,7 +186,7 @@ class ChannelConfigScreen extends StatelessWidget {
               width: Dimentions.buttonSize.width,
               height: Dimentions.buttonSize.height,
               child: Visibility(
-                visible: layer.fxs != null,
+                visible: layer.fxs!.isNotEmpty,
                 child: IconButton.outlined(
                   iconSize: 24,
                   icon: const Icon(Icons.graphic_eq),
@@ -198,44 +198,48 @@ class ChannelConfigScreen extends StatelessWidget {
                         extra: layer.fxs);
                     },
                 ),
-              )),
-          _buildPanSlider(layer.pan),
-          Expanded(child: _buildLevelSlider(layer.key ,layer.volume)),
-          Text(layer.name, style: Theme.of(context).textTheme.labelLarge),
+              ),
+            ),
+            _buildPanSlider(layer.key, layer.pan),
+            Expanded(child: _buildLevelSlider(layer.key, layer.volume)),
+            Text(layer.name,
+                style: Theme.of(context).textTheme.labelLarge)
         ],
       ),
     );
   }
 
-  Widget _buildLevelSlider(String key, double? level) {
-    if (level == null) return Container();
-    return Padding(
-        padding: const EdgeInsets.all(Dimentions.sliderPadding),
-        child: MixSlider(
-          min: 0.0,
-          max: 110,
-          values: [level * 100],
-          onDragging: (handlerIndex, lowerValue, upperValue) {
-            viewModel.sendValue(key, lowerValue);
-          },
-        ),
-    );
-  }
-
-  Widget _buildPanSlider(double? pan) {
+  Widget _buildPanSlider(String key, BaseControl? pan) {
     if (pan == null) return SizedBox(height: Dimentions.controlPanHeight);
     return SizedBox(
       height: Dimentions.controlPanHeight,
       child: Padding(
-        padding: const EdgeInsets.all(Dimentions.borderRadius),
-        child: PanSlider(
-          min: -100.0,
-          max: 100,
-          values: [pan * 100]
-        ),
-        ),
+      padding: const EdgeInsets.all(Dimentions.borderRadius),
+      child: PanSlider(
+        min: pan.min ?? -100,
+        max: pan.max ?? 100,
+        values: [pan.value * 100],
+        onDragging: (handlerIndex, lowerValue, upperValue) {
+          viewModel.sendValue(key, lowerValue/100);
+        },
+      ),
+    )
     );
   }
 
+  Widget _buildLevelSlider(String key, BaseControl? volume) {
+    if (volume == null) return Container();
+    return Padding(
+      padding: const EdgeInsets.all(Dimentions.sliderPadding),
+      child: MixSlider(
+        min: volume.min ?? 0.0,
+        max: volume.max ?? 110,
+        values: [volume.value*100],
+        onDragging: (handlerIndex, lowerValue, upperValue) {
+          viewModel.sendValue(key, lowerValue/100);
+        },
+      ),
+    );
+  }
 
 }

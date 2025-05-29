@@ -111,7 +111,7 @@ class KitScreen extends StatelessWidget {
               child: MixSlider(
                 min: 0.0,
                 max: 110,
-                values: [channel.volume*100],
+                values: [channel.volume.value*100],
               ),
             ),
         ),

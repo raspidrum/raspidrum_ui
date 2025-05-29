@@ -226,10 +226,10 @@ mixin _$Channel {
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
   ChannelType get type => throw _privateConstructorUsedError;
-  double get volume => throw _privateConstructorUsedError;
-  set volume(double value) => throw _privateConstructorUsedError;
-  double get pan => throw _privateConstructorUsedError;
-  set pan(double value) => throw _privateConstructorUsedError;
+  BaseControl get volume => throw _privateConstructorUsedError;
+  set volume(BaseControl value) => throw _privateConstructorUsedError;
+  BaseControl? get pan => throw _privateConstructorUsedError;
+  set pan(BaseControl? value) => throw _privateConstructorUsedError;
   List<FX>? get fxs => throw _privateConstructorUsedError;
   set fxs(List<FX>? value) => throw _privateConstructorUsedError;
   List<Instrument>? get instruments => throw _privateConstructorUsedError;
@@ -254,10 +254,13 @@ abstract class $ChannelCopyWith<$Res> {
       {String key,
       String name,
       ChannelType type,
-      double volume,
-      double pan,
+      BaseControl volume,
+      BaseControl? pan,
       List<FX>? fxs,
       List<Instrument>? instruments});
+
+  $BaseControlCopyWith<$Res> get volume;
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -279,7 +282,7 @@ class _$ChannelCopyWithImpl<$Res, $Val extends Channel>
     Object? name = null,
     Object? type = null,
     Object? volume = null,
-    Object? pan = null,
+    Object? pan = freezed,
     Object? fxs = freezed,
     Object? instruments = freezed,
   }) {
@@ -299,11 +302,11 @@ class _$ChannelCopyWithImpl<$Res, $Val extends Channel>
       volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pan: null == pan
+              as BaseControl,
+      pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double,
+              as BaseControl?,
       fxs: freezed == fxs
           ? _value.fxs
           : fxs // ignore: cast_nullable_to_non_nullable
@@ -313,6 +316,30 @@ class _$ChannelCopyWithImpl<$Res, $Val extends Channel>
           : instruments // ignore: cast_nullable_to_non_nullable
               as List<Instrument>?,
     ) as $Val);
+  }
+
+  /// Create a copy of Channel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res> get volume {
+    return $BaseControlCopyWith<$Res>(_value.volume, (value) {
+      return _then(_value.copyWith(volume: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Channel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res>? get pan {
+    if (_value.pan == null) {
+      return null;
+    }
+
+    return $BaseControlCopyWith<$Res>(_value.pan!, (value) {
+      return _then(_value.copyWith(pan: value) as $Val);
+    });
   }
 }
 
@@ -327,10 +354,15 @@ abstract class _$$ChannelImplCopyWith<$Res> implements $ChannelCopyWith<$Res> {
       {String key,
       String name,
       ChannelType type,
-      double volume,
-      double pan,
+      BaseControl volume,
+      BaseControl? pan,
       List<FX>? fxs,
       List<Instrument>? instruments});
+
+  @override
+  $BaseControlCopyWith<$Res> get volume;
+  @override
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -350,7 +382,7 @@ class __$$ChannelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? type = null,
     Object? volume = null,
-    Object? pan = null,
+    Object? pan = freezed,
     Object? fxs = freezed,
     Object? instruments = freezed,
   }) {
@@ -370,11 +402,11 @@ class __$$ChannelImplCopyWithImpl<$Res>
       volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pan: null == pan
+              as BaseControl,
+      pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double,
+              as BaseControl?,
       fxs: freezed == fxs
           ? _value.fxs
           : fxs // ignore: cast_nullable_to_non_nullable
@@ -395,7 +427,7 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
       required this.name,
       required this.type,
       required this.volume,
-      required this.pan,
+      this.pan,
       this.fxs,
       this.instruments});
 
@@ -409,9 +441,9 @@ class _$ChannelImpl with DiagnosticableTreeMixin implements _Channel {
   @override
   final ChannelType type;
   @override
-  double volume;
+  BaseControl volume;
   @override
-  double pan;
+  BaseControl? pan;
   @override
   List<FX>? fxs;
   @override
@@ -457,8 +489,8 @@ abstract class _Channel implements Channel {
       {required final String key,
       required String name,
       required final ChannelType type,
-      required double volume,
-      required double pan,
+      required BaseControl volume,
+      BaseControl? pan,
       List<FX>? fxs,
       List<Instrument>? instruments}) = _$ChannelImpl;
 
@@ -472,11 +504,11 @@ abstract class _Channel implements Channel {
   @override
   ChannelType get type;
   @override
-  double get volume;
-  set volume(double value);
+  BaseControl get volume;
+  set volume(BaseControl value);
   @override
-  double get pan;
-  set pan(double value);
+  BaseControl? get pan;
+  set pan(BaseControl? value);
   @override
   List<FX>? get fxs;
   set fxs(List<FX>? value);
@@ -501,10 +533,10 @@ mixin _$Instrument {
   String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  double? get volume => throw _privateConstructorUsedError;
-  set volume(double? value) => throw _privateConstructorUsedError;
-  double? get pan => throw _privateConstructorUsedError;
-  set pan(double? value) => throw _privateConstructorUsedError;
+  BaseControl? get volume => throw _privateConstructorUsedError;
+  set volume(BaseControl? value) => throw _privateConstructorUsedError;
+  BaseControl? get pan => throw _privateConstructorUsedError;
+  set pan(BaseControl? value) => throw _privateConstructorUsedError;
   List<FX>? get tunes => throw _privateConstructorUsedError;
   set tunes(List<FX>? value) => throw _privateConstructorUsedError;
   List<Layer>? get layers => throw _privateConstructorUsedError;
@@ -529,10 +561,13 @@ abstract class $InstrumentCopyWith<$Res> {
   $Res call(
       {String key,
       String name,
-      double? volume,
-      double? pan,
+      BaseControl? volume,
+      BaseControl? pan,
       List<FX>? tunes,
       List<Layer>? layers});
+
+  $BaseControlCopyWith<$Res>? get volume;
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -569,11 +604,11 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       tunes: freezed == tunes
           ? _value.tunes
           : tunes // ignore: cast_nullable_to_non_nullable
@@ -583,6 +618,34 @@ class _$InstrumentCopyWithImpl<$Res, $Val extends Instrument>
           : layers // ignore: cast_nullable_to_non_nullable
               as List<Layer>?,
     ) as $Val);
+  }
+
+  /// Create a copy of Instrument
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res>? get volume {
+    if (_value.volume == null) {
+      return null;
+    }
+
+    return $BaseControlCopyWith<$Res>(_value.volume!, (value) {
+      return _then(_value.copyWith(volume: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Instrument
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res>? get pan {
+    if (_value.pan == null) {
+      return null;
+    }
+
+    return $BaseControlCopyWith<$Res>(_value.pan!, (value) {
+      return _then(_value.copyWith(pan: value) as $Val);
+    });
   }
 }
 
@@ -597,10 +660,15 @@ abstract class _$$InstrumentImplCopyWith<$Res>
   $Res call(
       {String key,
       String name,
-      double? volume,
-      double? pan,
+      BaseControl? volume,
+      BaseControl? pan,
       List<FX>? tunes,
       List<Layer>? layers});
+
+  @override
+  $BaseControlCopyWith<$Res>? get volume;
+  @override
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -635,11 +703,11 @@ class __$$InstrumentImplCopyWithImpl<$Res>
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       tunes: freezed == tunes
           ? _value.tunes
           : tunes // ignore: cast_nullable_to_non_nullable
@@ -671,9 +739,9 @@ class _$InstrumentImpl with DiagnosticableTreeMixin implements _Instrument {
   @override
   String name;
   @override
-  double? volume;
+  BaseControl? volume;
   @override
-  double? pan;
+  BaseControl? pan;
   @override
   List<FX>? tunes;
   @override
@@ -717,8 +785,8 @@ abstract class _Instrument implements Instrument {
   factory _Instrument(
       {required final String key,
       required String name,
-      double? volume,
-      double? pan,
+      BaseControl? volume,
+      BaseControl? pan,
       List<FX>? tunes,
       List<Layer>? layers}) = _$InstrumentImpl;
 
@@ -731,11 +799,11 @@ abstract class _Instrument implements Instrument {
   String get name;
   set name(String value);
   @override
-  double? get volume;
-  set volume(double? value);
+  BaseControl? get volume;
+  set volume(BaseControl? value);
   @override
-  double? get pan;
-  set pan(double? value);
+  BaseControl? get pan;
+  set pan(BaseControl? value);
   @override
   List<FX>? get tunes;
   set tunes(List<FX>? value);
@@ -760,10 +828,10 @@ mixin _$Layer {
   String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  double? get volume => throw _privateConstructorUsedError;
-  set volume(double? value) => throw _privateConstructorUsedError;
-  double? get pan => throw _privateConstructorUsedError;
-  set pan(double? value) => throw _privateConstructorUsedError;
+  BaseControl? get volume => throw _privateConstructorUsedError;
+  set volume(BaseControl? value) => throw _privateConstructorUsedError;
+  BaseControl? get pan => throw _privateConstructorUsedError;
+  set pan(BaseControl? value) => throw _privateConstructorUsedError;
   List<FX>? get fxs => throw _privateConstructorUsedError;
   set fxs(List<FX>? value) => throw _privateConstructorUsedError;
 
@@ -782,7 +850,14 @@ abstract class $LayerCopyWith<$Res> {
       _$LayerCopyWithImpl<$Res, Layer>;
   @useResult
   $Res call(
-      {String key, String name, double? volume, double? pan, List<FX>? fxs});
+      {String key,
+      String name,
+      BaseControl? volume,
+      BaseControl? pan,
+      List<FX>? fxs});
+
+  $BaseControlCopyWith<$Res>? get volume;
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -818,16 +893,44 @@ class _$LayerCopyWithImpl<$Res, $Val extends Layer>
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       fxs: freezed == fxs
           ? _value.fxs
           : fxs // ignore: cast_nullable_to_non_nullable
               as List<FX>?,
     ) as $Val);
+  }
+
+  /// Create a copy of Layer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res>? get volume {
+    if (_value.volume == null) {
+      return null;
+    }
+
+    return $BaseControlCopyWith<$Res>(_value.volume!, (value) {
+      return _then(_value.copyWith(volume: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Layer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseControlCopyWith<$Res>? get pan {
+    if (_value.pan == null) {
+      return null;
+    }
+
+    return $BaseControlCopyWith<$Res>(_value.pan!, (value) {
+      return _then(_value.copyWith(pan: value) as $Val);
+    });
   }
 }
 
@@ -839,7 +942,16 @@ abstract class _$$LayerImplCopyWith<$Res> implements $LayerCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String key, String name, double? volume, double? pan, List<FX>? fxs});
+      {String key,
+      String name,
+      BaseControl? volume,
+      BaseControl? pan,
+      List<FX>? fxs});
+
+  @override
+  $BaseControlCopyWith<$Res>? get volume;
+  @override
+  $BaseControlCopyWith<$Res>? get pan;
 }
 
 /// @nodoc
@@ -873,11 +985,11 @@ class __$$LayerImplCopyWithImpl<$Res>
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       pan: freezed == pan
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as BaseControl?,
       fxs: freezed == fxs
           ? _value.fxs
           : fxs // ignore: cast_nullable_to_non_nullable
@@ -900,9 +1012,9 @@ class _$LayerImpl with DiagnosticableTreeMixin implements _Layer {
   @override
   String name;
   @override
-  double? volume;
+  BaseControl? volume;
   @override
-  double? pan;
+  BaseControl? pan;
   @override
   List<FX>? fxs;
 
@@ -943,8 +1055,8 @@ abstract class _Layer implements Layer {
   factory _Layer(
       {required final String key,
       required String name,
-      double? volume,
-      double? pan,
+      BaseControl? volume,
+      BaseControl? pan,
       List<FX>? fxs}) = _$LayerImpl;
 
   factory _Layer.fromJson(Map<String, dynamic> json) = _$LayerImpl.fromJson;
@@ -955,11 +1067,11 @@ abstract class _Layer implements Layer {
   String get name;
   set name(String value);
   @override
-  double? get volume;
-  set volume(double? value);
+  BaseControl? get volume;
+  set volume(BaseControl? value);
   @override
-  double? get pan;
-  set pan(double? value);
+  BaseControl? get pan;
+  set pan(BaseControl? value);
   @override
   List<FX>? get fxs;
   set fxs(List<FX>? value);
@@ -969,6 +1081,233 @@ abstract class _Layer implements Layer {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LayerImplCopyWith<_$LayerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+BaseControl _$BaseControlFromJson(Map<String, dynamic> json) {
+  return _BaseControl.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BaseControl {
+  String get key => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
+  double get value => throw _privateConstructorUsedError;
+  set value(double value) => throw _privateConstructorUsedError;
+  double? get min => throw _privateConstructorUsedError;
+  set min(double? value) => throw _privateConstructorUsedError;
+  double? get max => throw _privateConstructorUsedError;
+  set max(double? value) => throw _privateConstructorUsedError;
+
+  /// Serializes this BaseControl to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BaseControl
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BaseControlCopyWith<BaseControl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BaseControlCopyWith<$Res> {
+  factory $BaseControlCopyWith(
+          BaseControl value, $Res Function(BaseControl) then) =
+      _$BaseControlCopyWithImpl<$Res, BaseControl>;
+  @useResult
+  $Res call({String key, String name, double value, double? min, double? max});
+}
+
+/// @nodoc
+class _$BaseControlCopyWithImpl<$Res, $Val extends BaseControl>
+    implements $BaseControlCopyWith<$Res> {
+  _$BaseControlCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BaseControl
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+    Object? name = null,
+    Object? value = null,
+    Object? min = freezed,
+    Object? max = freezed,
+  }) {
+    return _then(_value.copyWith(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double,
+      min: freezed == min
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as double?,
+      max: freezed == max
+          ? _value.max
+          : max // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BaseControlImplCopyWith<$Res>
+    implements $BaseControlCopyWith<$Res> {
+  factory _$$BaseControlImplCopyWith(
+          _$BaseControlImpl value, $Res Function(_$BaseControlImpl) then) =
+      __$$BaseControlImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String key, String name, double value, double? min, double? max});
+}
+
+/// @nodoc
+class __$$BaseControlImplCopyWithImpl<$Res>
+    extends _$BaseControlCopyWithImpl<$Res, _$BaseControlImpl>
+    implements _$$BaseControlImplCopyWith<$Res> {
+  __$$BaseControlImplCopyWithImpl(
+      _$BaseControlImpl _value, $Res Function(_$BaseControlImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BaseControl
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+    Object? name = null,
+    Object? value = null,
+    Object? min = freezed,
+    Object? max = freezed,
+  }) {
+    return _then(_$BaseControlImpl(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as double,
+      min: freezed == min
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as double?,
+      max: freezed == max
+          ? _value.max
+          : max // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BaseControlImpl with DiagnosticableTreeMixin implements _BaseControl {
+  _$BaseControlImpl(
+      {required this.key,
+      required this.name,
+      required this.value,
+      this.min,
+      this.max});
+
+  factory _$BaseControlImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BaseControlImplFromJson(json);
+
+  @override
+  final String key;
+  @override
+  String name;
+  @override
+  double value;
+  @override
+  double? min;
+  @override
+  double? max;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BaseControl(key: $key, name: $name, value: $value, min: $min, max: $max)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BaseControl'))
+      ..add(DiagnosticsProperty('key', key))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('min', min))
+      ..add(DiagnosticsProperty('max', max));
+  }
+
+  /// Create a copy of BaseControl
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BaseControlImplCopyWith<_$BaseControlImpl> get copyWith =>
+      __$$BaseControlImplCopyWithImpl<_$BaseControlImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BaseControlImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BaseControl implements BaseControl {
+  factory _BaseControl(
+      {required final String key,
+      required String name,
+      required double value,
+      double? min,
+      double? max}) = _$BaseControlImpl;
+
+  factory _BaseControl.fromJson(Map<String, dynamic> json) =
+      _$BaseControlImpl.fromJson;
+
+  @override
+  String get key;
+  @override
+  String get name;
+  set name(String value);
+  @override
+  double get value;
+  set value(double value);
+  @override
+  double? get min;
+  set min(double? value);
+  @override
+  double? get max;
+  set max(double? value);
+
+  /// Create a copy of BaseControl
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BaseControlImplCopyWith<_$BaseControlImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -18,6 +18,7 @@ class Preset with _$Preset {
 }
 
 enum ChannelType {
+  unspecified,
   global,
   sampler,
   instrument,
@@ -25,17 +26,16 @@ enum ChannelType {
   player,
 }
 
-// TODO: rewrite to multiple constructor by type
 @unfreezed
 class Channel with _$Channel {
   factory Channel({
     required final String key,
     required String name,
     required final ChannelType type,
-    required double volume,
-    required double pan,
+    required BaseControl volume,
+    BaseControl? pan,
     List<FX>? fxs,
-    List<Instrument>? instruments
+    List<Instrument>? instruments,
   }) = _Channel;
 
   factory Channel.fromJson(Map<String, Object?> json)
@@ -47,8 +47,8 @@ class Instrument with _$Instrument {
   factory Instrument({
     required final String key,
     required String name,
-    double? volume,
-    double? pan,
+    BaseControl? volume,
+    BaseControl? pan,
     List<FX>? tunes,
     List<Layer>? layers,
   }) = _Instrument;
@@ -62,13 +62,27 @@ class Layer with _$Layer {
   factory Layer({
     required final String key,
     required String name,
-    double? volume,
-    double? pan,
-    List<FX>? fxs
+    BaseControl? volume,
+    BaseControl? pan,
+    List<FX>? fxs,
   }) = _Layer;
 
   factory Layer.fromJson(Map<String, Object?> json)
     => _$LayerFromJson(json);
+}
+
+@unfreezed
+class BaseControl with _$BaseControl {
+  factory BaseControl({
+    required final String key,
+    required String name,
+    required double value,
+    double? min,
+    double? max,
+  }) = _BaseControl;
+
+  factory BaseControl.fromJson(Map<String, Object?> json)
+    => _$BaseControlFromJson(json);
 }
 
 @unfreezed
@@ -89,6 +103,7 @@ class FX with _$FX {
 // - дискретные - набор допустимых значений. Список допустимых значений задается в FxParamDiscreteVal
 // - логические - не указываются range_min, range_max, divisions и discrete_vals. false: default==0; true: default==1.0
 enum FXParamType {
+  unspecified,
   range,
   fixed,
   boolean,
@@ -113,7 +128,6 @@ class FXParam with _$FXParam {
     => _$FXParamFromJson(json);
 }
 
-
 @freezed
 class FXParamDiscreteVal with _$FXParamDiscreteVal {
   const factory FXParamDiscreteVal({
@@ -123,5 +137,4 @@ class FXParamDiscreteVal with _$FXParamDiscreteVal {
 
   factory FXParamDiscreteVal.fromJson(Map<String, Object?> json)
     => _$FXParamDiscreteValFromJson(json);
-
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../model/channel_preset.dart';
@@ -74,8 +73,8 @@ class FxTuneScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Dimentions.sliderPadding),
       child: FxParamSlider(
-        min: param.min,
-        max: param.max,
+        min: param.min ?? 0.0,
+        max: param.max ?? 1.0,
         values: [param.value],
       ),
     );

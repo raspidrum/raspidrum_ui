@@ -28,8 +28,10 @@ _$ChannelImpl _$$ChannelImplFromJson(Map<String, dynamic> json) =>
       key: json['key'] as String,
       name: json['name'] as String,
       type: $enumDecode(_$ChannelTypeEnumMap, json['type']),
-      volume: (json['volume'] as num).toDouble(),
-      pan: (json['pan'] as num).toDouble(),
+      volume: BaseControl.fromJson(json['volume'] as Map<String, dynamic>),
+      pan: json['pan'] == null
+          ? null
+          : BaseControl.fromJson(json['pan'] as Map<String, dynamic>),
       fxs: (json['fxs'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -50,6 +52,7 @@ Map<String, dynamic> _$$ChannelImplToJson(_$ChannelImpl instance) =>
     };
 
 const _$ChannelTypeEnumMap = {
+  ChannelType.unspecified: 'unspecified',
   ChannelType.global: 'global',
   ChannelType.sampler: 'sampler',
   ChannelType.instrument: 'instrument',
@@ -61,8 +64,12 @@ _$InstrumentImpl _$$InstrumentImplFromJson(Map<String, dynamic> json) =>
     _$InstrumentImpl(
       key: json['key'] as String,
       name: json['name'] as String,
-      volume: (json['volume'] as num?)?.toDouble(),
-      pan: (json['pan'] as num?)?.toDouble(),
+      volume: json['volume'] == null
+          ? null
+          : BaseControl.fromJson(json['volume'] as Map<String, dynamic>),
+      pan: json['pan'] == null
+          ? null
+          : BaseControl.fromJson(json['pan'] as Map<String, dynamic>),
       tunes: (json['tunes'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -84,8 +91,12 @@ Map<String, dynamic> _$$InstrumentImplToJson(_$InstrumentImpl instance) =>
 _$LayerImpl _$$LayerImplFromJson(Map<String, dynamic> json) => _$LayerImpl(
       key: json['key'] as String,
       name: json['name'] as String,
-      volume: (json['volume'] as num?)?.toDouble(),
-      pan: (json['pan'] as num?)?.toDouble(),
+      volume: json['volume'] == null
+          ? null
+          : BaseControl.fromJson(json['volume'] as Map<String, dynamic>),
+      pan: json['pan'] == null
+          ? null
+          : BaseControl.fromJson(json['pan'] as Map<String, dynamic>),
       fxs: (json['fxs'] as List<dynamic>?)
           ?.map((e) => FX.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -98,6 +109,24 @@ Map<String, dynamic> _$$LayerImplToJson(_$LayerImpl instance) =>
       'volume': instance.volume,
       'pan': instance.pan,
       'fxs': instance.fxs,
+    };
+
+_$BaseControlImpl _$$BaseControlImplFromJson(Map<String, dynamic> json) =>
+    _$BaseControlImpl(
+      key: json['key'] as String,
+      name: json['name'] as String,
+      value: (json['value'] as num).toDouble(),
+      min: (json['min'] as num?)?.toDouble(),
+      max: (json['max'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$$BaseControlImplToJson(_$BaseControlImpl instance) =>
+    <String, dynamic>{
+      'key': instance.key,
+      'name': instance.name,
+      'value': instance.value,
+      'min': instance.min,
+      'max': instance.max,
     };
 
 _$FXImpl _$$FXImplFromJson(Map<String, dynamic> json) => _$FXImpl(
@@ -145,6 +174,7 @@ Map<String, dynamic> _$$FXParamImplToJson(_$FXParamImpl instance) =>
     };
 
 const _$FXParamTypeEnumMap = {
+  FXParamType.unspecified: 'unspecified',
   FXParamType.range: 'range',
   FXParamType.fixed: 'fixed',
   FXParamType.boolean: 'boolean',
