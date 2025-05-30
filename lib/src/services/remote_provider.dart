@@ -1,14 +1,14 @@
 import 'package:grpc/grpc.dart';
 
-import '../connectivity_constants.dart';
+import '../config/app_config.dart';
 import 'proto/channel_control.pbgrpc.dart' as grpc;
 
 class RemoteProvider {
-
+  final AppConfig _config;
   grpc.ChannelControlClient? _channelControlClient;
   late final ClientChannel _channel;
 
-  RemoteProvider() {
+  RemoteProvider(this._config) {
     _createChannel();
   }
 
@@ -18,10 +18,12 @@ class RemoteProvider {
     return _channelControlClient!;
   }
 
+  ClientChannel get channel => _channel;
+
   void _createChannel() {
     _channel = ClientChannel(
-      host,
-      port: port,
+      _config.grpcHost,
+      port: _config.grpcPort,
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
     );
   }
@@ -29,5 +31,4 @@ class RemoteProvider {
   void dispose() async {
     await _channel.shutdown();
   }
-
 }
