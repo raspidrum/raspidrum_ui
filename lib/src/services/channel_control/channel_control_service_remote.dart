@@ -1,11 +1,9 @@
-
-
 import 'package:raspidrum_ui/src/services/remote_provider.dart';
 
 import '../../utils/result.dart';
-import '../proto/channel_control.pbgrpc.dart';
+import '../../model/control_value.dart';
+import '../proto/channel_control.pbgrpc.dart' as grpc;
 import 'channel_control_service.dart';
-import 'model/channel_control.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
 
 class ChannelControlRemote implements ChannelControlService {
@@ -16,18 +14,18 @@ class ChannelControlRemote implements ChannelControlService {
     this._remoteProvider,
   );
 
-  ChannelControlClient get _channelControlClient => _remoteProvider.channelControlClient;
+  grpc.ChannelControlClient get _channelControlClient => _remoteProvider.channelControlClient;
 
   @override
-  Future<Result<ChannelControl>> setValue(String key, int seq, double value) async {
+  Future<Result<ControlValue>> setValue(String key, int seq, double value) async {
     try {
-      final reqParams = ControlValue(
+      final reqParams = grpc.ControlValue(
         key: key,
         seq: $fixnum.Int64(seq),
         value: value,
       );
       final resp = await _channelControlClient.setValue(reqParams);
-      final controlRes = ChannelControl(
+      final controlRes = ControlValue(
         key: resp.key, 
         seq: resp.seq.toInt(), 
         value: resp.value);
@@ -35,7 +33,6 @@ class ChannelControlRemote implements ChannelControlService {
     } on Exception catch (e) {
       return Result.error(e);
     }
-
   }
 
 }

@@ -1,22 +1,20 @@
-
-
 import 'package:grpc/grpc.dart';
 
 import '../connectivity_constants.dart';
-import 'proto/channel_control.pbgrpc.dart';
+import 'proto/channel_control.pbgrpc.dart' as grpc;
 
 class RemoteProvider {
 
-  ChannelControlClient? _channelControlClient;
+  grpc.ChannelControlClient? _channelControlClient;
   late final ClientChannel _channel;
 
   RemoteProvider() {
     _createChannel();
   }
 
-  ChannelControlClient get channelControlClient {
+  grpc.ChannelControlClient get channelControlClient {
     if (_channelControlClient != null) return _channelControlClient!;
-    _channelControlClient = ChannelControlClient(_channel);
+    _channelControlClient = grpc.ChannelControlClient(_channel);
     return _channelControlClient!;
   }
 

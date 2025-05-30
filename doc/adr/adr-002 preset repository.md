@@ -47,15 +47,15 @@
 
 ### Реализация
 
-1. Перенести модель из services/channel_control в model
++1. Перенести модель из services/channel_control в model
++2. Заменить lib/src/services/channel_control/model/channel_control.dart на lib/src/model/control_value.dart
++3. Удалить model/channel_control.dart, если нигде не используется
 
-2. Удалить model/channel_control.dart, если нигде не используется
+4. Создать remote и local сервис в папке service/kit_preset (нужно создать папку). Они должны реализовывать один интерфейс. Добавить получение этих сервисов в providers.dart по аналогии с ChannelControlRemote и ChannelControlLocal. 
+5. В data/repositories/kit_preset_repository.dart добавить интерфейс сервиса kit_preset. Инжектить в этот интерфейс remote или local сервис при создании kit_preset_repository
+6. Перенести логику запроса к gRPC из data/repositories/kit_preset_repository.dart в созданный в п.3 remote сервис
+7. В kit_preset_repository.dart хранить полученный preset. При получении вызова getPreset если данных нет, то выполнять запрос на сервер, иначе возвращать сохраненные данные
 
-3. Создать remote и local сервис в папке service/kit_preset (нужно создать папку). Они должны реализовывать один интерфейс. Добавить получение этих сервисов в providers.dart по аналогии с ChannelControlRemote и ChannelControlLocal. 
-4. В data/repositories/kit_preset_repository.dart добавить интерфейс сервиса kit_preset. Инжектить в этот интерфейс remote или local сервис при создании kit_preset_repository
-5. Перенести логику запроса к gRPC из data/repositories/kit_preset_repository.dart в созданный в п.3 remote сервис
-6. В kit_preset_repository.dart хранить полученный preset. При получении вызова getPreset если данных нет, то выполнять запрос на сервер, иначе возвращать сохраненные данные
-
-7. ControlsRepository (data/repositories/controls_repository.dart) переименовать в ControlHandler, заинжектить его в kit_preset_repository.dart
-8. Добавить метод setValue в kit_preset_repository.dart. Но вместо key передавать ссылку на объект Control в Preset. Этот метод должен изменять значение в Control и вызывать setValue в ControlHandler.
+8. ControlsRepository (data/repositories/controls_repository.dart) переименовать в ControlHandler, заинжектить его в kit_preset_repository.dart
+9. Добавить метод setValue в kit_preset_repository.dart. Но вместо key передавать ссылку на объект Control в Preset. Этот метод должен изменять значение в Control и вызывать setValue в ControlHandler.
    

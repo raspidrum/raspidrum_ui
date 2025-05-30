@@ -1,8 +1,5 @@
-
-
 // Repostitory used for setting values in back controls: channel volume, pan, plugins (FX) params, mixer controls
 // Sending a command to the back is asynchronous and queued
-
 
 import 'dart:async';
 import 'dart:collection';
@@ -10,7 +7,7 @@ import 'dart:collection';
 import 'package:logging/logging.dart';
 
 import '../../services/channel_control/channel_control_service.dart';
-import '../../services/channel_control/model/channel_control.dart';
+import '../../model/control_value.dart';
 import '../../utils/result.dart';
 
 // Class is used for interacting with viewmodel or other upper level
@@ -31,8 +28,6 @@ class ControlsRepository {
     }
     _controls[key]!.addEvent(value);
   }
-
-
 }
 
 // Type for holding event of setting control value
@@ -68,8 +63,6 @@ class _Control {
   _ValRequest? _processindEvent;
   _ValRequest? _completedEvent;
 
-
-
   // adding event to queue to delayed process
   void addEvent(double value) {
     _valsQueue.add(value);
@@ -95,14 +88,14 @@ class _Control {
     _log.fine("request: \t $_seq \t val: $val");
     final setValueResult = await _service.setValue(_key, _seq, val);
     switch (setValueResult) {
-      case Ok<ChannelControl>():
+      case Ok<ControlValue>():
         _processResponse(setValueResult.value);
-      case Error<ChannelControl>():
+      case Error<ControlValue>():
         _log.warning('Failed to set value', setValueResult.error);
     }
   }
 
-  void _processResponse(ChannelControl settedValue) {
+  void _processResponse(ControlValue settedValue) {
     // TODO: if (key != this._key) { throw exception("invalid key: $key"); }
     // update last completed event
     if (_completedEvent == null || settedValue.seq >= _completedEvent!.seq) {
@@ -110,7 +103,5 @@ class _Control {
       _log.fine("completed: \t ${settedValue.seq} \t val: ${settedValue.value}");
     }
   }
-
-
 }
 
