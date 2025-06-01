@@ -3,9 +3,9 @@ import 'package:logging/logging.dart';
 
 import '../../utils/result.dart';
 import '../../model/control_value.dart';
-import 'channel_control_service.dart';
+import 'control_handler_service.dart';
 
-class ChannelControlLocal implements ChannelControlService {
+class ChannelControlLocal implements ControlHandlerService {
 
   final _logger = Logger('ChannelControlLocal');
 

@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
 import 'config/app_config.dart';
-import 'data/repositories/controls_repository.dart';
+import 'data/repositories/controls_handler.dart';
 import 'data/repositories/kit_preset_repository.dart';
-import 'services/channel_control/channel_control_service_local.dart';
-import 'services/channel_control/channel_control_service_remote.dart';
+import 'services/control_handler/control_handler_service_local.dart';
+import 'services/control_handler/control_handler_service_remote.dart';
 import 'services/kit_preset/kit_preset_service_local.dart';
 import 'services/kit_preset/kit_preset_service_remote.dart';
 import 'services/remote_provider.dart';
@@ -18,10 +18,13 @@ List<SingleChildWidget> get providersRemote {
   return [
     Provider.value(value: config),
     Provider(
-      create: (context) => KitPresetRepository(KitPresetServiceRemote(remoteServices)),
-    ),
-    Provider(
-      create: (context) => ControlsRepository(ChannelControlRemote(remoteServices)),
+      create: (context) {
+        final controlHandler = ControlHandler(ChannelControlRemote(remoteServices));
+        return KitPresetRepository(
+          KitPresetServiceRemote(remoteServices),
+          controlHandler,
+        );
+      },
     )
   ];
 }
@@ -32,10 +35,13 @@ List<SingleChildWidget> get providersLocal {
   return [
     Provider.value(value: config),
     Provider(
-      create: (context) => KitPresetRepository(KitPresetServiceLocal()),
-    ),
-    Provider(
-      create: (context) => ControlsRepository(ChannelControlLocal()),
+      create: (context) {
+        final controlHandler = ControlHandler(ChannelControlLocal());
+        return KitPresetRepository(
+          KitPresetServiceLocal(),
+          controlHandler,
+        );
+      },
     )
   ];
 }

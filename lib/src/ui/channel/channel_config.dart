@@ -105,8 +105,8 @@ class ChannelConfigScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _buildPanSlider(channel.key, channel.pan),
-            Expanded(child: _buildLevelSlider(channel.key, channel.volume)),
+            _buildPanSlider(channel.pan),
+            Expanded(child: _buildLevelSlider(channel.volume)),
             Text(channel.name,
                 style: Theme.of(context).textTheme.labelLarge)
           ],
@@ -200,8 +200,8 @@ class ChannelConfigScreen extends StatelessWidget {
                 ),
               ),
             ),
-            _buildPanSlider(layer.key, layer.pan),
-            Expanded(child: _buildLevelSlider(layer.key, layer.volume)),
+            _buildPanSlider(layer.pan),
+            Expanded(child: _buildLevelSlider(layer.volume)),
             Text(layer.name,
                 style: Theme.of(context).textTheme.labelLarge)
         ],
@@ -209,7 +209,7 @@ class ChannelConfigScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPanSlider(String key, BaseControl? pan) {
+  Widget _buildPanSlider(BaseControl? pan) {
     if (pan == null) return SizedBox(height: Dimentions.controlPanHeight);
     return SizedBox(
       height: Dimentions.controlPanHeight,
@@ -220,14 +220,14 @@ class ChannelConfigScreen extends StatelessWidget {
         max: pan.max ?? 100,
         values: [pan.value * 100],
         onDragging: (handlerIndex, lowerValue, upperValue) {
-          viewModel.sendValue(key, lowerValue/100);
+          viewModel.sendValue(pan, lowerValue/100);
         },
       ),
     )
     );
   }
 
-  Widget _buildLevelSlider(String key, BaseControl? volume) {
+  Widget _buildLevelSlider(BaseControl? volume) {
     if (volume == null) return Container();
     return Padding(
       padding: const EdgeInsets.all(Dimentions.sliderPadding),
@@ -236,7 +236,7 @@ class ChannelConfigScreen extends StatelessWidget {
         max: volume.max ?? 110,
         values: [volume.value*100],
         onDragging: (handlerIndex, lowerValue, upperValue) {
-          viewModel.sendValue(key, lowerValue/100);
+          viewModel.sendValue(volume, lowerValue/100);
         },
       ),
     );

@@ -1,22 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter/foundation.dart';
+import 'control.dart';
 
-part 'channel_preset.freezed.dart';
-part 'channel_preset.g.dart';
+part 'channel_preset.mapper.dart';
 
-@unfreezed
-class Preset with _$Preset {
-  factory Preset({
-    required final String key,
-    required String name,
-    String? description,
-    List<Channel>? channels,
-  }) = _Preset;
-
-  factory Preset.fromJson(Map<String, Object?> json)
-    => _$PresetFromJson(json);
-}
-
+@MappableEnum()
 enum ChannelType {
   unspecified,
   global,
@@ -26,82 +14,122 @@ enum ChannelType {
   player,
 }
 
-@unfreezed
-class Channel with _$Channel {
-  factory Channel({
-    required final String key,
-    required String name,
-    required final ChannelType type,
-    required BaseControl volume,
-    BaseControl? pan,
-    List<FX>? fxs,
-    List<Instrument>? instruments,
-  }) = _Channel;
+@MappableClass()
+class Preset with PresetMappable {
+  final String key;
+  String name;
+  String? description;
+  List<Channel>? channels;
 
-  factory Channel.fromJson(Map<String, Object?> json)
-    => _$ChannelFromJson(json);
+  Preset({
+    required this.key,
+    required this.name,
+    this.description,
+    this.channels,
+  });
 }
 
-@unfreezed
-class Instrument with _$Instrument {
-  factory Instrument({
-    required final String key,
-    required String name,
-    BaseControl? volume,
-    BaseControl? pan,
-    List<FX>? tunes,
-    List<Layer>? layers,
-  }) = _Instrument;
+@MappableClass()
+class Channel with ChannelMappable {
+  final String key;
+  String name;
+  final ChannelType type;
+  BaseControl volume;
+  BaseControl? pan;
+  List<FX>? fxs;
+  List<Instrument>? instruments;
 
-  factory Instrument.fromJson(Map<String, Object?> json)
-    => _$InstrumentFromJson(json);
+  Channel({
+    required this.key,
+    required this.name,
+    required this.type,
+    required this.volume,
+    this.pan,
+    this.fxs,
+    this.instruments,
+  });
 }
 
-@unfreezed
-class Layer with _$Layer {
-  factory Layer({
-    required final String key,
-    required String name,
-    BaseControl? volume,
-    BaseControl? pan,
-    List<FX>? fxs,
-  }) = _Layer;
+@MappableClass()
+class Instrument with InstrumentMappable {
+  final String key;
+  String name;
+  BaseControl? volume;
+  BaseControl? pan;
+  List<FX>? tunes;
+  List<Layer>? layers;
 
-  factory Layer.fromJson(Map<String, Object?> json)
-    => _$LayerFromJson(json);
+  Instrument({
+    required this.key,
+    required this.name,
+    this.volume,
+    this.pan,
+    this.tunes,
+    this.layers,
+  });
 }
 
-@unfreezed
-class BaseControl with _$BaseControl {
-  factory BaseControl({
-    required final String key,
-    required String name,
-    required double value,
-    double? min,
-    double? max,
-  }) = _BaseControl;
+@MappableClass()
+class Layer with LayerMappable {
+  final String key;
+  String name;
+  BaseControl? volume;
+  BaseControl? pan;
+  List<FX>? fxs;
 
-  factory BaseControl.fromJson(Map<String, Object?> json)
-    => _$BaseControlFromJson(json);
+  Layer({
+    required this.key,
+    required this.name,
+    this.volume,
+    this.pan,
+    this.fxs,
+  });
 }
 
-@unfreezed
-class FX with _$FX {
-  factory FX({
-    required final String key,
-    required final String name,
-    required int order,
-    required final List<FXParam> params,
-  }) = _FX;
+@MappableClass()
+class BaseControl with BaseControlMappable implements Control {
+  final String key;
+  String name;
+  double value;
+  double? min;
+  double? max;
 
-  factory FX.fromJson(Map<String, Object?> json)
-    => _$FXFromJson(json);
+  BaseControl({
+    required this.key,
+    required this.name,
+    required this.value,
+    this.min,
+    this.max,
+  });
+
+  @override
+  void setValue(double newValue) {
+    if (min != null && newValue < min!) {
+      throw Exception('Value $newValue is less than minimum $min');
+    }
+    if (max != null && newValue > max!) {
+      throw Exception('Value $newValue is greater than maximum $max');
+    }
+    value = newValue;
+  }
 }
 
-// Параметры могут быть:
-// - диапазонные. Ограничения задаются в range_min и range_max
-// - дискретные - набор допустимых значений. Список допустимых значений задается в FxParamDiscreteVal
-// - логические - не указываются range_min, range_max, divisions и discrete_vals. false: default==0; true: default==1.0
+@MappableClass()
+class FX with FXMappable {
+  final String key;
+  final String name;
+  int order;
+  final List<FXParam> params;
+
+  FX({
+    required this.key,
+    required this.name,
+    required this.order,
+    required this.params,
+  });
+}
+
+@MappableEnum()
 enum FXParamType {
   unspecified,
   range,
@@ -109,32 +137,57 @@ enum FXParamType {
   boolean,
 }
 
-// TODO: rewrite to multiple constructor by type
-@unfreezed
-class FXParam with _$FXParam {
-  factory FXParam({
-    required final String key,
-    required final String name,
-    required int order,
-    required final FXParamType type,
-    final double? min,
-    final double? max,
-    final int? divisions,
-    List<FXParamDiscreteVal>? discreteVals,
-    required double value,
-  }) = _FXParam;
+@MappableClass()
+class FXParam with FXParamMappable implements Control {
+  final String key;
+  final String name;
+  int order;
+  final FXParamType type;
+  final double? min;
+  final double? max;
+  final int? divisions;
+  List<FXParamDiscreteVal>? discreteVals;
+  double value;
 
-  factory FXParam.fromJson(Map<String, Object?> json)
-    => _$FXParamFromJson(json);
+  FXParam({
+    required this.key,
+    required this.name,
+    required this.order,
+    required this.type,
+    this.min,
+    this.max,
+    this.divisions,
+    this.discreteVals,
+    required this.value,
+  });
+
+  @override
+  void setValue(double newValue) {
+    if (min != null && newValue < min!) {
+      throw Exception('Value $newValue is less than minimum $min');
+    }
+    if (max != null && newValue > max!) {
+      throw Exception('Value $newValue is greater than maximum $max');
+    }
+    
+    if (type == FXParamType.fixed && discreteVals != null) {
+      final validValues = discreteVals!.map((v) => v.val).toList();
+      if (!validValues.contains(newValue)) {
+        throw Exception('Value $newValue is not one of the allowed values: $validValues');
+      }
+    }
+    
+    value = newValue;
+  }
 }
 
-@freezed
-class FXParamDiscreteVal with _$FXParamDiscreteVal {
-  const factory FXParamDiscreteVal({
-    String? name,
-    required double val
-  }) = _FXParamDiscreteVal;
+@MappableClass()
+class FXParamDiscreteVal with FXParamDiscreteValMappable {
+  String? name;
+  final double val;
 
-  factory FXParamDiscreteVal.fromJson(Map<String, Object?> json)
-    => _$FXParamDiscreteValFromJson(json);
+  FXParamDiscreteVal({
+    this.name,
+    required this.val,
+  });
 }

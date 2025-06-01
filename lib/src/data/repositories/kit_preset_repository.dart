@@ -1,6 +1,8 @@
-import 'package:raspidrum_ui/src/model/channel_preset.dart';
+import 'package:raspidrum_ui/src/model/channel_preset.dart' as preset;
 import 'package:raspidrum_ui/src/utils/result.dart';
 import 'package:raspidrum_ui/src/services/kit_preset/kit_preset_service.dart';
+import 'package:raspidrum_ui/src/data/repositories/controls_handler.dart';
+import 'package:raspidrum_ui/src/model/control.dart';
 
 // Repository is used for working with presets:
 //   - get preset list 
@@ -10,11 +12,12 @@ import 'package:raspidrum_ui/src/services/kit_preset/kit_preset_service.dart';
 
 class KitPresetRepository {
   final KitPresetService _service;
-  Preset? _cachedPreset;
+  final ControlHandler _controlHandler;
+  preset.Preset? _cachedPreset;
 
-  KitPresetRepository(this._service);
+  KitPresetRepository(this._service, this._controlHandler);
 
-  Future<Result<Preset>> getPreset() async {
+  Future<Result<preset.Preset>> getPreset() async {
     // TODO: get it in input parameter
     final id = '1';
     // Return cached preset if it exists and has the same ID
@@ -24,10 +27,23 @@ class KitPresetRepository {
 
     // Otherwise fetch from service
     final result = await _service.getPreset(id);
-    if (result is Ok<Preset>) {
+    if (result is Ok<preset.Preset>) {
       _cachedPreset = result.value;
     }
     return result;
+  }
+
+  // Sets value for a control in the preset and updates it through ControlHandler
+  void setValue(Control control, double value) {
+    if (_cachedPreset == null) {
+      throw Exception('No preset loaded');
+    }
+    
+    // Update the control value in the preset
+    control.setValue(value);
+    
+    // Update the value through ControlHandler
+    _controlHandler.setValue(control.key, value);
   }
 
   void dispose() {

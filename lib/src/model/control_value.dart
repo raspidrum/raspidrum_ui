@@ -1,15 +1,16 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'control_value.freezed.dart';
-part 'control_value.g.dart';
+part 'control_value.mapper.dart';
 
-@freezed
-class ControlValue with _$ControlValue {
-  const factory ControlValue({
-    required String key,
-    required int seq,
-    required double value,
-  }) = _ControlValue;
+@MappableClass()
+class ControlValue with ControlValueMappable {
+  final String key;
+  final int seq;
+  final double value;
 
-  factory ControlValue.fromJson(Map<String, Object?> json) => _$ControlValueFromJson(json);
+  const ControlValue({
+    required this.key,
+    required this.seq,
+    required this.value,
+  });
 } 

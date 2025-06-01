@@ -1,4 +1,4 @@
-// Repostitory used for setting values in back controls: channel volume, pan, plugins (FX) params, mixer controls
+// Handler used for setting values in back controls: channel volume, pan, plugins (FX) params, mixer controls
 // Sending a command to the back is asynchronous and queued
 
 import 'dart:async';
@@ -6,19 +6,19 @@ import 'dart:collection';
 
 import 'package:logging/logging.dart';
 
-import '../../services/channel_control/channel_control_service.dart';
+import '../../services/control_handler/control_handler_service.dart';
 import '../../model/control_value.dart';
 import '../../utils/result.dart';
 
 // Class is used for interacting with viewmodel or other upper level
-class ControlsRepository {
+class ControlHandler {
 
-  final ChannelControlService _service;
+  final ControlHandlerService _service;
   final _log = Logger('ControlsRepository');
 
   final Map<String, _Control> _controls = {};
 
-  ControlsRepository(
+  ControlHandler(
     this._service
   );
 
@@ -54,13 +54,13 @@ class _Control {
   static final int periodProcessing = 50;
 
   final String _key;
-  final ChannelControlService _service;
+  final ControlHandlerService _service;
   final Logger _log;
   Timer? _timer;
   int _seq = 0;
   
   final Queue<double> _valsQueue = Queue();
-  _ValRequest? _processindEvent;
+  //_ValRequest? _processindEvent;
   _ValRequest? _completedEvent;
 
   // adding event to queue to delayed process
@@ -83,10 +83,10 @@ class _Control {
       val = _valsQueue.removeFirst();
     }
     _seq++;
-    _processindEvent = _ValRequest(seq: _seq, value: val!);
+    //_processindEvent = _ValRequest(seq: _seq, value: val!);
     _timer = Timer(Duration(milliseconds: periodProcessing), () => _processQueue());
     _log.fine("request: \t $_seq \t val: $val");
-    final setValueResult = await _service.setValue(_key, _seq, val);
+    final setValueResult = await _service.setValue(_key, _seq, val!);
     switch (setValueResult) {
       case Ok<ControlValue>():
         _processResponse(setValueResult.value);

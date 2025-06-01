@@ -3,10 +3,10 @@ import 'package:raspidrum_ui/src/services/remote_provider.dart';
 import '../../utils/result.dart';
 import '../../model/control_value.dart';
 import '../proto/channel_control.pbgrpc.dart' as grpc;
-import 'channel_control_service.dart';
+import '../control_handler/control_handler_service.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
 
-class ChannelControlRemote implements ChannelControlService {
+class ChannelControlRemote implements ControlHandlerService {
 
   final RemoteProvider _remoteProvider;
 

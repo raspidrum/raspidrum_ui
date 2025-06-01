@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
-import '../../data/repositories/controls_repository.dart';
 import '../../data/repositories/kit_preset_repository.dart';
 import '../../model/channel_preset.dart';
+import '../../model/control.dart';
 import '../../utils/command.dart';
 import '../../utils/result.dart';
 
@@ -10,18 +10,15 @@ class ChannelConfigViewModel extends ChangeNotifier {
 
   ChannelConfigViewModel({
     required KitPresetRepository kitPresetRepository,
-    required ControlsRepository controlRepository,
     required String channelIdx
   }):
-    _kitPresetRepository = kitPresetRepository,
-    _controlRepository = controlRepository
+    _kitPresetRepository = kitPresetRepository
     {
       load = Command1(_load)..execute(channelIdx);
     }
     
 
   final KitPresetRepository _kitPresetRepository;
-  final ControlsRepository _controlRepository;
   final _log = Logger('ChannelConfigViewModel');
   
   late Command1<void, String> load;
@@ -50,8 +47,12 @@ class ChannelConfigViewModel extends ChangeNotifier {
   }
 
   // Sends a command to set the value on the device via the repository
-  void sendValue(String key, double value) {
-    _controlRepository.setValue(key, value);
+  void sendValue(Control control, double value) {
+    if (_channel == null) {
+      _log.warning('Cannot set value: no channel loaded');
+      return;
+    }
+    
+    _kitPresetRepository.setValue(control, value);
   }
-
 }
