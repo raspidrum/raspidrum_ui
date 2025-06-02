@@ -14,7 +14,7 @@ import 'package:raspidrum_ui/src/ui/player/player_viewmodel.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings.dart';
 import 'package:raspidrum_ui/src/ui/settings/settings_viewmodel.dart';
 
-import '../model/channel_preset.dart';
+import '../model/kit_preset.dart';
 import '../ui/channel/channel_config.dart';
 import '../ui/channel/channel_config_viewmodel.dart';
 import '../ui/fx_tune/fx_tune.dart';
@@ -65,6 +65,7 @@ final GoRouter router = GoRouter(
                                 state: state,
                                 child: FxTuneScreen(
                                     viewModel: FxTuneViewModel(
+                                        kitPresetRepository: context.read(),
                                         fxs: GoRouterState.of(context).extra!
                                             as List<FX>))),
                       ),
@@ -78,6 +79,7 @@ final GoRouter router = GoRouter(
                                 state: state,
                                 child: FxTuneScreen(
                                     viewModel: FxTuneViewModel(
+                                        kitPresetRepository: context.read(),
                                         fxs: GoRouterState.of(context).extra!
                                             as List<FX>))),
                       ),
@@ -91,6 +93,7 @@ final GoRouter router = GoRouter(
                                 state: state,
                                 child: FxTuneScreen(
                                     viewModel: FxTuneViewModel(
+                                        kitPresetRepository: context.read(),
                                         fxs: GoRouterState.of(context).extra!
                                             as List<FX>))),
                       ),

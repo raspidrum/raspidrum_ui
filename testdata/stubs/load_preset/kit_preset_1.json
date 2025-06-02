@@ -1,0 +1,660 @@
+{
+    "key": "0195fad1-6bd6-765a-8a25-6be0bd03e9ce",
+    "name": "SMDrums 1",
+    "channels": [
+      {
+        "key": "sampler",
+        "name": "Kit",
+        "type": "sampler",
+        "volume": {
+          "key": "s0volume",
+          "name": "Volume",
+          "value": 1,
+          "min": 0,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": []
+      },
+      {
+        "key": "1",
+        "name": "Kick",
+        "type": "instrument",
+        "volume": {
+          "key": "i4volume",
+          "name": "Volume",
+          "value": 0.748,
+          "min": 0,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": [
+          {
+            "key": "1",
+            "name": "Kick",
+            "tunes": [
+              {
+                "key": "i4decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i4decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i4pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i4pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          }
+        ]
+      },
+      {
+        "key": "2",
+        "name": "Snare",
+        "type": "instrument",
+        "volume": {
+          "key": "c1volume",
+          "name": "",
+          "value": 1,
+          "min": 0,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": [
+          {
+            "key": "3",
+            "name": "Rim Shot",
+            "volume": {
+              "key": "i7volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i7pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i7pitch",
+                "name": "Pitch",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i7pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              },
+              {
+                "key": "i7decay",
+                "name": "Decay",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i7decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          },
+          {
+            "key": "2",
+            "name": "Snare",
+            "volume": {
+              "key": "i8volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i8pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i8decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i8decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i8pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i8pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          }
+        ]
+      },
+      {
+        "key": "3",
+        "name": "Hi-Hat",
+        "type": "instrument",
+        "volume": {
+          "key": "c2volume",
+          "name": "Volume",
+          "value": 1,
+          "min": 0,
+          "max": 1
+        },
+        "pan": {
+          "key": "i3pan",
+          "name": "Pan",
+          "value": 0.008,
+          "min": -1,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": [
+          {
+            "key": "7",
+            "name": "Hi-Hat",
+            "tunes": [
+              {
+                "key": "i3decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i3decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i3pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i3pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 64
+                  }
+                ]
+              }
+            ],
+            "layers": [
+              {
+                "key": "loose",
+                "name": "",
+                "volume": {
+                  "key": "i3l0volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "open",
+                "name": "",
+                "volume": {
+                  "key": "i3l1volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "splash",
+                "name": "",
+                "volume": {
+                  "key": "i3l2volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "closed",
+                "name": "",
+                "volume": {
+                  "key": "i3l3volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "foot",
+                "name": "",
+                "volume": {
+                  "key": "i3l4volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "foot_open",
+                "name": "Foot open",
+                "volume": {
+                  "key": "i3l5volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "4",
+        "name": "Toms",
+        "type": "instrument",
+        "volume": {
+          "key": "c3volume",
+          "name": "Volume",
+          "value": 1,
+          "min": 0,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": [
+          {
+            "key": "6",
+            "name": "Floor Tom",
+            "volume": {
+              "key": "i1volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i1pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i1decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i1decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i1pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i1pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          },
+          {
+            "key": "4",
+            "name": "Hi Tom",
+            "volume": {
+              "key": "i2volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i2pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i2decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i2decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i2pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i2pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          },
+          {
+            "key": "5",
+            "name": "Mid Tom",
+            "volume": {
+              "key": "i5volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i5pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i5pitch",
+                "name": "Pitch",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i5pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 63
+                  }
+                ]
+              },
+              {
+                "key": "i5decay",
+                "name": "Decay",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i5decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          }
+        ]
+      },
+      {
+        "key": "5",
+        "name": "Cymbals",
+        "type": "instrument",
+        "volume": {
+          "key": "c4volume",
+          "name": "Volume",
+          "value": 1,
+          "min": 0,
+          "max": 1
+        },
+        "fxs": [],
+        "instruments": [
+          {
+            "key": "9",
+            "name": "Crash",
+            "volume": {
+              "key": "i0volume",
+              "name": "Volume",
+              "value": 0.748,
+              "min": 0,
+              "max": 1
+            },
+            "pan": {
+              "key": "i0pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i0decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i0decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i0pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i0pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 64
+                  }
+                ]
+              }
+            ],
+            "layers": []
+          },
+          {
+            "key": "8",
+            "name": "Ride",
+            "pan": {
+              "key": "i6pan",
+              "name": "Pan",
+              "value": 0.008,
+              "min": -1,
+              "max": 1
+            },
+            "tunes": [
+              {
+                "key": "i6decay",
+                "name": "Decay",
+                "order": 0,
+                "params": [
+                  {
+                    "key": "i6decay",
+                    "name": "Decay",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "key": "i6pitch",
+                "name": "Pitch",
+                "order": 1,
+                "params": [
+                  {
+                    "key": "i6pitch",
+                    "name": "Pitch",
+                    "order": 0,
+                    "type": "range",
+                    "min": 0,
+                    "max": 127,
+                    "discreteVals": [],
+                    "value": 64
+                  }
+                ]
+              }
+            ],
+            "layers": [
+              {
+                "key": "bell",
+                "name": "Bell",
+                "volume": {
+                  "key": "i6l0volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              },
+              {
+                "key": "edge",
+                "name": "Edge",
+                "volume": {
+                  "key": "i6l1volume",
+                  "name": "Volume",
+                  "value": 0.748,
+                  "min": 0,
+                  "max": 1
+                },
+                "fxs": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

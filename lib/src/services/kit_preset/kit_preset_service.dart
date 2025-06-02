@@ -1,4 +1,4 @@
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 import '../../utils/result.dart';
 
 abstract class KitPresetService {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 import '../../routing/routes.dart';
 import '../core/themes/constants.dart';
 
@@ -216,8 +216,8 @@ class ChannelConfigScreen extends StatelessWidget {
       child: Padding(
       padding: const EdgeInsets.all(Dimentions.borderRadius),
       child: PanSlider(
-        min: pan.min ?? -100,
-        max: pan.max ?? 100,
+        min: pan.min == null ? -100 : pan.min! *100,
+        max: pan.max == null ? 100 : pan.max! *100,
         values: [pan.value * 100],
         onDragging: (handlerIndex, lowerValue, upperValue) {
           viewModel.sendValue(pan, lowerValue/100);
@@ -232,8 +232,8 @@ class ChannelConfigScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Dimentions.sliderPadding),
       child: MixSlider(
-        min: volume.min ?? 0.0,
-        max: volume.max ?? 110,
+        min: volume.min == null ? 0.0 : volume.min! *100,
+        max: volume.max == null ? 110 : volume.max! *100,
         values: [volume.value*100],
         onDragging: (handlerIndex, lowerValue, upperValue) {
           viewModel.sendValue(volume, lowerValue/100);

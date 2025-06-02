@@ -56,6 +56,6 @@
 - [x] 6. Перенести логику запроса к gRPC из data/repositories/kit_preset_repository.dart в созданный в п.3 remote сервис
 - [x] 7. В kit_preset_repository.dart хранить полученный preset. При получении вызова getPreset если данных нет, то выполнять запрос на сервер, иначе возвращать сохраненные данные
 
-8. ControlsRepository (data/repositories/controls_repository.dart) переименовать в ControlHandler, заинжектить его в kit_preset_repository.dart
-9. Добавить метод setValue в kit_preset_repository.dart. Но вместо key передавать ссылку на объект Control в Preset. Этот метод должен изменять значение в Control и вызывать setValue в ControlHandler.
+- [x] 8. ControlsRepository (data/repositories/controls_repository.dart) переименовать в ControlHandler, заинжектить его в kit_preset_repository.dart
+- [x] 9. Добавить метод setValue в kit_preset_repository.dart. Но вместо key передавать ссылку на объект Control в Preset. Этот метод должен изменять значение в Control и вызывать setValue в ControlHandler.
    

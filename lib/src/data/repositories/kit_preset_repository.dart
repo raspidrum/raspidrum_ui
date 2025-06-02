@@ -1,4 +1,4 @@
-import 'package:raspidrum_ui/src/model/channel_preset.dart' as preset;
+import 'package:raspidrum_ui/src/model/kit_preset.dart' as preset;
 import 'package:raspidrum_ui/src/utils/result.dart';
 import 'package:raspidrum_ui/src/services/kit_preset/kit_preset_service.dart';
 import 'package:raspidrum_ui/src/data/repositories/controls_handler.dart';
@@ -14,6 +14,7 @@ class KitPresetRepository {
   final KitPresetService _service;
   final ControlHandler _controlHandler;
   preset.Preset? _cachedPreset;
+  String? _presetId;
 
   KitPresetRepository(this._service, this._controlHandler);
 
@@ -21,7 +22,7 @@ class KitPresetRepository {
     // TODO: get it in input parameter
     final id = '1';
     // Return cached preset if it exists and has the same ID
-    if (_cachedPreset != null && _cachedPreset!.key == id) {
+    if (_cachedPreset != null && _presetId == id) {
       return Result.ok(_cachedPreset!);
     }
 
@@ -29,6 +30,7 @@ class KitPresetRepository {
     final result = await _service.getPreset(id);
     if (result is Ok<preset.Preset>) {
       _cachedPreset = result.value;
+      _presetId = id;
     }
     return result;
   }

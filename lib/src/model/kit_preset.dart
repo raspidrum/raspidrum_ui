@@ -1,8 +1,7 @@
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flutter/foundation.dart';
 import 'control.dart';
 
-part 'channel_preset.mapper.dart';
+part 'kit_preset.mapper.dart';
 
 @MappableEnum()
 enum ChannelType {

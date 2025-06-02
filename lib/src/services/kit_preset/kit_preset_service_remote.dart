@@ -1,7 +1,6 @@
 import 'package:fixnum/fixnum.dart';
-import 'package:grpc/grpc.dart';
 
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 import '../../utils/result.dart';
 import '../remote_provider.dart';
 import '../proto/preset.pbgrpc.dart' as grpc;

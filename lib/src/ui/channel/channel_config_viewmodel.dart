@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 import '../../data/repositories/kit_preset_repository.dart';
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 import '../../model/control.dart';
 import '../../utils/command.dart';
 import '../../utils/result.dart';

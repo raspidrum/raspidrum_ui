@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 import '../core/themes/constants.dart';
 import '../core/ui/fxparam_slider.dart';
 import 'fx_tune_viewmodel.dart';
@@ -73,9 +73,12 @@ class FxTuneScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Dimentions.sliderPadding),
       child: FxParamSlider(
-        min: param.min ?? 0.0,
-        max: param.max ?? 1.0,
-        values: [param.value],
+        min: param.min == null ? 0.0 : param.min! *100,
+        max: param.max == null ? 100 : param.max! *100,
+        values: [param.value * 100],
+        onDragging: (handlerIndex, lowerValue, upperValue) {
+          viewModel.sendValue(param, lowerValue/100);
+        },
       ),
     );
   }

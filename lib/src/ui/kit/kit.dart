@@ -8,7 +8,7 @@ import '../core/ui/error_indicator.dart';
 import '../core/ui/mix_slider.dart';
 import 'kit_viewmodel.dart';
 
-import '../../model/channel_preset.dart';
+import '../../model/kit_preset.dart';
 
 class KitScreen extends StatelessWidget {
   const KitScreen({
@@ -109,9 +109,12 @@ class KitScreen extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.all(Dimentions.sliderPadding),
               child: MixSlider(
-                min: 0.0,
-                max: 110,
+                min: channel.volume.min == null ? 0.0 : channel.volume.min! *100,
+                max: channel.volume.max == null ? 110 : channel.volume.max! *100,
                 values: [channel.volume.value*100],
+                onDragging: (handlerIndex, lowerValue, upperValue) {
+                  viewModel.sendValue(channel.volume, lowerValue/100);
+                },
               ),
             ),
         ),
