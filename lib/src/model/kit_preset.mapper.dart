@@ -137,6 +137,8 @@ class PresetMapper extends ClassMapperBase<Preset> {
   @override
   final String id = 'Preset';
 
+  static int _$id(Preset v) => v.id;
+  static const Field<Preset, int> _f$id = Field('id', _$id);
   static String _$key(Preset v) => v.key;
   static const Field<Preset, String> _f$key = Field('key', _$key);
   static String _$name(Preset v) => v.name;
@@ -150,6 +152,7 @@ class PresetMapper extends ClassMapperBase<Preset> {
 
   @override
   final MappableFields<Preset> fields = const {
+    #id: _f$id,
     #key: _f$key,
     #name: _f$name,
     #description: _f$description,
@@ -158,6 +161,7 @@ class PresetMapper extends ClassMapperBase<Preset> {
 
   static Preset _instantiate(DecodingData data) {
     return Preset(
+        id: data.dec(_f$id),
         key: data.dec(_f$key),
         name: data.dec(_f$name),
         description: data.dec(_f$description),
@@ -213,7 +217,8 @@ abstract class PresetCopyWith<$R, $In extends Preset, $Out>
   ListCopyWith<$R, Channel, ChannelCopyWith<$R, Channel, Channel>>?
       get channels;
   $R call(
-      {String? key,
+      {int? id,
+      String? key,
       String? name,
       String? description,
       List<Channel>? channels});
@@ -234,11 +239,13 @@ class _PresetCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Preset, $Out>
           : null;
   @override
   $R call(
-          {String? key,
+          {int? id,
+          String? key,
           String? name,
           Object? description = $none,
           Object? channels = $none}) =>
       $apply(FieldCopyWithData({
+        if (id != null) #id: id,
         if (key != null) #key: key,
         if (name != null) #name: name,
         if (description != $none) #description: description,
@@ -246,6 +253,7 @@ class _PresetCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Preset, $Out>
       }));
   @override
   Preset $make(CopyWithData data) => Preset(
+      id: data.get(#id, or: $value.id),
       key: data.get(#key, or: $value.key),
       name: data.get(#name, or: $value.name),
       description: data.get(#description, or: $value.description),

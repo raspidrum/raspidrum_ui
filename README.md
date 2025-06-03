@@ -7,8 +7,15 @@ UI for Raspberry drum module.
 
 Proto files used from raspidrum_srv/api/grpc
 
-```bash
-$ cd server && git sparse-checkout init --cone && git sparse-checkout set api
+Init submodule:
 
-$ cd .. && git submodule update --force --checkout server
+```bash
+git submodule add -b master -- https://github.com/raspidrum/raspidrum_srv.git api/grpc
+$ cd server && git sparse-checkout init --cone && git sparse-checkout set api
+```
+
+Update submodule:
+
+```bash
+$ git submodule update --remote --merge
 ```

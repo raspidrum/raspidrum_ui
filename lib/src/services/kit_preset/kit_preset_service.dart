@@ -3,5 +3,5 @@ import '../../utils/result.dart';
 
 abstract class KitPresetService {
   /// Retrieves a preset by its ID
-  Future<Result<Preset>> getPreset(String id);
+  Future<Result<Preset>> getPreset(int id);
 } 

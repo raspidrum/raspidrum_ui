@@ -50,39 +50,40 @@ final $typed_data.Uint8List fXParamTypeDescriptor = $convert.base64Decode(
     '1fVFlQRV9SQU5HRRABEhcKE0ZYX1BBUkFNX1RZUEVfRklYRUQQAhIZChVGWF9QQVJBTV9UWVBF'
     'X0JPT0xFQU4QAw==');
 
-@$core.Deprecated('Use loadPresetRequestDescriptor instead')
-const LoadPresetRequest$json = {
-  '1': 'LoadPresetRequest',
+@$core.Deprecated('Use getPresetRequestDescriptor instead')
+const GetPresetRequest$json = {
+  '1': 'GetPresetRequest',
   '2': [
     {'1': 'preset_id', '3': 1, '4': 1, '5': 3, '10': 'presetId'},
   ],
 };
 
-/// Descriptor for `LoadPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loadPresetRequestDescriptor = $convert.base64Decode(
-    'ChFMb2FkUHJlc2V0UmVxdWVzdBIbCglwcmVzZXRfaWQYASABKANSCHByZXNldElk');
+/// Descriptor for `GetPresetRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getPresetRequestDescriptor = $convert.base64Decode(
+    'ChBHZXRQcmVzZXRSZXF1ZXN0EhsKCXByZXNldF9pZBgBIAEoA1IIcHJlc2V0SWQ=');
 
-@$core.Deprecated('Use loadPresetResponseDescriptor instead')
-const LoadPresetResponse$json = {
-  '1': 'LoadPresetResponse',
+@$core.Deprecated('Use presetResponseDescriptor instead')
+const PresetResponse$json = {
+  '1': 'PresetResponse',
   '2': [
     {'1': 'preset', '3': 1, '4': 1, '5': 11, '6': '.kitPreset.v1.Preset', '10': 'preset'},
   ],
 };
 
-/// Descriptor for `LoadPresetResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List loadPresetResponseDescriptor = $convert.base64Decode(
-    'ChJMb2FkUHJlc2V0UmVzcG9uc2USLAoGcHJlc2V0GAEgASgLMhQua2l0UHJlc2V0LnYxLlByZX'
-    'NldFIGcHJlc2V0');
+/// Descriptor for `PresetResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List presetResponseDescriptor = $convert.base64Decode(
+    'Cg5QcmVzZXRSZXNwb25zZRIsCgZwcmVzZXQYASABKAsyFC5raXRQcmVzZXQudjEuUHJlc2V0Ug'
+    'ZwcmVzZXQ=');
 
 @$core.Deprecated('Use presetDescriptor instead')
 const Preset$json = {
   '1': 'Preset',
   '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'description', '3': 3, '4': 1, '5': 9, '9': 0, '10': 'description', '17': true},
-    {'1': 'channels', '3': 4, '4': 3, '5': 11, '6': '.kitPreset.v1.Channel', '10': 'channels'},
+    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'key', '3': 2, '4': 1, '5': 9, '10': 'key'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'description', '3': 4, '4': 1, '5': 9, '9': 0, '10': 'description', '17': true},
+    {'1': 'channels', '3': 5, '4': 3, '5': 11, '6': '.kitPreset.v1.Channel', '10': 'channels'},
   ],
   '8': [
     {'1': '_description'},
@@ -91,9 +92,10 @@ const Preset$json = {
 
 /// Descriptor for `Preset`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List presetDescriptor = $convert.base64Decode(
-    'CgZQcmVzZXQSEAoDa2V5GAEgASgJUgNrZXkSEgoEbmFtZRgCIAEoCVIEbmFtZRIlCgtkZXNjcm'
-    'lwdGlvbhgDIAEoCUgAUgtkZXNjcmlwdGlvbogBARIxCghjaGFubmVscxgEIAMoCzIVLmtpdFBy'
-    'ZXNldC52MS5DaGFubmVsUghjaGFubmVsc0IOCgxfZGVzY3JpcHRpb24=');
+    'CgZQcmVzZXQSDgoCaWQYASABKANSAmlkEhAKA2tleRgCIAEoCVIDa2V5EhIKBG5hbWUYAyABKA'
+    'lSBG5hbWUSJQoLZGVzY3JpcHRpb24YBCABKAlIAFILZGVzY3JpcHRpb26IAQESMQoIY2hhbm5l'
+    'bHMYBSADKAsyFS5raXRQcmVzZXQudjEuQ2hhbm5lbFIIY2hhbm5lbHNCDgoMX2Rlc2NyaXB0aW'
+    '9u');
 
 @$core.Deprecated('Use channelDescriptor instead')
 const Channel$json = {

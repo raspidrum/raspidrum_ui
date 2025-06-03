@@ -13,7 +13,7 @@ class KitPresetServiceLocal implements KitPresetService {
       : _presetPath = presetPath ?? 'testdata/stubs/load_preset/kit_preset_1.json';
 
   @override
-  Future<Result<Preset>> getPreset(String id) async {
+  Future<Result<Preset>> getPreset(int id) async {
     try {
       final jsonString = await rootBundle.loadString(_presetPath);
       final preset = PresetMapper.fromJson(jsonString);

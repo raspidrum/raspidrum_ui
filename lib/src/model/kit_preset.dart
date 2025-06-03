@@ -15,12 +15,14 @@ enum ChannelType {
 
 @MappableClass()
 class Preset with PresetMappable {
+  final int id;
   final String key;
   String name;
   String? description;
   List<Channel>? channels;
 
   Preset({
+    required this.id,
     required this.key,
     required this.name,
     this.description,

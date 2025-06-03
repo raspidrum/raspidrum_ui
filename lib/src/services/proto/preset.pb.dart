@@ -19,8 +19,8 @@ import 'preset.pbenum.dart';
 export 'preset.pbenum.dart';
 
 /// Request message for loading a preset
-class LoadPresetRequest extends $pb.GeneratedMessage {
-  factory LoadPresetRequest({
+class GetPresetRequest extends $pb.GeneratedMessage {
+  factory GetPresetRequest({
     $fixnum.Int64? presetId,
   }) {
     final $result = create();
@@ -29,11 +29,11 @@ class LoadPresetRequest extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  LoadPresetRequest._() : super();
-  factory LoadPresetRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory LoadPresetRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetPresetRequest._() : super();
+  factory GetPresetRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetPresetRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoadPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kitPreset.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetPresetRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'kitPreset.v1'), createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'presetId')
     ..hasRequiredFields = false
   ;
@@ -42,22 +42,22 @@ class LoadPresetRequest extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  LoadPresetRequest clone() => LoadPresetRequest()..mergeFromMessage(this);
+  GetPresetRequest clone() => GetPresetRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  LoadPresetRequest copyWith(void Function(LoadPresetRequest) updates) => super.copyWith((message) => updates(message as LoadPresetRequest)) as LoadPresetRequest;
+  GetPresetRequest copyWith(void Function(GetPresetRequest) updates) => super.copyWith((message) => updates(message as GetPresetRequest)) as GetPresetRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static LoadPresetRequest create() => LoadPresetRequest._();
-  LoadPresetRequest createEmptyInstance() => create();
-  static $pb.PbList<LoadPresetRequest> createRepeated() => $pb.PbList<LoadPresetRequest>();
+  static GetPresetRequest create() => GetPresetRequest._();
+  GetPresetRequest createEmptyInstance() => create();
+  static $pb.PbList<GetPresetRequest> createRepeated() => $pb.PbList<GetPresetRequest>();
   @$core.pragma('dart2js:noInline')
-  static LoadPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoadPresetRequest>(create);
-  static LoadPresetRequest? _defaultInstance;
+  static GetPresetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetPresetRequest>(create);
+  static GetPresetRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $fixnum.Int64 get presetId => $_getI64(0);
@@ -70,8 +70,8 @@ class LoadPresetRequest extends $pb.GeneratedMessage {
 }
 
 /// Response message for loading a preset
-class LoadPresetResponse extends $pb.GeneratedMessage {
-  factory LoadPresetResponse({
+class PresetResponse extends $pb.GeneratedMessage {
+  factory PresetResponse({
     Preset? preset,
   }) {
     final $result = create();
@@ -80,11 +80,11 @@ class LoadPresetResponse extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  LoadPresetResponse._() : super();
-  factory LoadPresetResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory LoadPresetResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  PresetResponse._() : super();
+  factory PresetResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PresetResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoadPresetResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kitPreset.v1'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PresetResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'kitPreset.v1'), createEmptyInstance: create)
     ..aOM<Preset>(1, _omitFieldNames ? '' : 'preset', subBuilder: Preset.create)
     ..hasRequiredFields = false
   ;
@@ -93,22 +93,22 @@ class LoadPresetResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  LoadPresetResponse clone() => LoadPresetResponse()..mergeFromMessage(this);
+  PresetResponse clone() => PresetResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  LoadPresetResponse copyWith(void Function(LoadPresetResponse) updates) => super.copyWith((message) => updates(message as LoadPresetResponse)) as LoadPresetResponse;
+  PresetResponse copyWith(void Function(PresetResponse) updates) => super.copyWith((message) => updates(message as PresetResponse)) as PresetResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static LoadPresetResponse create() => LoadPresetResponse._();
-  LoadPresetResponse createEmptyInstance() => create();
-  static $pb.PbList<LoadPresetResponse> createRepeated() => $pb.PbList<LoadPresetResponse>();
+  static PresetResponse create() => PresetResponse._();
+  PresetResponse createEmptyInstance() => create();
+  static $pb.PbList<PresetResponse> createRepeated() => $pb.PbList<PresetResponse>();
   @$core.pragma('dart2js:noInline')
-  static LoadPresetResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoadPresetResponse>(create);
-  static LoadPresetResponse? _defaultInstance;
+  static PresetResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PresetResponse>(create);
+  static PresetResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
   Preset get preset => $_getN(0);
@@ -125,12 +125,16 @@ class LoadPresetResponse extends $pb.GeneratedMessage {
 /// Preset message
 class Preset extends $pb.GeneratedMessage {
   factory Preset({
+    $fixnum.Int64? id,
     $core.String? key,
     $core.String? name,
     $core.String? description,
     $core.Iterable<Channel>? channels,
   }) {
     final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
     if (key != null) {
       $result.key = key;
     }
@@ -150,10 +154,11 @@ class Preset extends $pb.GeneratedMessage {
   factory Preset.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Preset', package: const $pb.PackageName(_omitMessageNames ? '' : 'kitPreset.v1'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'key')
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'description')
-    ..pc<Channel>(4, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM, subBuilder: Channel.create)
+    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..aOS(2, _omitFieldNames ? '' : 'key')
+    ..aOS(3, _omitFieldNames ? '' : 'name')
+    ..aOS(4, _omitFieldNames ? '' : 'description')
+    ..pc<Channel>(5, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM, subBuilder: Channel.create)
     ..hasRequiredFields = false
   ;
 
@@ -179,34 +184,43 @@ class Preset extends $pb.GeneratedMessage {
   static Preset? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get key => $_getSZ(0);
+  $fixnum.Int64 get id => $_getI64(0);
   @$pb.TagNumber(1)
-  set key($core.String v) { $_setString(0, v); }
+  set id($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasKey() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearKey() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
+  $core.String get key => $_getSZ(1);
   @$pb.TagNumber(2)
-  set name($core.String v) { $_setString(1, v); }
+  set key($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
+  $core.bool hasKey() => $_has(1);
   @$pb.TagNumber(2)
-  void clearName() => clearField(2);
+  void clearKey() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get description => $_getSZ(2);
+  $core.String get name => $_getSZ(2);
   @$pb.TagNumber(3)
-  set description($core.String v) { $_setString(2, v); }
+  set name($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasDescription() => $_has(2);
+  $core.bool hasName() => $_has(2);
   @$pb.TagNumber(3)
-  void clearDescription() => clearField(3);
+  void clearName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<Channel> get channels => $_getList(3);
+  $core.String get description => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set description($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasDescription() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDescription() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.List<Channel> get channels => $_getList(4);
 }
 
 /// Channel message

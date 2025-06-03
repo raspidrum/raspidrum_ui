@@ -14,15 +14,14 @@ class KitPresetRepository {
   final KitPresetService _service;
   final ControlHandler _controlHandler;
   preset.Preset? _cachedPreset;
-  String? _presetId;
 
   KitPresetRepository(this._service, this._controlHandler);
 
   Future<Result<preset.Preset>> getPreset() async {
     // TODO: get it in input parameter
-    final id = '1';
+    final id = 1;
     // Return cached preset if it exists and has the same ID
-    if (_cachedPreset != null && _presetId == id) {
+    if (_cachedPreset != null && _cachedPreset!.id == id) {
       return Result.ok(_cachedPreset!);
     }
 
@@ -30,7 +29,6 @@ class KitPresetRepository {
     final result = await _service.getPreset(id);
     if (result is Ok<preset.Preset>) {
       _cachedPreset = result.value;
-      _presetId = id;
     }
     return result;
   }

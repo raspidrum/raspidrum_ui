@@ -15,9 +15,9 @@ class KitPresetServiceRemote implements KitPresetService {
   }
 
   @override
-  Future<Result<Preset>> getPreset(String id) async {
+  Future<Result<Preset>> getPreset(int id) async {
     try {
-      final response = await _client.loadPreset(grpc.LoadPresetRequest(presetId: Int64.parseInt(id)));
+      final response = await _client.getPreset(grpc.GetPresetRequest(presetId: Int64(id)));
       return Result.ok(_mapGrpcPresetToModel(response.preset));
     } catch (e) {
       return Result.error(Exception('Failed to load preset: $e'));
@@ -26,6 +26,7 @@ class KitPresetServiceRemote implements KitPresetService {
 
   Preset _mapGrpcPresetToModel(grpc.Preset grpcPreset) {
     return Preset(
+      id: grpcPreset.id.toInt(),
       key: grpcPreset.key,
       name: grpcPreset.name,
       description: grpcPreset.hasDescription() ? grpcPreset.description : null,
