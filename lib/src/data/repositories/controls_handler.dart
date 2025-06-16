@@ -37,6 +37,7 @@ class ControlHandler {
     if (controller != null && !controller!.isClosed) {
       return;
     }
+    _log.fine("start sending");
     controller = StreamController<$model.ControlValue>(
       onListen: _startTimer,
       onCancel: _stopTimer,
@@ -68,6 +69,7 @@ class ControlHandler {
       }
     }
     if (sended == 0) {
+      _log.fine("empty queue, stream stopped");
       controller!.close();
     } else {
       _timer =
@@ -123,7 +125,7 @@ class _Control {
     }
     double? val;
     // read all events in queue
-    _log.fine("queue: $_key: $_valsQueue");
+    _log.fine("queue: \t $_key: $_valsQueue");
     while (_valsQueue.isNotEmpty) {
       val = _valsQueue.removeFirst();
     }
