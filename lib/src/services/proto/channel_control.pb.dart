@@ -9,7 +9,6 @@
 // ignore_for_file: non_constant_identifier_names, prefer_final_fields
 // ignore_for_file: unnecessary_import, unnecessary_this, unused_import
 
-import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:fixnum/fixnum.dart' as $fixnum;
@@ -91,15 +90,6 @@ class ControlValue extends $pb.GeneratedMessage {
   $core.bool hasValue() => $_has(2);
   @$pb.TagNumber(3)
   void clearValue() => clearField(3);
-}
-
-class ChannelControlApi {
-  $pb.RpcClient _client;
-  ChannelControlApi(this._client);
-
-  $async.Future<ControlValue> setValue($pb.ClientContext? ctx, ControlValue request) =>
-    _client.invoke<ControlValue>(ctx, 'ChannelControl', 'SetValue', request, ControlValue())
-  ;
 }
 
 

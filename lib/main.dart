@@ -18,7 +18,8 @@ void main() async {
   await settingsController.loadSettings();
 
   $log.hierarchicalLoggingEnabled = true;
-  $log.Logger.root.level = $log.Level.INFO;
+  //$log.Logger.root.level = $log.Level.INFO;
+  $log.Logger.root.level = $log.Level.FINE;
   $log.Logger.root.onRecord.listen((record) {
     // ignore: avoid_print
     print(record.message);

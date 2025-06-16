@@ -19,10 +19,10 @@ import 'channel_control.pb.dart' as $0;
 
 export 'channel_control.pb.dart';
 
-@$pb.GrpcServiceName('ChannelControl')
+@$pb.GrpcServiceName('channelControl.v1.ChannelControl')
 class ChannelControlClient extends $grpc.Client {
   static final _$setValue = $grpc.ClientMethod<$0.ControlValue, $0.ControlValue>(
-      '/ChannelControl/SetValue',
+      '/channelControl.v1.ChannelControl/SetValue',
       ($0.ControlValue value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.ControlValue.fromBuffer(value));
 
@@ -32,28 +32,24 @@ class ChannelControlClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$0.ControlValue> setValue($0.ControlValue request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$setValue, request, options: options);
+  $grpc.ResponseStream<$0.ControlValue> setValue($async.Stream<$0.ControlValue> request, {$grpc.CallOptions? options}) {
+    return $createStreamingCall(_$setValue, request, options: options);
   }
 }
 
-@$pb.GrpcServiceName('ChannelControl')
+@$pb.GrpcServiceName('channelControl.v1.ChannelControl')
 abstract class ChannelControlServiceBase extends $grpc.Service {
-  $core.String get $name => 'ChannelControl';
+  $core.String get $name => 'channelControl.v1.ChannelControl';
 
   ChannelControlServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.ControlValue, $0.ControlValue>(
         'SetValue',
-        setValue_Pre,
-        false,
-        false,
+        setValue,
+        true,
+        true,
         ($core.List<$core.int> value) => $0.ControlValue.fromBuffer(value),
         ($0.ControlValue value) => value.writeToBuffer()));
   }
 
-  $async.Future<$0.ControlValue> setValue_Pre($grpc.ServiceCall call, $async.Future<$0.ControlValue> request) async {
-    return setValue(call, await request);
-  }
-
-  $async.Future<$0.ControlValue> setValue($grpc.ServiceCall call, $0.ControlValue request);
+  $async.Stream<$0.ControlValue> setValue($grpc.ServiceCall call, $async.Stream<$0.ControlValue> request);
 }

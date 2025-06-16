@@ -2,5 +2,6 @@
   "editor.fontSize": 13,
   "files.exclude": {
     "**/.git": false
-  }
+  },
+  "editor.formatOnSave": true
 }
