@@ -1,4 +1,5 @@
 import 'package:grpc/grpc.dart';
+import 'package:logging/logging.dart';
 
 import '../config/app_config.dart';
 import 'proto/channel_control.pbgrpc.dart' as grpc;
@@ -7,6 +8,7 @@ class RemoteProvider {
   final AppConfig _config;
   grpc.ChannelControlClient? _channelControlClient;
   late final ClientChannel _channel;
+  final _log = Logger('RemoteProvider');
 
   RemoteProvider(this._config) {
     _createChannel();
@@ -25,6 +27,12 @@ class RemoteProvider {
       _config.grpcHost,
       port: _config.grpcPort,
       options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+      channelShutdownHandler: () => _log.fine("connection shutting down"),
+    );
+    _channel.onConnectionStateChanged.listen(
+      (data) => _log.fine("connection state: ${data.name}"),
+      onError: (error) => _log.fine("connection error: $error"),
+      onDone: () => _log.fine("connection closed"),
     );
   }
 

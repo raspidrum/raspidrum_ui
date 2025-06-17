@@ -18,6 +18,7 @@ class ControlHandler {
   Timer? _timer;
   final int delayStartProcessing = 10;
   final int periodProcessing = 50;
+  bool _cancelled = false;
 
   StreamController<$model.ControlValue>? controller;
 
@@ -34,16 +35,18 @@ class ControlHandler {
   }
 
   void _startSending() {
-    if (controller != null && !controller!.isClosed) {
-      return;
+    if (controller == null || _cancelled) {
+      controller = StreamController<$model.ControlValue>(
+        onListen: () => {_log.fine("onListen"), _startTimer},
+        onCancel: () => {_log.fine("onCancel"), _cancelled = true, _stopTimer},
+        onPause: () => {_log.fine("onPause"), _stopTimer},
+        onResume: () => {_log.fine("onResume"), _startTimer},
+      );
+      _cancelled = false;
     }
-    _log.fine("start sending");
-    controller = StreamController<$model.ControlValue>(
-      onListen: _startTimer,
-      onCancel: _stopTimer,
-      onPause: _stopTimer,
-      onResume: _startTimer,
-    );
+
+    if (controller!.isClosed || !controller!.hasListener) {
+      _log.fine("start sending");
 
     _service.runSendValues(controller!.stream, (result) {
       switch (result) {
@@ -54,6 +57,11 @@ class ControlHandler {
               'Failed to set value: ${result.error.toString()}', result.error);
       }
     });
+    } else {
+      if (_timer == null || !_timer!.isActive) {
+        _startTimer();
+      }
+    }
   }
 
   // process queue after timer
@@ -69,8 +77,7 @@ class ControlHandler {
       }
     }
     if (sended == 0) {
-      _log.fine("empty queue, stream stopped");
-      controller!.close();
+      _log.fine("empty queue, streaming stopped");
     } else {
       _timer =
           Timer(Duration(milliseconds: periodProcessing), () => processSend());
@@ -92,6 +99,7 @@ class ControlHandler {
 class _ValRequest {
   final int seq;
   final double value;
+  final DateTime startTime = DateTime.now();
 
   _ValRequest({
     required this.seq,
@@ -111,7 +119,7 @@ class _Control {
   int _seq = 0;
 
   final Queue<double> _valsQueue = Queue();
-  //_ValRequest? _processindEvent;
+  _ValRequest? _processindEvent;
   _ValRequest? _completedEvent;
 
   // adding event to queue to delayed process
@@ -130,7 +138,8 @@ class _Control {
       val = _valsQueue.removeFirst();
     }
     _seq++;
-    return $model.ControlValue(key: _key, seq: _seq, value: val!);
+    _processindEvent = _ValRequest(seq: _seq, value: val!);
+    return $model.ControlValue(key: _key, seq: _seq, value: val);
   }
 
 
@@ -140,10 +149,13 @@ class _Control {
     }
     // update last completed event
     if (_completedEvent == null || settedValue.seq >= _completedEvent!.seq) {
-      _completedEvent =
+      _completedEvent = 
           _ValRequest(seq: settedValue.seq, value: settedValue.value);
-      _log.finest(
-          "completed: \t ${settedValue.key} \t seq: ${settedValue.seq} \t val: ${settedValue.value}");
+      final endTime = DateTime.now();
+      final duration = endTime.difference(_processindEvent!.startTime);
+
+      _log.fine(
+          "completed: \t ${settedValue.key} \t seq: ${settedValue.seq} \t val: ${settedValue.value} \t duration: ${duration.inMilliseconds} ms");
     }
   }
 }

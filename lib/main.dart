@@ -42,7 +42,7 @@ void main() async {
       ],
       builder: (context) {
         return MultiProvider (
-          providers: providersLocal,
+          providers: providersRemote,
           child: App(settingsController: settingsController),
         );
       }
