@@ -1,5 +1,5 @@
 import 'package:grpc/grpc.dart';
-import 'package:logging/logging.dart';
+import 'package:logging/logging.dart' as $log;
 
 import '../config/app_config.dart';
 import 'proto/channel_control.pbgrpc.dart' as grpc;
@@ -8,7 +8,8 @@ class RemoteProvider {
   final AppConfig _config;
   grpc.ChannelControlClient? _channelControlClient;
   late final ClientChannel _channel;
-  final _log = Logger('RemoteProvider');
+  final _log = $log.Logger('RemoteProvider');
+
 
   RemoteProvider(this._config) {
     _createChannel();

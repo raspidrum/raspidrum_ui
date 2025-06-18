@@ -3,6 +3,7 @@
 
 import 'dart:async';
 import 'dart:collection';
+import 'package:flutter/foundation.dart';
 
 import 'package:logging/logging.dart';
 
@@ -138,8 +139,10 @@ class _Control {
       val = _valsQueue.removeFirst();
     }
     _seq++;
-    _processindEvent = _ValRequest(seq: _seq, value: val!);
-    return $model.ControlValue(key: _key, seq: _seq, value: val);
+    if (kDebugMode) {
+      _processindEvent = _ValRequest(seq: _seq, value: val!);
+    }
+    return $model.ControlValue(key: _key, seq: _seq, value: val!);
   }
 
 
@@ -151,11 +154,12 @@ class _Control {
     if (_completedEvent == null || settedValue.seq >= _completedEvent!.seq) {
       _completedEvent = 
           _ValRequest(seq: settedValue.seq, value: settedValue.value);
-      final endTime = DateTime.now();
-      final duration = endTime.difference(_processindEvent!.startTime);
-
-      _log.fine(
+      if (kDebugMode) {
+        final endTime = DateTime.now();
+        final duration = endTime.difference(_processindEvent!.startTime);
+        _log.fine(
           "completed: \t ${settedValue.key} \t seq: ${settedValue.seq} \t val: ${settedValue.value} \t duration: ${duration.inMilliseconds} ms");
+      }
     }
   }
 }

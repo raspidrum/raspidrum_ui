@@ -1,26 +1,20 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
-      "name": "raspidrum_ui",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "raspidrum_ui (profile mode)",
+      "name": "UI (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "raspidrum_ui (release mode)",
+      "name": "UI (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "raspidrum_ui (Flutter macOS)",
+      "name": "UI (Flutter macOS)",
       "program": "lib/main.dart",
       "deviceId": "macos",
       "request": "launch",

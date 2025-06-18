@@ -17,13 +17,7 @@ void main() async {
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
 
-  $log.hierarchicalLoggingEnabled = true;
-  //$log.Logger.root.level = $log.Level.INFO;
-  $log.Logger.root.level = $log.Level.FINE;
-  $log.Logger.root.onRecord.listen((record) {
-    // ignore: avoid_print
-    print(record.message);
-  });
+  _setupLogging();
 
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
@@ -48,4 +42,19 @@ void main() async {
       }
     )
   );
+}
+
+
+void _setupLogging() {
+  $log.hierarchicalLoggingEnabled = true;
+  //$log.Logger.root.level = $log.Level.INFO;
+  $log.Logger.root.level = $log.Level.FINE;
+  $log.Logger.root.onRecord.listen((record) {
+    // ignore: avoid_print
+    print('${record.level.name}: ${record.time}: ${record.message}');
+    // ignore: avoid_print
+    if (record.error != null) print('Error: ${record.error}');
+    // ignore: avoid_print
+    if (record.stackTrace != null) print('StackTrace: ${record.stackTrace}');
+  });
 }
