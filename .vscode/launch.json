@@ -8,17 +8,20 @@
       "flutterMode": "profile"
     },
     {
-      "name": "UI (release mode)",
+      "name": "UI (release macOS)",
+      "program": "lib/main.dart",
+      "deviceId": "macos",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
     },
     {
-      "name": "UI (Flutter macOS)",
+      "name": "UI (debug macOS)",
       "program": "lib/main.dart",
       "deviceId": "macos",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "flutterMode": "debug"
     }
   ]
 }

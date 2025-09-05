@@ -2,8 +2,18 @@
 
 UI for Raspberry drum module.
 
+## Configuration
 
-# Use gRPC proto files
+The app uses two configurations for connecting to the gRPC server:
+
+- Development configuration: Uses `localhost:50051` as the server address
+- Production configuration: Uses `raspidrum-<xxxx>.local:50051` as the server address
+
+The configuration is automatically selected based on the Flutter build mode:
+- Debug/Development builds use the development configuration
+- Release builds use the production configuration
+
+## Use gRPC proto files
 
 Proto files used from raspidrum_srv/api/grpc
 

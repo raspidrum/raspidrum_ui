@@ -13,7 +13,7 @@ class AppConfig {
       );
 
   factory AppConfig.production() => const AppConfig(
-        grpcHost: 'raspidrum.local', // или другой production хост
+        grpcHost: 'raspidrum-aabf.local', // или другой production хост
         grpcPort: 50051,
       );
-} 
+}
